@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return '<p>poi</p>';
+    return view('welcome');
 });
 
 Auth::routes();

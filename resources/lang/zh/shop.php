@@ -11,6 +11,7 @@ return [
     'ShoppingCart' => '購物車',
     'lowtohigh' => '價錢由低到高',
     'hightolow' => '價錢由高到低',
+    'mycenter' => '會員中心 ',
     'myprodile' => '會員資料 ',
     'myorder' => '我的訂單',
     'virtualrecord' => '虛擬幣紀錄',

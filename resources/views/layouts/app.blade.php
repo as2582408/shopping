@@ -40,8 +40,8 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @guest
-                            <li><a href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                            <li><a href="{{ route('register') }}">{{ __('shop.signup') }}</a></li>
+                            <li><a href="{{ url('/signin') }}">{{ __('Login') }}</a></li>
+                            <li><a href="{{ url('signup') }}">{{ __('shop.signup') }}</a></li>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>

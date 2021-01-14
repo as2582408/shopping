@@ -12,8 +12,21 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('signin');
 });
+Route::get('/signin', 'UserController@getSignin');      //登入畫面
+Route::post('/signin', 'UserController@postSignin');    //登入
+Route::get('/signup', 'UserController@getSignup');      //註冊畫面
+Route::post('/signup', 'UserController@postSignup');    //註冊
+Route::get('/mycenter', 'UserController@getCenter')->middleware(['auth']); //會員中心
+Route::get('/profile', 'UserController@getProfile')->middleware(['auth']); //修改資料頁面
+Route::post('/profile', 'UserController@postProfile')->middleware(['auth']); //修改資料
+
+Route::get('/poi',function () {
+    return view('shop.shopIndex');
+});
+
+
 
 Auth::routes();
 

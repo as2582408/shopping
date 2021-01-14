@@ -11,6 +11,7 @@ return [
     'en' => 'English',
     'zh' => 'Chinese',
     'user'=> 'User',
+    'mycenter' => 'Member Center ',
     'myprodile' => 'Member Profile ',
     'myorder' => 'My Order',
     'virtualrecord' => 'Virtual Record',

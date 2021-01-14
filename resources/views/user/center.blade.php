@@ -10,7 +10,6 @@
     <script src="{{ asset('js/app.js') }}"></script>
 </head>
 <body>
-@section('sidebar')
     <nav class="navbar navbar-default  navbar-fixed-top" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -37,11 +36,55 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
-@show
 <hr>
-<div class="container">
-    @yield('content')
-</div>
-</body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 h-100" style="width:300px;">
+          <div class="list-group">
+            <a href="{{ url('mycenter') }}" class="list-group-item list-group-item-action">{{ __('shop.myprodile') }}</a>
+            <a href="{{ url('profile') }}" class="list-group-item list-group-item-action">{{ __('shop.Revise personal info') }}</a>
+            <a href="#" class="list-group-item list-group-item-action">訂單資訊</a>
+            <a href="#" class="list-group-item list-group-item-action">我的退貨</a>
+            <a href="#" class="list-group-item list-group-item-action">客訴</a>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="text-center">
+              <div class="col-sm-5 col-xs-6 tital ">{{__('shop.name')}}:</div>
+              <div class="col-sm-7 col-xs-6 ">{{__($user->name)}}</div>
+              <div class="clearfix"></div>
+              <div class="bot-border"></div>
+              <hr>
+              <div class="col-sm-5 col-xs-6 tital ">{{__('shop.email')}}:</div>
+              <div class="col-sm-7">{{__($user->email)}}</div>
+              <div class="clearfix"></div>
+              <div class="bot-border"></div>
+              <hr>
+              <div class="col-sm-5 col-xs-6 tital ">{{__('shop.level')}}:</div>
+              <div class="col-sm-7">{{__($user->level)}}</div>
+              <div class="clearfix"></div>
+              <div class="bot-border"></div>
+              <hr>
+              <div class="col-sm-5 col-xs-6 tital ">{{__('shop.phone')}}:</div>
+              <div class="col-sm-7">{{__($user->phone)}}</div>
+              <hr>
+              <div class="clearfix"></div>
+              <div class="bot-border"></div>
+              <hr>
+              <div class="col-sm-5 col-xs-6 tital ">{{__('shop.address')}}:</div>
+              <div class="col-sm-7">{{__($user->address)}}</div>
+              <hr>
+              <div class="clearfix"></div>
+              <div class="bot-border"></div>
+              <hr>
+              <div class="col-sm-5 col-xs-6 tital ">剩餘購物金:</div>
+              <div class="col-sm-7">{{__($user->point)}}</div>
+              <hr>
+              <!-- /.box-body -->
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-</html>

@@ -37,6 +37,7 @@
         </div><!-- /.container-fluid -->
     </nav>
 <hr>
+
     <div class="container">
       <div class="row">
         <div class="col-md-6 h-100" style="width:300px;">
@@ -50,41 +51,50 @@
             <a href="#" class="list-group-item list-group-item-action">客訴</a>
           </div>
         </div>
+        
         <div class="col-md-6">
           <div class="row">
+            <div class="box-body">
+                @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    @foreach ($errors->all() as $errors)
+                        <p>{{ $errors }}</p>    
+                    @endforeach
+                </div>
+
+                @elseif (isset($success) > 0)
+                <div class="alert alert-success">
+                        <p>{{ $success }}</p>    
+                </div>
+                @endif 
+                <form action="{{ url('password') }}" method="post">
+                    {!! csrf_field() !!}
             <div class="text-center">
-              <div class="col-sm-5 col-xs-6 tital ">{{__('shop.name')}}:</div>
-              <div class="col-sm-7 col-xs-6 ">{{__($user->name)}}</div>
-              <div class="clearfix"></div>
-              <div class="bot-border"></div>
-              <hr>
-              <div class="col-sm-5 col-xs-6 tital ">{{__('shop.email')}}:</div>
-              <div class="col-sm-7">{{__($user->email)}}</div>
-              <div class="clearfix"></div>
-              <div class="bot-border"></div>
-              <hr>
-              <div class="col-sm-5 col-xs-6 tital ">{{__('shop.level')}}:</div>
-              <div class="col-sm-7">{{__($user->level)}}</div>
-              <div class="clearfix"></div>
-              <div class="bot-border"></div>
-              <hr>
-              <div class="col-sm-5 col-xs-6 tital ">{{__('shop.phone')}}:</div>
-              <div class="col-sm-7">{{__($user->phone)}}</div>
-              <hr>
-              <div class="clearfix"></div>
-              <div class="bot-border"></div>
-              <hr>
-              <div class="col-sm-5 col-xs-6 tital ">{{__('shop.address')}}:</div>
-              <div class="col-sm-7">{{__($user->address)}}</div>
-              <hr>
-              <div class="clearfix"></div>
-              <div class="bot-border"></div>
-              <hr>
-              <div class="col-sm-5 col-xs-6 tital ">剩餘購物金:</div>
-              <div class="col-sm-7">{{__($user->point)}}</div>
-              <hr>
-              <!-- /.box-body -->
-          </div>
+                
+                <hr>
+                <div class="col-sm-5 col-xs-6 tital ">{{__('shop.newpassowrd')}}:</div>
+                <div class="col-sm-4 pull-right"">
+                    <input type="password" id="password" name="password" type="text"  class="form-control  "  required="">    
+                </div>
+                <div class="clearfix"></div>
+                <div class="bot-border"></div>
+                <hr>
+                <div class="col-sm-5 col-xs-6 tital ">{{__('shop.confirmnewpassword')}}:</div>
+                <div class="col-sm-4 pull-right"">
+                    <input type="password" id="password" name="password_confirmation" class="form-control" required>
+                </div>
+                <div class="clearfix"></div>
+                <div class="bot-border"></div>
+                <!-- /.box-body -->
+                <hr>
+                <div class="btn-group pull-right">
+                    <button id="submit" name="submit" class="btn btn-sm btn-default">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>{{__('shop.saveedit')}}
+                    </button>
+                </div>
+            </div>
+        </form>
+            </div>
           </div>
         </div>
       </div>

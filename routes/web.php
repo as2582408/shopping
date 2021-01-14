@@ -20,7 +20,9 @@ Route::get('/signup', 'UserController@getSignup');      //註冊畫面
 Route::post('/signup', 'UserController@postSignup');    //註冊
 Route::get('/mycenter', 'UserController@getCenter')->middleware(['auth']); //會員中心
 Route::get('/profile', 'UserController@getProfile')->middleware(['auth']); //修改資料頁面
-Route::post('/profile', 'UserController@postProfile')->middleware(['auth']); //修改資料
+Route::post('/profile', 'UserController@editProfile')->middleware(['auth']); //修改資料
+Route::get('/password', 'UserController@getPassword')->middleware(['auth']); //修改密碼頁面
+Route::post('/password', 'UserController@editPassword')->middleware(['auth']); //修改密碼
 
 Route::get('/poi',function () {
     return view('shop.shopIndex');

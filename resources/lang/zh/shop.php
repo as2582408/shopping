@@ -112,7 +112,7 @@ return [
     'emailunique' => '信箱已重複',
     'passwordmin' => '密碼長度至少6碼',
     'passowrdcomfirmed' => '確認密碼不相同',
-    'passwordregex' => '密碼必須包含大小寫字母與整數',
+    'passwordregex' => '密碼必須包含字母與整數',
     'suspended' => '此帳號已被停權，請聯絡我們',
     'accountpassworderror' => '帳號/密碼錯誤，請重新輸入！',
     'captcharequired' => '驗證碼，不能為空',

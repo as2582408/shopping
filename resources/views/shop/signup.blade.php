@@ -16,7 +16,7 @@
     @endif 
     <form action="{{ url('signup')}}" method="post">
         <div class="form-group">
-            <label for="name"">{{__('shop.name')}}</label>
+            <label for="name">{{__('shop.name')}}</label>
             <input type="text" id="name" name="name" class="form-control" required value="{{ old('name') }}">
         </div>
         <div class="form-group">
@@ -25,7 +25,7 @@
         </div>
         <div class="form-group">
             <label for="email">{{__('shop.phone')}}</label>
-            <input type="text" id="phone"" name="phone" class="form-control" placeholder="0912345678" required oninput = "value=value.replace(/[^\d]/g,'')" value="{{ old('phone') }}">
+            <input type="text" id="phone" name="phone" class="form-control" placeholder="0912345678" required oninput = "value=value.replace(/[^\d]/g,'')" value="{{ old('phone') }}">
         </div>
         <div class="form-group">
             <label for="email">{{__('shop.address')}}</label>

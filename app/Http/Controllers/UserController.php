@@ -92,16 +92,15 @@ class UserController extends Controller
 
     public function editProfile(Request $request)
     {        
-
+        $user = Auth::user();
         $this->validate($request, [
             'name' => 'required|max:255|regex:/^[\x7f-\xffA-Za-z0-9 ()（）\s]+$/',
-            'email' => 'email|required|unique:users,email',
-            'phone' => 'required|numeric|regex:/^09\d{8}$/',
+            'email' => 'email|required|unique:users,email'.$user->id,
+            'phone' => 'required|numeric|regex:/^09\d{8}$/'
         ], [
             'name.regex' => __('shop.nameregex'),
             'email.email' => __('shop.emailvalidation'),
         ]);
-        $user = Auth::user();
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->phone = $request->input('phone');
@@ -120,6 +119,7 @@ class UserController extends Controller
 
     public function editPassword(Request $request)
     {
+        $user = Auth::user();
         $this->validate($request, [
             'password' => 'required|min:6|confirmed|regex:/^.*(?=.*[a-z])(?=.*[0-9]).*$/',
         ], [
@@ -128,7 +128,6 @@ class UserController extends Controller
             'password.regex' => __('shop.passwordregex')
         ]);
 
-        $user = Auth::user();
         $user->password = bcrypt(($request->input('password')));
         $user->updated_at = date("Y-m-d H:i:s"); ;
         $user->save();

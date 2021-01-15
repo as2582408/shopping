@@ -29,6 +29,23 @@ Route::get('/poi',function () {
 });
 
 
+Route::get('/admin',function () {
+    return view('admin.adminhome');
+});
+Route::post('/admin/logout', 'AdminController@signOut');  //登出
+Route::get('/admin/login', 'AdminController@getSignin');    //登入畫面
+Route::post('/admin/login', 'AdminController@postSignin');  //登入畫面
+Route::get('/admin/center', 'AdminController@adminCenter')->middleware(['admin']);      //主畫面
+
+Route::get('/admin/account', 'AdminController@account')->middleware(['admin']);
+Route::get('/admin/accountedit/{id}', 'AdminController@editAccountPage')->middleware(['admin']);
+Route::post('/admin/accountedit', 'AdminController@editAccount')->middleware(['admin']);      
+Route::get('/admin/accountdel/{id}', 'AdminController@delectAccount')->middleware(['admin']); 
+Route::get('/admin/accountSearch', 'AdminController@searchAccount')->middleware(['admin']);      
+
+
+
+
 
 Auth::routes();
 

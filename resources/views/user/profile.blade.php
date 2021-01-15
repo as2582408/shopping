@@ -63,7 +63,7 @@
                     
                 </div>
                 @endif
-                <form action="{{ url('profile') }}" method="post">
+            <form action="{{ url('profile') }}" method="post">
                     {!! csrf_field() !!}
             <div class="text-center">
                 

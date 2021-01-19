@@ -48,9 +48,33 @@
             <a href=" " class="list-group-item list-group-item-action">{{ __('shop.Level Management') }}</a>
           </div>
         </div>
-        <div class="col-md-8">
+        <div class= "col-md-8">
           <div class="row">
-            
+            <div class="row">
+              <a class="btn btn-primary" href="{{ url('/admin/addCategory') }}" role="button">新增分類</a>
+            </div>
+            <table class="table table-sm">
+				<thead>
+				  <tr>
+					<th scope="col">id</th>
+					<th scope="col">分類名</th>
+          <th scope="col">修改</th>
+          <th scope="col"></th>
+					<th scope="col">快速刪除</th>
+				  </tr>
+				</thead>
+				<tbody>
+					@foreach ($categories as $category)
+					<tr>
+						<th scope="row">{{ $category->id }}</th>
+						<td>{{ $category->category_name }}</td>
+            <td><a href='{{ url("/admin/editCategory/{$category->id}") }}' class="alert-link">修改</a></td>
+            <td></td>
+						<td><a href='{{ url("/admin/delCategory/{$category->id}") }}' class="alert-link">刪除</a></td>
+					  </tr>
+					@endforeach
+				</tbody>
+			  </table>
           </div>
         </div>
       </div>

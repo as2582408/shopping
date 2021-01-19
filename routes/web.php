@@ -65,6 +65,18 @@ Route::post('/admin/editProducts', 'ProductsController@editProducts')->middlewar
 //搜尋商品
 Route::get('/admin/productsSearch', 'ProductsController@searchProducts')->middleware(['admin']);
 
+//分類頁面
+Route::get('/admin/category', 'CategoryController@index')->middleware(['admin']);
+//分類修改頁面
+Route::get('/admin/editCategory/{id}', 'CategoryController@editCategoryPage')->middleware(['admin']);
+//分類修改
+Route::post('/admin/editCategory', 'CategoryController@editCategory')->middleware(['admin']);
+//分類刪除
+Route::get('/admin/delCategory/{id}', 'CategoryController@delCategory')->middleware(['admin']);
+//分類新增頁面
+Route::get('/admin/addCategory', 'CategoryController@addCategoryPage')->middleware(['admin']);
+//分類新增
+Route::post('/admin/addCategory', 'CategoryController@addCategory')->middleware(['admin']);
 
 
 

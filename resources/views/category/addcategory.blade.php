@@ -36,6 +36,13 @@
 <hr>
     <div class="container">
       <div class="row">
+                @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    @foreach ($errors->all() as $errors)
+                        <p>{{ $errors }}</p>    
+                    @endforeach
+                </div>
+                @endif
         <div class="col-md-6 h-100 " style="width:200px;">
           <div class="list-group">
             <a href="{{ url('/admin/account') }}" class="list-group-item list-group-item-action">{{ __('shop.Account Management') }}</a>
@@ -50,7 +57,26 @@
         </div>
         <div class="col-md-8">
           <div class="row">
-            
+            <div class="text-center">
+              <form action="{{ url('/admin/addCategory') }}" method="post">
+                {!! csrf_field() !!}      
+                <div class="col-sm-5 col-xs-6 tital ">分類名稱:</div>
+                <div class="col-sm-4 pull-right"">
+                    <input id="name" name="name" type="text"  class="form-control  " value="" required=""> 
+                </div>
+                <div class="clearfix"></div>
+                <div class="bot-border"></div>
+                <hr>
+                <div class="btn-group pull-right">
+                    <button id="submit" name="submit" class="btn btn-sm btn-default">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>{{__('shop.saveedit')}}
+                    </button>
+                  </form>
+                </div>
+                <div>
+                  <button class="btn btn-sm btn-default" onclick="history.back()">返回</button>
+                </div>
+              </div>
           </div>
         </div>
       </div>

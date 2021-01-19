@@ -49,7 +49,7 @@
             <a href=" " class="list-group-item list-group-item-action">{{ __('shop.Order Management') }}</a>
             <a href=" " class="list-group-item list-group-item-action">{{ __('shop.Refund Management') }}</a>
             <a href="{{ url('/admin/products') }}" class="list-group-item list-group-item-action">{{ __('shop.Stock Management') }}</a>
-            <a href=" " class="list-group-item list-group-item-action">{{ __('shop.Category Management') }}</a>
+            <a href="{{ url('/admin/category') }}" class="list-group-item list-group-item-action">{{ __('shop.Category Management') }}</a>
             <a href=" " class="list-group-item list-group-item-action">{{ __('shop.Reply Management') }}</a>
             <a href=" " class="list-group-item list-group-item-action">{{ __('shop.Offer Management') }}</a>
             <a href=" " class="list-group-item list-group-item-action">{{ __('shop.Level Management') }}</a>

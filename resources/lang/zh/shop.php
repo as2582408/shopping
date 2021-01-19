@@ -63,7 +63,7 @@ return [
     'cancel' => '取消',
     'buy' => '購買',
     'dollor'=> ' 元',
-    'orderlist' => '訂單管理',
+    'orderlist' => '訂單列表',
     'ordernumber' => '訂單號碼',
     'productcontent' => '商品內容',
     'status' => '狀態',

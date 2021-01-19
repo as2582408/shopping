@@ -41,20 +41,20 @@
             <a href="{{ url('/admin/account') }}" class="list-group-item list-group-item-action">{{ __('shop.Account Management') }}</a>
             <a href=" " class="list-group-item list-group-item-action">{{ __('shop.Order Management') }}</a>
             <a href=" " class="list-group-item list-group-item-action">{{ __('shop.Refund Management') }}</a>
-            <a href=" " class="list-group-item list-group-item-action">{{ __('shop.Stock Management') }}</a>
+            <a href="{{ url('/admin/products') }}" class="list-group-item list-group-item-action">{{ __('shop.Stock Management') }}</a>
             <a href=" " class="list-group-item list-group-item-action">{{ __('shop.Category Management') }}</a>
             <a href=" " class="list-group-item list-group-item-action">{{ __('shop.Reply Management') }}</a>
             <a href=" " class="list-group-item list-group-item-action">{{ __('shop.Offer Management') }}</a>
             <a href=" " class="list-group-item list-group-item-action">{{ __('shop.Level Management') }}</a>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class= "col-md-8">
           <div class="row">
             <div style="margin-top:10px;">
               <form action="{{ url('/admin/accountSearch') }}" method="GET" class="search-form">
                   <input type="text" name="query" id="query" value="{{ request()->input('query') }}" class="search-box"
                       placeholder="{{__('shop.Account Name')}}">
-                  <button type="submit" class="fa fa-search search-icon btn btn-primary btn-sm"></button>
+                  <button type="submit" class="fa fa-search btn btn-info btn-sm"></button>
               </form>
           </div>
             <table class="table table-sm">

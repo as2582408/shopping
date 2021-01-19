@@ -46,7 +46,7 @@
             <div class="col-md-12">
                     <div class="col-sm-6 col-md-4">
                         <div class="thumbnail" >
-                            <img src="https://truth.bahamut.com.tw/s01/201911/4e3eb1c83a9c6204fd1cdcff2206e831.JPG" class="img-responsive">
+                            <img src="{{asset('storage/poi.jpg')}}" class="img-responsive">
                             <div class="caption">
                                 <div class="row">
                                     <div class="col-md-6 col-xs-6">

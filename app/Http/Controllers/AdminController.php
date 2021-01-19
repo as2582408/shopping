@@ -35,6 +35,7 @@ class AdminController extends Controller
         if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')]) && $user->admin == 'Y') {
             $user->login_time = date("Y-m-d H:i:s");
             $user->save();
+            
             return redirect()->intended('admin/center');
         } else {
             return view('admin.login', ['error' => __('shop.accountpassworderror')]);
@@ -44,6 +45,7 @@ class AdminController extends Controller
     public function adminCenter()
     {
         $user = Auth::user();
+
         return view('admin.adminCenter');
     }
 
@@ -51,12 +53,14 @@ class AdminController extends Controller
     public function account()
     {
         $user = User::all();
+
         return view('admin.account', ['users_data' => $user]);
     }
     //編輯會員資料頁面
     public function editAccountPage($id)
     {
         $user = User::where('id', $id)->first();
+        
         return view('admin.editaccount', ['users_data' => $user]);
     }
     //刪除會員
@@ -66,6 +70,7 @@ class AdminController extends Controller
         $user->status = 'D';
         $user->updated_at = date("Y-m-d H:i:s"); ;
         $user->save();
+
         return redirect()->intended('admin/account');
     }
 
@@ -92,16 +97,17 @@ class AdminController extends Controller
         $user->point = $request->input('point');
         $user->status = $request->input('status');
         $user->level = $request->input('level');
-        $user->updated_at = date("Y-m-d H:i:s"); ;
+        $user->updated_at = date("Y-m-d H:i:s");
         $user->save();
+
         return redirect()->intended('admin/account');
     }
 
     public function searchAccount(Request $request)
     {
         $query = $request->input('query');
+        $user = User::where('name', 'LIKE', '%'.$query.'%')->get();
 
-        $user = User::where('name', 'LIKE', '%'.$query.'%')->get();;
         return view('admin.account', ['users_data' => $user]);
     }
 }

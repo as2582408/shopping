@@ -58,66 +58,75 @@
         <div class="col-md-8">
           <div class="row">
             <div class="text-center">
-              <form action="{{ url('/admin/accountedit') }}" method="post">
+              <form action="{{ url('/admin/editProducts') }}" method="post" class="form-horizontal" enctype="multipart/form-data" role="form">
                 {!! csrf_field() !!}
-                <input id="id" name="id" type="hidden"  class="form-control  " value=" {{$users_data->id}} " required="">
-                <div class="col-sm-5 col-xs-6 tital ">{{__('shop.name')}}:</div>
-                <div class="col-sm-4 col-xs-3  pull-right" >
-                     <input id="name" name="name" type="text"  class="form-control  " value=" {{$users_data->name}} " required="">
-                </div>
+                <input id="id" name="id" type="hidden"  class="form-control  " value=" {{$product->product_id}} " required="">
+                <label class="col-sm-5 col-xs-6 tital" for="file">{{__('shop.Upload Image')}}</label>
+                      <div class="col-sm-4 pull-right">
+                          <input id="img" name="img" class="input-file" type="file">
+                      </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
                 <hr>
-                <div class="col-sm-5 col-xs-6 tital ">{{__('shop.email')}}:</div>
+                <div class="col-sm-5 col-xs-6 tital ">商品名稱:</div>
                 <div class="col-sm-4 pull-right"">
-                    <input id="email" name="email" type="text"  class="form-control  " value=" {{$users_data->email}} " required="">    
+                    <input id="name" name="name" type="text"  class="form-control  " value="{{ $product->product_name }}" required="">    
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
                 <hr>
-                <div class="col-sm-5 col-xs-6 tital ">{{__('shop.phone')}}:</div>
+                <div class="col-sm-5 col-xs-6 tital ">商品描述:</div>
                 <div class="col-sm-4 pull-right"">
-                    <input id="phone" name="phone" type="text"  class="form-control  " value=" {{$users_data->phone}} " required="">    
+                    <input id="description" name="description" type="text"  class="form-control  " value="{{ $product->product_description }}" required="">    
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
                 <hr>
-                <div class="col-sm-5 col-xs-6 tital ">{{__('shop.address')}}:</div>
+                <div class="col-sm-5 col-xs-6 tital ">價格:</div>
                 <div class="col-sm-4 pull-right"">
-                    <input id="address" name="address" type="text"  class="form-control  " value=" {{$users_data->address}} " required=""> 
+                    <input id="price" name="price" type="text"  class="form-control  " value="{{ $product->product_price }}" required=""> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
                 <hr>
-                <div class="col-sm-5 col-xs-6 tital ">會員等級:</div>
+                <div class="col-sm-5 col-xs-6 tital ">數量:</div>
                 <div class="col-sm-4 pull-right"">
-                    <input id="level" name="level" type="text"  class="form-control  " value=" {{$users_data->level}} " required=""> 
+                    <input id="amount" name="amount" type="text"  class="form-control  " value="{{ $product->product_amount }}" required=""> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
                 <hr>
-                <div class="col-sm-5 col-xs-6 tital ">購物金:</div>
+                <div class="col-sm-5 col-xs-6 tital ">分類:</div>
+                @php
+                    $category_arr = explode(",", $product->product_category);
+                @endphp
                 <div class="col-sm-4 pull-right"">
-                    <input id="point" name="point" type="text"  class="form-control  " value=" {{$users_data->point}} " required=""> 
+                  @for ($i = 0; $i < 3; $i++)
+                  <select id="category{{$i+1}}" name="category{{$i+1}}" class="form-select" aria-label="Default select example">
+                    <option value=""></option>
+                    @foreach ($category as $categorise)
+                    <option value="{{$categorise->id}}" @if($category_arr[$i] == $categorise->id) {{'SELECTED'}} @endif> {{$categorise->category_name}}</option>
+                    @endforeach
+                  </select>
+                  @endfor
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
                 <hr>
-                <div class="col-sm-5 col-xs-6 tital ">停權:</div>
+                <div class="col-sm-5 col-xs-6 tital ">上架狀態:</div>
                 <div class="col-sm-4 pull-right"">
                   <select id="status" name="status" class="form-select" aria-label="Default select example">
-                    <option value="Y" @if($users_data->status == 'Y') {{'SELECTED'}} @endif>Y</option>
-                    <option value="N" @if($users_data->status == 'N') {{'SELECTED'}} @endif>N</option>
-                    <option value="D" @if($users_data->status == 'D') {{'SELECTED'}} @endif>D</option>
-                  </select>
-                </div>
+                    <option value="Y" @if($product->product_status == 'Y') {{'SELECTED'}} @endif>Y</option>
+                    <option value="N" @if($product->product_status == 'N') {{'SELECTED'}} @endif>N</option>
+                    <option value="D" @if($product->product_status == 'D') {{'SELECTED'}} @endif>D</option>
+                  </select>                </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
                 <!-- /.box-body -->
                 <hr>
                 <div class="btn-group pull-right">
                     <button id="submit" name="submit" class="btn btn-sm btn-default">
-                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>{{__('shop.saveedit')}}
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>{{__('shop.Edit Product')}}
                     </button>
                   </form>
                 </div>

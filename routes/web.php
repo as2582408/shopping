@@ -14,15 +14,15 @@
 Route::get('/', function () {
     return redirect('signin');
 });
-Route::get('/signin', 'UserController@getSignin');      //登入畫面
-Route::post('/signin', 'UserController@postSignin');    //登入
-Route::get('/signup', 'UserController@getSignup');      //註冊畫面
-Route::post('/signup', 'UserController@postSignup');    //註冊
-Route::get('/mycenter', 'UserController@getCenter')->middleware(['auth']); //會員中心
-Route::get('/profile', 'UserController@getProfile')->middleware(['auth']); //修改資料頁面
-Route::post('/profile', 'UserController@editProfile')->middleware(['auth']); //修改資料
-Route::get('/password', 'UserController@getPassword')->middleware(['auth']); //修改密碼頁面
-Route::post('/password', 'UserController@editPassword')->middleware(['auth']); //修改密碼
+Route::get('/signin', 'UserController@getSignin');  //登入畫面
+Route::post('/signin', 'UserController@postSignin');//登入
+Route::get('/signup', 'UserController@getSignup');  //註冊畫面
+Route::post('/signup', 'UserController@postSignup');//註冊
+Route::get('/mycenter', 'UserController@getCenter')->middleware(['auth']);      //會員中心
+Route::get('/profile', 'UserController@getProfile')->middleware(['auth']);      //修改資料頁面
+Route::post('/profile', 'UserController@editProfile')->middleware(['auth']);    //修改資料
+Route::get('/password', 'UserController@getPassword')->middleware(['auth']);    //修改密碼頁面
+Route::post('/password', 'UserController@editPassword')->middleware(['auth']);  //修改密碼
 
 Route::get('/poi',function () {
     return view('shop.shopIndex');
@@ -32,16 +32,38 @@ Route::get('/poi',function () {
 Route::get('/admin',function () {
     return view('admin.adminhome');
 });
-Route::post('/admin/logout', 'AdminController@signOut');  //登出
-Route::get('/admin/login', 'AdminController@getSignin');    //登入畫面
-Route::post('/admin/login', 'AdminController@postSignin');  //登入畫面
-Route::get('/admin/center', 'AdminController@adminCenter')->middleware(['admin']);      //主畫面
-
+//登出
+Route::post('/admin/logout', 'AdminController@signOut');
+//登入畫面
+Route::get('/admin/login', 'AdminController@getSignin');
+//登入
+Route::post('/admin/login', 'AdminController@postSignin');
+//後台首頁
+Route::get('/admin/center', 'AdminController@adminCenter')->middleware(['admin']);
+//帳號管理頁面
 Route::get('/admin/account', 'AdminController@account')->middleware(['admin']);
+//會員編輯頁面
 Route::get('/admin/accountedit/{id}', 'AdminController@editAccountPage')->middleware(['admin']);
-Route::post('/admin/accountedit', 'AdminController@editAccount')->middleware(['admin']);      
+//修改會員
+Route::post('/admin/accountedit', 'AdminController@editAccount')->middleware(['admin']);
+//刪除會員
 Route::get('/admin/accountdel/{id}', 'AdminController@delectAccount')->middleware(['admin']); 
-Route::get('/admin/accountSearch', 'AdminController@searchAccount')->middleware(['admin']);      
+//搜尋會員
+Route::get('/admin/accountSearch', 'AdminController@searchAccount')->middleware(['admin']);
+//商品頁面
+Route::get('/admin/products', 'ProductsController@products')->middleware(['admin']);
+//新增商品頁面
+Route::get('/admin/addProducts', 'ProductsController@addProductsPage')->middleware(['admin']);
+//新增商品
+Route::post('/admin/addProducts', 'ProductsController@addProducts')->middleware(['admin']);
+//刪除商品
+Route::get('/admin/delProducts/{id}', 'ProductsController@delectProducts')->middleware(['admin']); 
+//修改商品頁面
+Route::get('/admin/editProducts/{id}', 'ProductsController@editProductsPage')->middleware(['admin']); 
+//修改商品
+Route::post('/admin/editProducts', 'ProductsController@editProducts')->middleware(['admin']);
+//搜尋商品
+Route::get('/admin/productsSearch', 'ProductsController@searchProducts')->middleware(['admin']);
 
 
 

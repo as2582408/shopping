@@ -51,7 +51,7 @@
             <a href="{{ url('/admin/products') }}" class="list-group-item list-group-item-action">{{ __('shop.Stock Management') }}</a>
             <a href="{{ url('/admin/category') }}" class="list-group-item list-group-item-action">{{ __('shop.Category Management') }}</a>
             <a href=" " class="list-group-item list-group-item-action">{{ __('shop.Reply Management') }}</a>
-            <a href=" " class="list-group-item list-group-item-action">{{ __('shop.Offer Management') }}</a>
+            <a href="{{ url('/admin/discount') }}" class="list-group-item list-group-item-action">{{ __('shop.Offer Management') }}</a>
             <a href="{{ url('/admin/level') }}" class="list-group-item list-group-item-action">{{ __('shop.Level Management') }}</a>
           </div>
         </div>
@@ -63,42 +63,46 @@
                 <input id="id" name="id" type="hidden"  class="form-control  " value=" {{$users_data->id}} " required="">
                 <div class="col-sm-5 col-xs-6 tital ">{{__('shop.name')}}:</div>
                 <div class="col-sm-4 col-xs-3  pull-right" >
-                     <input id="name" name="name" type="text"  class="form-control  " value=" {{$users_data->name}} " required="">
+                     <input id="name" name="name" type="text"  class="form-control  " value="{{$users_data->name}}" required="">
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
                 <hr>
                 <div class="col-sm-5 col-xs-6 tital ">{{__('shop.email')}}:</div>
                 <div class="col-sm-4 pull-right"">
-                    <input id="email" name="email" type="text"  class="form-control  " value=" {{$users_data->email}} " required="">    
+                    <input id="email" name="email" type="text"  class="form-control  " value="{{$users_data->email}}" required="">    
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
                 <hr>
                 <div class="col-sm-5 col-xs-6 tital ">{{__('shop.phone')}}:</div>
                 <div class="col-sm-4 pull-right"">
-                    <input id="phone" name="phone" type="text"  class="form-control  " value=" {{$users_data->phone}} " required="">    
+                    <input id="phone" name="phone" type="text"  class="form-control  " value="{{$users_data->phone}}" required="">    
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
                 <hr>
                 <div class="col-sm-5 col-xs-6 tital ">{{__('shop.address')}}:</div>
                 <div class="col-sm-4 pull-right"">
-                    <input id="address" name="address" type="text"  class="form-control  " value=" {{$users_data->address}} " required=""> 
+                    <input id="address" name="address" type="text"  class="form-control  " value="{{$users_data->address}}" required=""> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
                 <hr>
                 <div class="col-sm-5 col-xs-6 tital ">會員等級:</div>
                 <div class="col-sm-4 pull-right"">
-                    <input id="level" name="level" type="text"  class="form-control  " value=" {{$users_data->level}} " required=""> 
+                  <select id="level" name="level" class="form-select" aria-label="Default select example">
+                    @foreach ($levels as $level)
+                      <option value="{{$level->level_rank}}" @if($users_data->level == $level->level_rank) {{'SELECTED'}} @endif>{{$level->level_rank}}</option>
+                    @endforeach
+                  </select>
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
                 <hr>
                 <div class="col-sm-5 col-xs-6 tital ">購物金:</div>
                 <div class="col-sm-4 pull-right"">
-                    <input id="point" name="point" type="text"  class="form-control  " value=" {{$users_data->point}} " required=""> 
+                    <input id="point" name="point" type="text"  class="form-control  " value="{{$users_data->point}}" required=""> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>

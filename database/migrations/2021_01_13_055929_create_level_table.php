@@ -19,7 +19,7 @@ class CreateLevelTable extends Migration
             $table->string('level_name', 20);
             $table->integer('level_rank');
             $table->integer('level_threshold');
-            $table->enum('discount_status', ['Y','D']);
+            $table->enum('level_status', ['Y','D']);
 
         });
     }

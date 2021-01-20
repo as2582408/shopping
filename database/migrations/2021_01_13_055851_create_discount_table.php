@@ -15,14 +15,14 @@ class CreateDiscountTable extends Migration
     {
         Schema::create('discount', function (Blueprint $table) {
             //
-            $table->increments('id');
+            $table->increments('discount_id');
             $table->string('discount_name', 20);
             $table->integer('level');
             $table->integer('discount_threshold');
-            $table->integer('discount_gift');
+            $table->float('discount_gift');
             $table->timestamp('discount_create_time')->nullable();
             $table->timestamp('discount_updata_time')->nullable();
-            $table->enum('discount_status', ['Y','N','D']);
+            $table->enum('discount_status', ['Y','N']);
 
             
         });

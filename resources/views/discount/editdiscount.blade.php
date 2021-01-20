@@ -36,6 +36,13 @@
 <hr>
     <div class="container">
       <div class="row">
+                @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    @foreach ($errors->all() as $errors)
+                        <p>{{ $errors }}</p>    
+                    @endforeach
+                </div>
+                @endif
         <div class="col-md-6 h-100 " style="width:200px;">
           <div class="list-group">
             <a href="{{ url('/admin/account') }}" class="list-group-item list-group-item-action">{{ __('shop.Account Management') }}</a>
@@ -49,51 +56,60 @@
           </div>
         </div>
         <div class="col-md-8">
-          <div class="row justify-content-end offset-2">
-            <form action="{{ url('/admin/productsSearch') }}" method="GET" class="search-form">
-                <input type="text" name="query" id="query" value="{{ request()->input('query') }}" class="search-box"
-                    placeholder="{{__('shop.Product Name')}}">
-                <button type="submit" class="fa fa-search btn btn-info btn-sm"></button>
-            </form>
-          </div>
           <div class="row">
-            <a class="btn btn-primary" href="{{ url('/admin/addProducts') }}" role="button">新增商品</a>
-          </div>
-          <div class="row">
-          <table class="table table-sm">
-				<thead>
-				<tr>
-					<th scope="col">id</th>
-					<th scope="col">圖片</th>
-					<th scope="col">商品名</th>
-					<th scope="col">價格</th>
-					<th scope="col">數量</th>
-					<th scope="col">上架</th>
-					<th scope="col">上架時間</th>
-					<th scope="col">商品分類</th>
-          <th scope="col">修改</th>
-          <th scope="col"></th>
-					<th scope="col">快速刪除</th>
-				</tr>
-				</thead>
-				<tbody>
-          @foreach ($products as $product)
-          <tr>
-            <th scope="row">{{ $product->product_id }}</th>
-            <td><img src="{{asset("storage/$product->product_img")}}" class="img-responsive" width="200" height="100"></td>
-						<td>{{ $product->product_name }}</td>
-						<td>{{ $product->product_price }}</td>
-						<td>{{ $product->product_amount }}</td>
-            <td>{{ $product->product_status }}</td>
-            <td>{{ $product->product_create_time }}</td>
-            <td>{{ $product->category_name }}</td>
-            <td><a href='{{ url("/admin/editProducts/{$product->product_id}") }}' class="alert-link">修改</a></td>
-            <td></td>
-						<td><a href='{{ url("/admin/delProducts/{$product->product_id}") }}' class="alert-link">刪除</a></td>
-					</tr>
-          @endforeach  
-				</tbody>
-			  </table>
+            <div class="text-center">
+              <form action="{{ url('/admin/editdiscount') }}" method="post" class="form-horizontal" enctype="multipart/form-data" role="form">
+                {!! csrf_field() !!}
+                <input id="id" name="id" type="hidden"  class="form-control  " value=" {{$discount->discount_id}} " required="">
+                <div class="col-sm-5 col-xs-6 tital ">優惠名稱:</div>
+                <div class="col-sm-4 pull-right"">
+                    <input id="name" name="name" type="text"  class="form-control  " value="{{ $discount->discount_name }}" required="">    
+                </div>
+                <div class="clearfix"></div>
+                <div class="bot-border"></div>
+                <hr>
+                <div class="col-sm-5 col-xs-6 tital ">優惠需求等級:</div>
+                <div class="col-sm-4 pull-right"">
+                    <input id="level" name="level" type="text"  class="form-control  " value="{{ $discount->level }}" required="">    
+                </div>
+                <div class="clearfix"></div>
+                <div class="bot-border"></div>
+                <hr>
+                <div class="col-sm-5 col-xs-6 tital ">優惠需求消費金額(1以下為折扣 以上為禮金):</div>
+                <div class="col-sm-4 pull-right"">
+                    <input id="threshold" name="threshold" type="text"  class="form-control  " value="{{ $discount->discount_threshold }}" required=""> 
+                </div>
+                <div class="clearfix"></div>
+                <div class="bot-border"></div>
+                <hr>
+                <div class="col-sm-5 col-xs-6 tital ">優惠比例:</div>
+                <div class="col-sm-4 pull-right"">
+                    <input id="gift" name="gift" type="text"  class="form-control  " value="{{ $discount->discount_gift }}" required=""> 
+                </div>
+                <div class="clearfix"></div>
+                <div class="bot-border"></div>
+                <hr>
+                <div class="col-sm-5 col-xs-6 tital ">啟用狀態:</div>
+                <div class="col-sm-4 pull-right"">
+                  <select id="status" name="status" class="form-select" aria-label="Default select example">
+                    <option value="Y" @if($discount->discount_status == 'Y') {{'SELECTED'}} @endif>Y</option>
+                    <option value="N" @if($discount->discount_status == 'N') {{'SELECTED'}} @endif>N</option>
+                  </select>                
+                </div>
+                <div class="clearfix"></div>
+                <div class="bot-border"></div>
+                <!-- /.box-body -->
+                <hr>
+                <div class="btn-group pull-right">
+                    <button id="submit" name="submit" class="btn btn-sm btn-default">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>{{__('shop.Edit Product')}}
+                    </button>
+                  </form>
+                </div>
+                <div>
+                  <button class="btn btn-sm btn-default" onclick="history.back()">返回</button>
+                </div>
+              </div>
           </div>
         </div>
       </div>

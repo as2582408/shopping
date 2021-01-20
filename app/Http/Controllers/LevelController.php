@@ -12,7 +12,7 @@ class LevelController extends Controller
     public function index()
     {
         $levels = Level::orderBy('level_rank', 'desc')->get();
-        $maxLevel = Level::where('discount_status', '=', 'Y')->max('level_rank');
+        $maxLevel = Level::where('level_status', '=', 'Y')->max('level_rank');
 
         return view('level.level', [
             'levels' => $levels,
@@ -65,7 +65,7 @@ class LevelController extends Controller
         $oldRank = Level::select('level_rank')->where('level_id', '=', $id)->first();
 
         Level::where('level_id', '=', $id)->update([
-            'discount_status' => 'D'
+            'level_status' => 'D'
         ]);
 
         //刪除等級時將刪除等級底下的會員降級
@@ -80,7 +80,7 @@ class LevelController extends Controller
         $reRank = Level::select('level_rank', 'level_threshold')->where('level_id', '=', $id)->first();
 
         Level::where('level_id', '=', $id)->update([
-            'discount_status' => 'Y'
+            'level_status' => 'Y'
         ]);
         //復原需要將等級還原
         User::where([
@@ -94,8 +94,8 @@ class LevelController extends Controller
 
     public function addLevelPage()
     {
-        $maxLevel = Level::where('discount_status', '=', 'Y')->max('level_rank');
-        $rankMoney = Level::where('discount_status', '=', 'Y')->max('level_threshold');
+        $maxLevel = Level::where('level_status', '=', 'Y')->max('level_rank');
+        $rankMoney = Level::where('level_status', '=', 'Y')->max('level_threshold');
 
         return view('level.addlevel', [
             'max' => $maxLevel,
@@ -117,7 +117,7 @@ class LevelController extends Controller
             'level_name' => $request->input('name')
         ]);
         //新增等級時將停用的舊等級刪除
-        Level::where('discount_status', '=', 'D')->delete();
+        Level::where('level_status', '=', 'D')->delete();
         $addLevel->save();
 
         return redirect()->intended('/admin/level');

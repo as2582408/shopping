@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\User;
+use App\Level;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -60,8 +61,12 @@ class AdminController extends Controller
     public function editAccountPage($id)
     {
         $user = User::where('id', $id)->first();
+        $levels = Level::where('level_status', '=', 'Y')->orderBy('level_rank', 'asc')->get();
         
-        return view('admin.editaccount', ['users_data' => $user]);
+        return view('admin.editaccount', [
+            'users_data' => $user,
+            'levels' => $levels
+            ]);
     }
     //刪除會員
     public function delectAccount($id)

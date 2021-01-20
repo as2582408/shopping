@@ -49,47 +49,38 @@
           </div>
         </div>
         <div class="col-md-8">
-          <div class="row justify-content-end offset-2">
-            <form action="{{ url('/admin/productsSearch') }}" method="GET" class="search-form">
-                <input type="text" name="query" id="query" value="{{ request()->input('query') }}" class="search-box"
-                    placeholder="{{__('shop.Product Name')}}">
-                <button type="submit" class="fa fa-search btn btn-info btn-sm"></button>
-            </form>
-          </div>
           <div class="row">
-            <a class="btn btn-primary" href="{{ url('/admin/addProducts') }}" role="button">新增商品</a>
+            <a class="btn btn-primary" href="{{ url('/admin/adddiscount') }}" role="button">新增優惠</a>
           </div>
           <div class="row">
           <table class="table table-sm">
 				<thead>
 				<tr>
 					<th scope="col">id</th>
-					<th scope="col">圖片</th>
-					<th scope="col">商品名</th>
-					<th scope="col">價格</th>
-					<th scope="col">數量</th>
-					<th scope="col">上架</th>
-					<th scope="col">上架時間</th>
-					<th scope="col">商品分類</th>
+					<th scope="col">優惠名</th>
+					<th scope="col">需求會員等級</th>
+					<th scope="col">需求消費金額</th>
+					<th scope="col">優惠比例</th>
+					<th scope="col">建立時間</th>
+					<th scope="col">啟用狀態</th>
           <th scope="col">修改</th>
           <th scope="col"></th>
 					<th scope="col">快速刪除</th>
 				</tr>
 				</thead>
 				<tbody>
-          @foreach ($products as $product)
+          @foreach ($discounts as $discount)
           <tr>
-            <th scope="row">{{ $product->product_id }}</th>
-            <td><img src="{{asset("storage/$product->product_img")}}" class="img-responsive" width="200" height="100"></td>
-						<td>{{ $product->product_name }}</td>
-						<td>{{ $product->product_price }}</td>
-						<td>{{ $product->product_amount }}</td>
-            <td>{{ $product->product_status }}</td>
-            <td>{{ $product->product_create_time }}</td>
-            <td>{{ $product->category_name }}</td>
-            <td><a href='{{ url("/admin/editProducts/{$product->product_id}") }}' class="alert-link">修改</a></td>
+            <th scope="row">{{ $discount->discount_id }}</th>
+						<td>{{$discount->discount_name}}</td>
+						<td>{{$discount->level}}</td>
+						<td>{{$discount->discount_threshold}}</td>
+            <td>{{$discount->discount_gift}}</td>
+            <td>{{$discount->discount_create_time}}</td>
+            <td>{{$discount->discount_status}}</td>
+            <td><a href='{{ url("/admin/editdiscount/{$discount->discount_id}") }}' class="alert-link">修改</a></td>
             <td></td>
-						<td><a href='{{ url("/admin/delProducts/{$product->product_id}") }}' class="alert-link">刪除</a></td>
+						<td><a href='{{ url("/admin/deldiscount/{$discount->discount_id}") }}' class="alert-link">刪除</a></td>
 					</tr>
           @endforeach  
 				</tbody>

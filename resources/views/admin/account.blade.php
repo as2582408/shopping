@@ -45,7 +45,7 @@
             <a href="{{ url('/admin/category') }}" class="list-group-item list-group-item-action">{{ __('shop.Category Management') }}</a>
             <a href=" " class="list-group-item list-group-item-action">{{ __('shop.Reply Management') }}</a>
             <a href=" " class="list-group-item list-group-item-action">{{ __('shop.Offer Management') }}</a>
-            <a href=" " class="list-group-item list-group-item-action">{{ __('shop.Level Management') }}</a>
+            <a href="{{ url('/admin/level') }}" class="list-group-item list-group-item-action">{{ __('shop.Level Management') }}</a>
           </div>
         </div>
         <div class= "col-md-8">

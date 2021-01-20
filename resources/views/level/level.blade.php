@@ -48,9 +48,44 @@
             <a href="{{ url('/admin/level') }}" class="list-group-item list-group-item-action">{{ __('shop.Level Management') }}</a>
           </div>
         </div>
-        <div class="col-md-8">
+        <div class= "col-md-8">
           <div class="row">
-            
+            <div class="row">
+              <a class="btn btn-primary" href="{{ url('/admin/addlevel') }}" role="button">新增等級</a>
+            </div>
+            <table class="table table-sm">
+				<thead>
+				  <tr>
+					<th scope="col">id</th>
+          <th scope="col">等級名稱</th>
+          <th scope="col">階級</th>
+          <th scope="col">需要累積金額</th>
+          <th scope="col">狀態</th>
+          <th scope="col">修改</th>
+          <th scope="col"></th>
+          <th scope="col">快速刪除</th>
+          <th scope="col"></th>
+					<th scope="col">復原</th>
+				  </tr>
+				</thead>
+				<tbody>
+					@foreach ($levels as $level)
+					<tr>
+						<th scope="row">{{ $level->level_id }}</th>
+            <td>{{ $level->level_name }}</td>
+            <td>{{ $level->level_rank }}</td>
+						<td>{{ $level->level_threshold }}</td>
+						<td>{{ $level->discount_status }}</td>
+
+            <td><a href='{{ url("/admin/editlevel/{$level->level_id}") }}' class="alert-link">修改</a></td>
+            <td>&nbsp;</td>
+            <td>@if($level->level_rank == $maxLevel) <a href='{{ url("/admin/dellevel/{$level->level_id}") }}' class="alert-link"> @endif 刪除</a></td>
+            <td>&nbsp;</td>
+            <td>@if($level->level_rank == $maxLevel+1 && $level->discount_status == 'D') <a href='{{ url("/admin/redellevel/{$level->level_id}") }}' class="alert-link"> @endif 復原</a></td>
+            </tr>
+					@endforeach
+				</tbody>
+			  </table>
           </div>
         </div>
       </div>

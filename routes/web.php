@@ -64,7 +64,6 @@ Route::get('/admin/editProducts/{id}', 'ProductsController@editProductsPage')->m
 Route::post('/admin/editProducts', 'ProductsController@editProducts')->middleware(['admin']);
 //搜尋商品
 Route::get('/admin/productsSearch', 'ProductsController@searchProducts')->middleware(['admin']);
-
 //分類頁面
 Route::get('/admin/category', 'CategoryController@index')->middleware(['admin']);
 //分類修改頁面
@@ -79,7 +78,20 @@ Route::get('/admin/addCategory', 'CategoryController@addCategoryPage')->middlewa
 Route::post('/admin/addCategory', 'CategoryController@addCategory')->middleware(['admin']);
 
 
-
+//等級管理頁面
+Route::get('/admin/level', 'LevelController@index')->middleware(['admin']);
+//等級修改頁面
+Route::get('/admin/editlevel/{id}', 'LevelController@editLevelPage')->middleware(['admin']);
+//等級修改
+Route::post('/admin/editlevel', 'LevelController@editLevel')->middleware(['admin']);
+//等級刪除
+Route::get('/admin/dellevel/{id}', 'LevelController@delLevel')->middleware(['admin']);
+//等級復原
+Route::get('/admin/redellevel/{id}', 'LevelController@redelLevel')->middleware(['admin']);
+//等級新增頁面
+Route::get('/admin/addlevel', 'LevelController@addLevelPage')->middleware(['admin']);
+//等級新增
+Route::post('/admin/addlevel', 'LevelController@addLevel')->middleware(['admin']);
 
 Auth::routes();
 

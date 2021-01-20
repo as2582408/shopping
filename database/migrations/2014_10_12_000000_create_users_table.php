@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->integer('point');
+            $table->integer('accumulation_point');
             $table->integer('level');
             $table->string('phone');
             $table->string('address');

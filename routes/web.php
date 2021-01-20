@@ -10,7 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
     return redirect('signin');
 });
@@ -29,69 +28,87 @@ Route::get('/poi',function () {
 });
 
 
-Route::get('/admin',function () {
-    return view('admin.adminhome');
+Route::prefix('admin')->group(function () {
+
+    Route::get('/',function () {
+        return view('admin.adminhome');
+    });
+    //登出
+    Route::post('/logout', 'AdminController@signOut');
+    //登入畫面
+    Route::get('/login', 'AdminController@getSignin');
+    //登入
+    Route::post('/login', 'AdminController@postSignin');
+
+    Route::group(['middleware' => ['admin']], function () {
+    //後台首頁
+        Route::get('/center', 'AdminController@adminCenter');
+        //帳號管理頁面
+        Route::get('/account', 'AdminController@account');
+        //會員編輯頁面
+        Route::get('/accountedit/{id}', 'AdminController@editAccountPage');
+        //修改會員
+        Route::post('/accountedit', 'AdminController@editAccount');
+        //刪除會員
+        Route::get('/accountdel/{id}', 'AdminController@delectAccount'); 
+        //搜尋會員
+        Route::get('/accountSearch', 'AdminController@searchAccount');
+        //商品頁面
+        Route::get('/products', 'ProductsController@products');
+        //新增商品頁面
+        Route::get('/addProducts', 'ProductsController@addProductsPage');
+        //新增商品
+        Route::post('/addProducts', 'ProductsController@addProducts');
+        //刪除商品
+        Route::get('/delProducts/{id}', 'ProductsController@delectProducts'); 
+        //修改商品頁面
+        Route::get('/editProducts/{id}', 'ProductsController@editProductsPage'); 
+        //修改商品
+        Route::post('/editProducts', 'ProductsController@editProducts');
+        //搜尋商品
+        Route::get('/productsSearch', 'ProductsController@searchProducts');
+        //分類頁面
+        Route::get('/category', 'CategoryController@index');
+        //分類修改頁面
+        Route::get('/editCategory/{id}', 'CategoryController@editCategoryPage');
+        //分類修改
+        Route::post('/editCategory', 'CategoryController@editCategory');
+        //分類刪除
+        Route::get('/delCategory/{id}', 'CategoryController@delCategory');
+        //分類新增頁面
+        Route::get('/addCategory', 'CategoryController@addCategoryPage');
+        //分類新增
+        Route::post('/addCategory', 'CategoryController@addCategory');
+        //等級管理頁面
+        Route::get('/level', 'LevelController@index');
+        //等級修改頁面
+        Route::get('/editlevel/{id}', 'LevelController@editLevelPage');
+        //等級修改
+        Route::post('/editlevel', 'LevelController@editLevel');
+        //等級刪除
+        Route::get('/dellevel/{id}', 'LevelController@delLevel');
+        //等級復原
+        Route::get('/redellevel/{id}', 'LevelController@redelLevel');
+        //等級新增頁面
+        Route::get('/addlevel', 'LevelController@addLevelPage');
+        //等級新增
+        Route::post('/addlevel', 'LevelController@addLevel');
+
+        //優惠管理頁面
+        Route::get('/discount', 'DiscountController@index');
+        //優惠修改頁面
+        Route::get('/editdiscount/{id}', 'DiscountController@editDiscountPage');
+        //優惠修改
+        Route::post('/editdiscount', 'DiscountController@editDiscount');
+        //優惠刪除
+        Route::get('/deldiscount/{id}', 'DiscountController@delDiscount');
+        //優惠新增頁面
+        Route::get('/adddiscount', 'DiscountController@addDiscountPage');
+        //優惠新增
+        Route::post('/adddiscount', 'DiscountController@addDiscount');
+
+    });
 });
-//登出
-Route::post('/admin/logout', 'AdminController@signOut');
-//登入畫面
-Route::get('/admin/login', 'AdminController@getSignin');
-//登入
-Route::post('/admin/login', 'AdminController@postSignin');
-//後台首頁
-Route::get('/admin/center', 'AdminController@adminCenter')->middleware(['admin']);
-//帳號管理頁面
-Route::get('/admin/account', 'AdminController@account')->middleware(['admin']);
-//會員編輯頁面
-Route::get('/admin/accountedit/{id}', 'AdminController@editAccountPage')->middleware(['admin']);
-//修改會員
-Route::post('/admin/accountedit', 'AdminController@editAccount')->middleware(['admin']);
-//刪除會員
-Route::get('/admin/accountdel/{id}', 'AdminController@delectAccount')->middleware(['admin']); 
-//搜尋會員
-Route::get('/admin/accountSearch', 'AdminController@searchAccount')->middleware(['admin']);
-//商品頁面
-Route::get('/admin/products', 'ProductsController@products')->middleware(['admin']);
-//新增商品頁面
-Route::get('/admin/addProducts', 'ProductsController@addProductsPage')->middleware(['admin']);
-//新增商品
-Route::post('/admin/addProducts', 'ProductsController@addProducts')->middleware(['admin']);
-//刪除商品
-Route::get('/admin/delProducts/{id}', 'ProductsController@delectProducts')->middleware(['admin']); 
-//修改商品頁面
-Route::get('/admin/editProducts/{id}', 'ProductsController@editProductsPage')->middleware(['admin']); 
-//修改商品
-Route::post('/admin/editProducts', 'ProductsController@editProducts')->middleware(['admin']);
-//搜尋商品
-Route::get('/admin/productsSearch', 'ProductsController@searchProducts')->middleware(['admin']);
-//分類頁面
-Route::get('/admin/category', 'CategoryController@index')->middleware(['admin']);
-//分類修改頁面
-Route::get('/admin/editCategory/{id}', 'CategoryController@editCategoryPage')->middleware(['admin']);
-//分類修改
-Route::post('/admin/editCategory', 'CategoryController@editCategory')->middleware(['admin']);
-//分類刪除
-Route::get('/admin/delCategory/{id}', 'CategoryController@delCategory')->middleware(['admin']);
-//分類新增頁面
-Route::get('/admin/addCategory', 'CategoryController@addCategoryPage')->middleware(['admin']);
-//分類新增
-Route::post('/admin/addCategory', 'CategoryController@addCategory')->middleware(['admin']);
-
-
-//等級管理頁面
-Route::get('/admin/level', 'LevelController@index')->middleware(['admin']);
-//等級修改頁面
-Route::get('/admin/editlevel/{id}', 'LevelController@editLevelPage')->middleware(['admin']);
-//等級修改
-Route::post('/admin/editlevel', 'LevelController@editLevel')->middleware(['admin']);
-//等級刪除
-Route::get('/admin/dellevel/{id}', 'LevelController@delLevel')->middleware(['admin']);
-//等級復原
-Route::get('/admin/redellevel/{id}', 'LevelController@redelLevel')->middleware(['admin']);
-//等級新增頁面
-Route::get('/admin/addlevel', 'LevelController@addLevelPage')->middleware(['admin']);
-//等級新增
-Route::post('/admin/addlevel', 'LevelController@addLevel')->middleware(['admin']);
 
 Auth::routes();
 

@@ -39,7 +39,7 @@
         <div class="col-md-6 h-100 " style="width:200px;">
           <div class="list-group">
             <a href="{{ url('/admin/account') }}" class="list-group-item list-group-item-action">{{ __('shop.Account Management') }}</a>
-            <a href=" " class="list-group-item list-group-item-action">{{ __('shop.Order Management') }}</a>
+            <a href="{{ url('/admin/detail') }}" class="list-group-item list-group-item-action">{{ __('shop.Order Management') }}</a>
             <a href=" " class="list-group-item list-group-item-action">{{ __('shop.Refund Management') }}</a>
             <a href="{{ url('/admin/products') }}" class="list-group-item list-group-item-action">{{ __('shop.Stock Management') }}</a>
             <a href="{{ url('/admin/category') }}" class="list-group-item list-group-item-action">{{ __('shop.Category Management') }}</a>

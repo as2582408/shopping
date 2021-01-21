@@ -58,51 +58,64 @@
         <div class="col-md-8">
           <div class="row">
             <div class="text-center">
-              <form action="{{ url('/admin/editdiscount') }}" method="post" class="form-horizontal" enctype="multipart/form-data" role="form">
+              <form action="{{ url('/admin/editdetail') }}" method="post">
                 {!! csrf_field() !!}
-                <input id="id" name="id" type="hidden"  class="form-control  " value=" {{$discount->discount_id}} " required="">
-                <div class="col-sm-5 col-xs-6 tital ">優惠名稱:</div>
+                <input id="id" name="id" type="hidden"  class="form-control  " value="{{$detail->detail_id}}" required="">
+      
+                <div class="col-sm-5 col-xs-6 tital ">會員姓名:</div>
                 <div class="col-sm-4 pull-right"">
-                    <input id="name" name="name" type="text"  class="form-control  " value="{{ $discount->discount_name }}" required="">    
+                    <input id="name" name="name" type="text"  class="form-control  " value="{{$detail->name}}" required="" readonly="readonly"> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
-                <hr>
-                <div class="col-sm-5 col-xs-6 tital ">優惠需求等級:</div>
+				<hr>
+				<div class="col-sm-5 col-xs-6 tital ">電話:</div>
                 <div class="col-sm-4 pull-right"">
-                    <input id="level" name="level" type="text"  class="form-control  " value="{{ $discount->level }}" required="">    
+                    <input id="phone" name="phone" type="text"  class="form-control  " value="{{$detail->user_phone}}" required=""> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
-                <hr>
-                <div class="col-sm-5 col-xs-6 tital ">優惠需求消費金額(1以下為折扣 以上為禮金):</div>
+				<hr>
+				<div class="col-sm-5 col-xs-6 tital ">地址:</div>
                 <div class="col-sm-4 pull-right"">
-                    <input id="threshold" name="threshold" type="text"  class="form-control  " value="{{ $discount->discount_threshold }}" required=""> 
+                    <input id="address" name="address" type="text"  class="form-control  " value="{{$detail->user_address}}" required=""> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
-                <hr>
-                <div class="col-sm-5 col-xs-6 tital ">優惠比例:</div>
+				<hr>
+				<div class="col-sm-5 col-xs-6 tital ">訂單金額:</div>
                 <div class="col-sm-4 pull-right"">
-                    <input id="gift" name="gift" type="text"  class="form-control  " value="{{ $discount->discount_gift }}" required=""> 
+                    <input id="price" name="price" type="text"  class="form-control  " value="{{$detail->detail_totail_price}}" required="" readonly="readonly"> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
-                <hr>
-                <div class="col-sm-5 col-xs-6 tital ">啟用狀態:</div>
+				<hr>
+				<div class="col-sm-5 col-xs-6 tital ">使用購物金:</div>
                 <div class="col-sm-4 pull-right"">
-                  <select id="status" name="status" class="form-select" aria-label="Default select example">
-                    <option value="Y" @if($discount->discount_status == 'Y') {{'SELECTED'}} @endif>Y</option>
-                    <option value="N" @if($discount->discount_status == 'N') {{'SELECTED'}} @endif>N</option>
-                  </select>                
+                    <input id="point" name="point" type="text"  class="form-control  " value="{{$detail->detail_shopping_point}}" required="" readonly="readonly"> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
-                <!-- /.box-body -->
-                <hr>
+				<hr>
+				<div class="col-sm-5 col-xs-6 tital ">贈送禮金:</div>
+                <div class="col-sm-4 pull-right"">
+                    <input id="gift" name="gift" type="text"  class="form-control  " value="{{$detail->detail_gift_money}}" required="" readonly="readonly"> 
+                </div>
+                <div class="clearfix"></div>
+                <div class="bot-border"></div>
+				<hr>
+				<div class="form-group">
+					<label for="exampleFormControlTextarea1">訂單詳細</label>
+					<textarea id="description" name="description" class="form-control" rows="4">
+					{{$detail->detail_description}}
+					</textarea>
+				  </div>
+                <div class="clearfix"></div>
+                <div class="bot-border"></div>
+				<hr>
                 <div class="btn-group pull-right">
                     <button id="submit" name="submit" class="btn btn-sm btn-default">
-                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>{{__('shop.Edit Product')}}
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>{{__('shop.saveedit')}}
                     </button>
                   </form>
                 </div>

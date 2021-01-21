@@ -58,51 +58,20 @@
         <div class="col-md-8">
           <div class="row">
             <div class="text-center">
-              <form action="{{ url('/admin/editdiscount') }}" method="post" class="form-horizontal" enctype="multipart/form-data" role="form">
+              <form action="{{ url('/admin/deldetail') }}" method="post">
                 {!! csrf_field() !!}
-                <input id="id" name="id" type="hidden"  class="form-control  " value=" {{$discount->discount_id}} " required="">
-                <div class="col-sm-5 col-xs-6 tital ">優惠名稱:</div>
-                <div class="col-sm-4 pull-right"">
-                    <input id="name" name="name" type="text"  class="form-control  " value="{{ $discount->discount_name }}" required="">    
+                <input id="id" name="id" type="hidden"  class="form-control  " value="{{$detailId}}" required="">
+      
+                <div class="form-group">
+                  <label for="exampleFormControlTextarea1">退貨理由</label>
+                  <textarea id="remarks" name="remarks" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
-                <hr>
-                <div class="col-sm-5 col-xs-6 tital ">優惠需求等級:</div>
-                <div class="col-sm-4 pull-right"">
-                    <input id="level" name="level" type="text"  class="form-control  " value="{{ $discount->level }}" required="">    
-                </div>
-                <div class="clearfix"></div>
-                <div class="bot-border"></div>
-                <hr>
-                <div class="col-sm-5 col-xs-6 tital ">優惠需求消費金額(1以下為折扣 以上為禮金):</div>
-                <div class="col-sm-4 pull-right"">
-                    <input id="threshold" name="threshold" type="text"  class="form-control  " value="{{ $discount->discount_threshold }}" required=""> 
-                </div>
-                <div class="clearfix"></div>
-                <div class="bot-border"></div>
-                <hr>
-                <div class="col-sm-5 col-xs-6 tital ">優惠比例:</div>
-                <div class="col-sm-4 pull-right"">
-                    <input id="gift" name="gift" type="text"  class="form-control  " value="{{ $discount->discount_gift }}" required=""> 
-                </div>
-                <div class="clearfix"></div>
-                <div class="bot-border"></div>
-                <hr>
-                <div class="col-sm-5 col-xs-6 tital ">啟用狀態:</div>
-                <div class="col-sm-4 pull-right"">
-                  <select id="status" name="status" class="form-select" aria-label="Default select example">
-                    <option value="Y" @if($discount->discount_status == 'Y') {{'SELECTED'}} @endif>Y</option>
-                    <option value="N" @if($discount->discount_status == 'N') {{'SELECTED'}} @endif>N</option>
-                  </select>                
-                </div>
-                <div class="clearfix"></div>
-                <div class="bot-border"></div>
-                <!-- /.box-body -->
                 <hr>
                 <div class="btn-group pull-right">
                     <button id="submit" name="submit" class="btn btn-sm btn-default">
-                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>{{__('shop.Edit Product')}}
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>{{__('shop.saveedit')}}
                     </button>
                   </form>
                 </div>

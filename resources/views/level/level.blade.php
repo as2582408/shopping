@@ -39,7 +39,7 @@
         <div class="col-md-6 h-100 " style="width:200px;">
           <div class="list-group">
             <a href="{{ url('/admin/account') }}" class="list-group-item list-group-item-action">{{ __('shop.Account Management') }}</a>
-            <a href=" " class="list-group-item list-group-item-action">{{ __('shop.Order Management') }}</a>
+            <a href="{{ url('/admin/detail') }}" class="list-group-item list-group-item-action">{{ __('shop.Order Management') }}</a>
             <a href=" " class="list-group-item list-group-item-action">{{ __('shop.Refund Management') }}</a>
             <a href="{{ url('/admin/products') }}" class="list-group-item list-group-item-action">{{ __('shop.Stock Management') }}</a>
             <a href="{{ url('/admin/category') }}" class="list-group-item list-group-item-action">{{ __('shop.Category Management') }}</a>
@@ -79,9 +79,9 @@
 
             <td><a href='{{ url("/admin/editlevel/{$level->level_id}") }}' class="alert-link">修改</a></td>
             <td>&nbsp;</td>
-            <td>@if($level->level_rank == $maxLevel) <a href='{{ url("/admin/dellevel/{$level->level_id}") }}' class="alert-link"> @endif 刪除</a></td>
+            <td>@if($level->level_rank == $maxLevel) <a href='{{ url("/admin/dellevel/{$level->level_id}") }}' class="alert-link">刪除</a> @endif</td>
             <td>&nbsp;</td>
-            <td>@if($level->level_rank == $maxLevel+1 && $level->level_status == 'D') <a href='{{ url("/admin/redellevel/{$level->level_id}") }}' class="alert-link"> @endif 復原</a></td>
+            <td>@if($level->level_rank == $maxLevel+1 && $level->level_status == 'D') <a href='{{ url("/admin/redellevel/{$level->level_id}") }}' class="alert-link">復原</a> @endif</td>
             </tr>
 					@endforeach
 				</tbody>

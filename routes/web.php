@@ -93,7 +93,6 @@ Route::prefix('admin')->group(function () {
         Route::get('/addlevel', 'LevelController@addLevelPage');
         //等級新增
         Route::post('/addlevel', 'LevelController@addLevel');
-
         //優惠管理頁面
         Route::get('/discount', 'DiscountController@index');
         //優惠修改頁面
@@ -106,6 +105,21 @@ Route::prefix('admin')->group(function () {
         Route::get('/adddiscount', 'DiscountController@addDiscountPage');
         //優惠新增
         Route::post('/adddiscount', 'DiscountController@addDiscount');
+
+        //訂單管理頁面
+        Route::get('/detail', 'DetailController@index');
+        //訂單修改頁面
+        Route::get('/editdetail/{id}', 'DetailController@editDetailPage');
+        //訂單修改
+        Route::post('/editdetail', 'DetailController@editDetail');
+        //訂單取消頁面
+        Route::get('/deldetail/{id}', 'DetailController@delDetailPage');
+        //訂單取消
+        Route::post('/deldetail', 'DetailController@delDetail');
+        //訂單出貨
+        Route::get('/shipmentdetail/{id}', 'DetailController@shipmentDetail');
+        //訂單完成
+        Route::get('/enddetail/{id}', 'DetailController@endDetail');
 
     });
 });

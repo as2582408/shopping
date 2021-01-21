@@ -15,7 +15,7 @@ class CreateDetailTable extends Migration
     {
         Schema::create('detail', function (Blueprint $table) {
             //
-            $table->increments('id');
+            $table->increments('detail_id');
             $table->integer('user_id');
             $table->integer('detail_totail_price');
             $table->string('detail_description');
@@ -23,7 +23,7 @@ class CreateDetailTable extends Migration
             $table->enum('detail_shipment', ['1','2']);
             $table->timestamp('detail_updata_time')->nullable();
             $table->timestamp('detail_create_time')->nullable();
-            $table->integer('user_phone');
+            $table->string('user_phone');
             $table->string('user_address');
             $table->integer('detail_shopping_point');
             $table->integer('detail_gift_money');

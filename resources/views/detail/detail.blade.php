@@ -80,7 +80,7 @@
             <td><a href='{{ url("/admin/editdetail/{$detail->detail_id}") }}' class="alert-link">修改</a></td>
             <td></td>
             <td>@if($detail->detail_shipment == 1 && $detail->detail_status == 0)<a href='{{ url("/admin/deldetail/{$detail->detail_id}") }}' class="alert-link">刪除</a>@endif</td>
-            <td>@if($detail->detail_shipment == 1)<a href='{{ url("/admin/shipmentdetail/{$detail->detail_id}") }}' class="alert-link">出貨</a>@endif</td>
+            <td>@if($detail->detail_shipment == 1 && $detail->detail_status == 0)<a href='{{ url("/admin/shipmentdetail/{$detail->detail_id}") }}' class="alert-link">出貨</a>@endif</td>
             <td>@if($detail->detail_status == 0 && $detail->detail_shipment == 2)<a href='{{ url("/admin/enddetail/{$detail->detail_id}") }}' class="alert-link">完成</a>@endif</td>
 
 					</tr>

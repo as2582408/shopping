@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Detail;
 use App\User;
 use App\Level;
+use App\Point_log;
 
 class DetailController extends Controller
 {
@@ -74,6 +75,16 @@ class DetailController extends Controller
         $detailData = Detail::select('user_id', 'detail_shopping_point')->where('detail_id', '=', $detailId)->first();
 
         User::where('id', '=', $detailData->user_id)->increment('point', $detailData->detail_shopping_point);
+        $log = User::select('point')->where('id', '=', $detailData->user_id)->first();
+
+        Point_log::create([
+            'log_user_id' => $detailData->user_id,
+            'log_detail' => $detailId,
+            'log_change_gold' => $detailData->detail_shopping_point,
+            'log_new_gold' => $log->point,
+            'log_type' => '3',
+            'log_time' => date("Y-m-d H:i:s")
+        ])->save();
     }
 
     public function shipmentDetail($id)
@@ -92,12 +103,23 @@ class DetailController extends Controller
             User::where('id', '=', $userData->user_id)->increment('point', $userData->detail_gift_money);
         }
         User::where('id', '=', $userData->user_id)->increment('accumulation_point', $userData->detail_totail_price );
-        
+
         //刷新會員等級
-        $newAccumulation = User::select('accumulation_point')->where('id', '=', $userData->user_id)->first();
+        $newAccumulation = User::select('point','accumulation_point')->where('id', '=', $userData->user_id)->first();
         $newLevel = Level::select('level_rank')->where('level_threshold', '<=', $newAccumulation->accumulation_point)->orderBy('level_threshold', 'desc')->first();
         User::where('id', '=', $userData->user_id)->update(['level' => $newLevel->level_rank]);
 
+        if($userData->detail_gift_money > 0) {
+
+            Point_log::create([
+                'log_user_id' => $userData->user_id,
+                'log_detail' => $id,
+                'log_change_gold' => $userData->detail_gift_money,
+                'log_new_gold' => $newAccumulation->point,
+                'log_type' => '2',
+                'log_time' => date("Y-m-d H:i:s")
+            ])->save();
+        }
         return redirect()->intended('/admin/detail');
     }
 }

@@ -49,6 +49,13 @@
           </div>
         </div>
         <div class= "col-md-8">
+          @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    @foreach ($errors->all() as $errors)
+                        <p>{{ $errors }}</p>    
+                    @endforeach
+                </div>
+                @endif
           <div class="row">
             <div style="margin-top:10px;">
               <form action="{{ url('/admin/accountSearch') }}" method="GET" class="search-form">

@@ -15,11 +15,14 @@ class CreatPointLogTable extends Migration
     {
         Schema::create('point_log', function (Blueprint $table) {
 
-            $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('detail');
-            $table->integer('change_gold');
-            $table->integer('new_gold');
+            $table->increments('log_id');
+            $table->integer('log_user_id');
+            $table->integer('log_detail');
+            $table->integer('log_change_gold');
+            $table->integer('log_new_gold');
+            $table->enum('log_type', ['1','2', '3','4','5']);
+            $table->timestamp('log_time')->nullable();
+
         });
     }
 

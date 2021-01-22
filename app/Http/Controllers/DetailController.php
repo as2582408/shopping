@@ -7,6 +7,9 @@ use App\Detail;
 use App\User;
 use App\Level;
 use App\Point_log;
+use App\Detail_item;
+use Illuminate\Support\Facades\DB;
+
 
 class DetailController extends Controller
 {
@@ -17,7 +20,7 @@ class DetailController extends Controller
         ->get();
 
         $status_arr = ['未結束', '結束', '取消'];
-        $shipment_arr = [1 => '未出貨',2 => '以出貨'];
+        $shipment_arr = [1 => '未出貨',2 => '已出貨'];
 
         return view('detail.detail', [
             'details' => $details,
@@ -29,8 +32,13 @@ class DetailController extends Controller
     public function editDetailPage($id)
     {
         $detail = Detail::where('detail_id', $id)->join('users', 'users.id', '=', 'detail.user_id')->first();
-        
-        return view('detail.editdetail', ['detail' => $detail]);
+        $detailItem = DB::table('detail_item')->select( DB::raw('count(*) as count'), 'product_name', DB::raw('SUM(product_price) as total_price'), 'product_price')
+        ->where('item_detail_id', '=', $id)
+        ->groupBy('product_name', 'product_price')->get();
+        return view('detail.editdetail', [
+            'detail' => $detail, 
+            'items' => $detailItem
+            ]);
     }
 
     public function editDetail(Request $request)

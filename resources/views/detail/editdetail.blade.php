@@ -71,14 +71,14 @@
 				<hr>
 				<div class="col-sm-5 col-xs-6 tital ">電話:</div>
                 <div class="col-sm-4 pull-right"">
-                    <input id="phone" name="phone" type="text"  class="form-control  " value="{{$detail->user_phone}}" required=""> 
+                    <input id="phone" name="phone" type="text"  class="form-control  " value="{{$detail->user_phone}}" required="" @if($detail->detail_shipment == '2' || $detail->detail_shipment != '0'){{'readonly="readonly"'}}@endif> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
 				<hr>
 				<div class="col-sm-5 col-xs-6 tital ">地址:</div>
                 <div class="col-sm-4 pull-right"">
-                    <input id="address" name="address" type="text"  class="form-control  " value="{{$detail->user_address}}" required=""> 
+                    <input id="address" name="address" type="text"  class="form-control  " value="{{$detail->user_address}}" required="" @if($detail->detail_shipment == '2' || $detail->detail_shipment != '0'){{'readonly="readonly"'}}@endif> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
@@ -106,13 +106,11 @@
 				<hr>
 				<div class="form-group">
 					<label for="exampleFormControlTextarea1">訂單詳細</label>
-					<textarea id="description" name="description" class="form-control" rows="4">
-					{{$detail->detail_description}}
-					</textarea>
-				  </div>
+          </div>
+            @php echo $detail->detail_description @endphp
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
-				<hr>
+				      <hr>
                 <div class="btn-group pull-right">
                     <button id="submit" name="submit" class="btn btn-sm btn-default">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>{{__('shop.saveedit')}}

@@ -108,7 +108,7 @@ class LevelController extends Controller
         $this->validate($request, [
             'name' => 'required|max:255',
             'rank' => 'required|numeric',
-            'threshold' => 'required|numeric|min:'.($request->input('upThreshold')-1)
+            'threshold' => 'required|numeric|min:'.($request->input('upThreshold'))
         ]);
 
         $addLevel = Level::create([

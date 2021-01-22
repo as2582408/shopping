@@ -69,11 +69,14 @@ class UserController extends Controller
         ]);
 
         $user = User::where('email',$request->input('email'))->first();
+        //if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')]) && $user->admin == 'N' && $user->status != 'Y') {
         if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
+
             $user->login_time = date("Y-m-d H:i:s");            ;
             $user->save();
             return redirect()->intended('/poi');
         } else {
+            Auth::logout();
             return view('welcome', ['error' => __('shop.accountpassworderror')]);
         }
     }

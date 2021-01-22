@@ -105,7 +105,6 @@ Route::prefix('admin')->group(function () {
         Route::get('/adddiscount', 'DiscountController@addDiscountPage');
         //優惠新增
         Route::post('/adddiscount', 'DiscountController@addDiscount');
-
         //訂單管理頁面
         Route::get('/detail', 'DetailController@index');
         //訂單修改頁面
@@ -121,6 +120,14 @@ Route::prefix('admin')->group(function () {
         //訂單完成
         Route::get('/enddetail/{id}', 'DetailController@endDetail');
 
+        //客訴管理
+        Route::get('/report', 'ReportController@index');
+        //客訴詳細畫面
+        Route::get('/reportTalk/{id}', 'ReportController@talk');
+        //客訴回覆頁面
+        Route::get('/reportreply/{id}', 'ReportController@reportReplyPage');
+        //客訴回覆
+        Route::post('/reportreply', 'ReportController@reportReply');
     });
 });
 

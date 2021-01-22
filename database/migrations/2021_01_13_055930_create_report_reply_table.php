@@ -15,9 +15,9 @@ class CreateReportReplyTable extends Migration
     {
         Schema::create('report_reply', function (Blueprint $table) {
             //
-            $table->integer('report_id');
-            $table->string('report_reply');
-            $table->timestamp('report_reply_time')->nullable();
+            $table->integer('reply_id');
+            $table->string('reply');
+            $table->timestamp('reply_time')->nullable();
         });
     }
 

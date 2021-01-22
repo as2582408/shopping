@@ -36,13 +36,6 @@
 <hr>
     <div class="container">
       <div class="row">
-                @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                    @foreach ($errors->all() as $errors)
-                        <p>{{ $errors }}</p>    
-                    @endforeach
-                </div>
-                @endif
         <div class="col-md-6 h-100 " style="width:200px;">
           <div class="list-group">
             <a href="{{ url('/admin/account') }}" class="list-group-item list-group-item-action">{{ __('shop.Account Management') }}</a>
@@ -55,74 +48,34 @@
             <a href="{{ url('/admin/level') }}" class="list-group-item list-group-item-action">{{ __('shop.Level Management') }}</a>
           </div>
         </div>
-        <div class="col-md-8">
+        <div class= "col-md-8">
           <div class="row">
-            <div class="text-center">
-              <form action="{{ url('/admin/editdetail') }}" method="post">
-                {!! csrf_field() !!}
-                <input id="id" name="id" type="hidden"  class="form-control  " value="{{$detail->detail_id}}" required="">
-      
-                <div class="col-sm-5 col-xs-6 tital ">會員姓名:</div>
-                <div class="col-sm-4 pull-right"">
-                    <input id="name" name="name" type="text"  class="form-control  " value="{{$detail->name}}" required="" readonly="readonly"> 
-                </div>
-                <div class="clearfix"></div>
-                <div class="bot-border"></div>
-				<hr>
-				<div class="col-sm-5 col-xs-6 tital ">電話:</div>
-                <div class="col-sm-4 pull-right"">
-                    <input id="phone" name="phone" type="text"  class="form-control  " value="{{$detail->user_phone}}" required=""> 
-                </div>
-                <div class="clearfix"></div>
-                <div class="bot-border"></div>
-				<hr>
-				<div class="col-sm-5 col-xs-6 tital ">地址:</div>
-                <div class="col-sm-4 pull-right"">
-                    <input id="address" name="address" type="text"  class="form-control  " value="{{$detail->user_address}}" required=""> 
-                </div>
-                <div class="clearfix"></div>
-                <div class="bot-border"></div>
-				<hr>
-				<div class="col-sm-5 col-xs-6 tital ">訂單金額:</div>
-                <div class="col-sm-4 pull-right"">
-                    <input id="price" name="price" type="text"  class="form-control  " value="{{$detail->detail_totail_price}}" required="" readonly="readonly"> 
-                </div>
-                <div class="clearfix"></div>
-                <div class="bot-border"></div>
-				<hr>
-				<div class="col-sm-5 col-xs-6 tital ">使用購物金:</div>
-                <div class="col-sm-4 pull-right"">
-                    <input id="point" name="point" type="text"  class="form-control  " value="{{$detail->detail_shopping_point}}" required="" readonly="readonly"> 
-                </div>
-                <div class="clearfix"></div>
-                <div class="bot-border"></div>
-				<hr>
-				<div class="col-sm-5 col-xs-6 tital ">贈送禮金:</div>
-                <div class="col-sm-4 pull-right"">
-                    <input id="gift" name="gift" type="text"  class="form-control  " value="{{$detail->detail_gift_money}}" required="" readonly="readonly"> 
-                </div>
-                <div class="clearfix"></div>
-                <div class="bot-border"></div>
-				<hr>
-				<div class="form-group">
-					<label for="exampleFormControlTextarea1">訂單詳細</label>
-					<textarea id="description" name="description" class="form-control" rows="4">
-					{{$detail->detail_description}}
-					</textarea>
-				  </div>
-                <div class="clearfix"></div>
-                <div class="bot-border"></div>
-				<hr>
-                <div class="btn-group pull-right">
-                    <button id="submit" name="submit" class="btn btn-sm btn-default">
-                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>{{__('shop.saveedit')}}
-                    </button>
-                  </form>
-                </div>
-                <div>
-                  <button class="btn btn-sm btn-default" onclick="history.back()">返回</button>
-                </div>
-              </div>
+            <table class="table table-sm">
+				<thead>
+				  <tr>
+					<th scope="col">客訴id</th>
+					<th scope="col">會員名字</th>
+          <th scope="col">標題</th>
+          <th scope="col">最後回覆人員</th>
+          <th scope="col">最後回覆時間</th>
+          <th scope="col"></th>
+					<th scope="col">詳細</th>
+				  </tr>
+				</thead>
+				<tbody>
+					@foreach ($reports as $report)
+					<tr>
+						<th scope="row">{{$report->report_id}}</th>
+						<td>{{$report->name}}</td>
+            <td>{{$report->report_description}}</td>
+            <td>{{$report->report_reply}}</td>
+            <td>{{$report->report_updata_time	}}</td>
+            <td></td>
+						<td><a href='{{ url("/admin/reportTalk/{$report->report_id}") }}' class="alert-link">詳細</a></td>
+					  </tr>
+					@endforeach
+				</tbody>
+			  </table>
           </div>
         </div>
       </div>

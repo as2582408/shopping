@@ -15,7 +15,7 @@ class CreateReportTable extends Migration
     {
         Schema::create('report', function (Blueprint $table) {
             //
-            $table->increments('id');
+            $table->increments('report_id');
             $table->integer('user_id');
             $table->string('report_description');
             $table->string('report_reply');

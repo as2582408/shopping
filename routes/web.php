@@ -17,11 +17,31 @@ Route::get('/signin', 'UserController@getSignin');  //登入畫面
 Route::post('/signin', 'UserController@postSignin');//登入
 Route::get('/signup', 'UserController@getSignup');  //註冊畫面
 Route::post('/signup', 'UserController@postSignup');//註冊
-Route::get('/mycenter', 'UserController@getCenter')->middleware(['auth']);      //會員中心
-Route::get('/profile', 'UserController@getProfile')->middleware(['auth']);      //修改資料頁面
-Route::post('/profile', 'UserController@editProfile')->middleware(['auth']);    //修改資料
-Route::get('/password', 'UserController@getPassword')->middleware(['auth']);    //修改密碼頁面
-Route::post('/password', 'UserController@editPassword')->middleware(['auth']);  //修改密碼
+
+Route::group(['middleware' => ['auth']], function () {
+
+    Route::get('/mycenter', 'UserController@getCenter') ;      //會員中心
+    Route::get('/profile', 'UserController@getProfile') ;      //修改資料頁面
+    Route::post('/profile', 'UserController@editProfile') ;    //修改資料
+    Route::get('/password', 'UserController@getPassword') ;    //修改密碼頁面
+    Route::post('/password', 'UserController@editPassword') ;  //修改密碼
+    //訂單頁面
+    Route::get('/detail', 'DetailController@userIndex') ;
+    //訂單修改頁面
+    Route::get('/editdetail/{id}', 'DetailController@userEditDetailPage');
+    //訂單修改
+    Route::post('/editdetail', 'DetailController@userEditDetail');
+    //訂單刪除
+    Route::get('/deldetail/{id}', 'DetailController@userDelDetail');
+    //退貨頁面
+    Route::get('/returndetail/{id}', 'DetailController@userReturnDetailPage');
+    //退貨
+    Route::post('/returndetail', 'DetailController@userReturnDetail');
+
+    //退貨查詢頁面
+    Route::get('/return', 'ReturnController@index');
+
+});
 
 Route::get('/poi',function () {
     return view('shop.shopIndex');
@@ -53,6 +73,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/accountdel/{id}', 'AdminController@delectAccount'); 
         //搜尋會員
         Route::get('/accountSearch', 'AdminController@searchAccount');
+
         //商品頁面
         Route::get('/products', 'ProductsController@products');
         //新增商品頁面
@@ -67,6 +88,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/editProducts', 'ProductsController@editProducts');
         //搜尋商品
         Route::get('/productsSearch', 'ProductsController@searchProducts');
+
         //分類頁面
         Route::get('/category', 'CategoryController@index');
         //分類修改頁面
@@ -79,6 +101,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/addCategory', 'CategoryController@addCategoryPage');
         //分類新增
         Route::post('/addCategory', 'CategoryController@addCategory');
+
         //等級管理頁面
         Route::get('/level', 'LevelController@index');
         //等級修改頁面
@@ -93,6 +116,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/addlevel', 'LevelController@addLevelPage');
         //等級新增
         Route::post('/addlevel', 'LevelController@addLevel');
+
         //優惠管理頁面
         Route::get('/discount', 'DiscountController@index');
         //優惠修改頁面
@@ -105,6 +129,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/adddiscount', 'DiscountController@addDiscountPage');
         //優惠新增
         Route::post('/adddiscount', 'DiscountController@addDiscount');
+
         //訂單管理頁面
         Route::get('/detail', 'DetailController@index');
         //訂單修改頁面
@@ -128,6 +153,17 @@ Route::prefix('admin')->group(function () {
         Route::get('/reportreply/{id}', 'ReportController@reportReplyPage');
         //客訴回覆
         Route::post('/reportreply', 'ReportController@reportReply');
+
+        ////退貨管理
+        //Route::get('/retrun', 'ReportController@index');
+        ////退貨詳細畫面
+        //Route::get('/retrunPage/{id}', 'ReportController@talk');
+        ////退貨同意
+        //Route::get('/reportTalk/{id}', 'ReportController@talk');
+        ////客訴拒絕頁面
+        //Route::get('/reportreply/{id}', 'ReportController@reportReplyPage');
+        ////客訴拒絕
+        //Route::post('/reportreply', 'ReportController@reportReply');
     });
 });
 

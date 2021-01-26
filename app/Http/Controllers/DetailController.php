@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Detail;
 use App\User;
 use App\Level;
 use App\Point_log;
 use App\Detail_item;
+use App\Return_detail;
+
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 
@@ -130,4 +134,112 @@ class DetailController extends Controller
         }
         return redirect()->intended('/admin/detail');
     }
+
+    //會員訂單頁面
+    public function userIndex()
+    {
+        $id = Auth::id();
+
+        $details = Detail::where('user_id', '=', $id)->get();
+
+        $status_arr = ['未結束', '結束', '取消'];
+        $shipment_arr = [1 => '未出貨',2 => '已出貨'];
+
+        return view('user.detail', [
+            'details' => $details,
+            'status' => $status_arr,
+            'shipment' => $shipment_arr
+            ]);
+    }
+    //會員編輯訂單頁面
+    public function userEditDetailPage($id)
+    {
+        $detail = Detail::where('detail_id', $id)->join('users', 'users.id', '=', 'detail.user_id')->first();
+        $detailItem = DB::table('detail_item')->select( DB::raw('count(*) as count'), 'product_name', DB::raw('SUM(product_price) as total_price'), 'product_price')
+        ->where('item_detail_id', '=', $id)
+        ->groupBy('product_name', 'product_price')->get();
+        return view('user.editdetail', [
+            'detail' => $detail, 
+            'items' => $detailItem
+            ]);
+    }
+    //會員編輯訂單
+    public function userEditDetail(Request $request)
+    {
+        $this->validate($request, [
+            'address' => 'required|max:255',
+            'phone' => 'required|numeric|regex:/^09\d{8}$/',
+        ]);
+
+        Detail::where('detail_id', $request->input('id'))->update([
+            'user_phone' => $request->input('phone'),
+            'user_address' => $request->input('address')
+        ]);
+        return redirect()->intended('/detail');
+    }
+    //
+    public function userDelDetail($id)
+    {
+        Detail::where('detail_id', '=', $id)->update([
+            'detail_status' => '2'
+        ]);
+        $this->returnPoint($id);
+        
+        return redirect()->intended('/detail');
+    }
+    //會員退貨頁面
+    public function userReturnDetailPage($id)
+    {
+        $check = 0;
+        $products = Detail_item::where('item_detail_id', '=', $id)->get();
+        foreach($products as $product) {
+            $check += ($product->product_amount - $product->product_retrun_amount);
+        }
+        return view('user.returndetail', ['products' => $products, 'check' => $check]);
+    }
+    
+    //會員退貨
+    public function userReturnDetail(Request $request)
+    {
+        $this->validate($request, [
+            'product' => 'required',
+        ],[
+            'product.required' => __('shop.productrequired')
+        ]);
+        
+        $checks = $request->product;
+        $product = Detail_item::whereIn('item_id', $checks)->first();
+        $prCount = count($checks);
+        $idArr = '';
+        $userId = Auth::id();
+        //檢查退貨數量
+        foreach( $checks as $check) {
+            if($request->$check == 0){
+                return  redirect()->back()->withSuccessMessage('退貨數量不能為0');;
+            }       
+        }
+
+        for($i = 0; $i < $prCount; $i++) {
+            if($i == $prCount-1) {
+                $idArr .= $checks[$i];
+            } else {
+                $idArr .= $checks[$i].',';
+            }
+        }
+        
+        Return_detail::create([
+            'detail_id' => $product->item_detail_id,
+            'user_id'   =>  $userId,
+            'return_itme_id' => $idArr,
+            'return_create_time' => date("Y-m-d H:i:s"),
+            'return_updata_time' => date("Y-m-d H:i:s"),
+            'return_reply' => '',
+            'return_message' => ''
+        ])->save();
+
+        foreach( $checks as $check) {
+            Detail_item::where('item_id', '=', $check)->increment('product_retrun_amount', $request->$check);
+        }
+    }
+    
 }

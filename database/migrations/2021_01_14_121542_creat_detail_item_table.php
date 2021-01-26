@@ -15,10 +15,12 @@ class CreatDetailItemTable extends Migration
     {
         Schema::create('detail_item', function (Blueprint $table) {
             //
-            $table->integer('detail_id');
+            $table->integer('item_detail_id');
             $table->string('product_name');
             $table->integer('product_price');
             $table->integer('product_amount');
+            $table->integer('product_retrun_amount');
+
         });
     }
 

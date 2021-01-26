@@ -48,41 +48,39 @@
             <a href="{{ url('/admin/level') }}" class="list-group-item list-group-item-action">{{ __('shop.Level Management') }}</a>
           </div>
         </div>
-        <div class="col-md-8">
+        <div class= "col-md-8">
           <div class="row">
-            <a class="btn btn-primary" href="{{ url('/admin/adddiscount') }}" role="button">新增優惠</a>
-          </div>
-          <div class="row">
-          <table class="table table-sm">
+            <table class="table table-sm">
 				<thead>
-				<tr>
+				  <tr>
 					<th scope="col">id</th>
-					<th scope="col">優惠名</th>
-					<th scope="col">需求會員等級</th>
-					<th scope="col">需求消費金額</th>
-					<th scope="col">優惠比例</th>
-					<th scope="col">建立時間</th>
-					<th scope="col">啟用狀態</th>
+          <th scope="col">等級名稱</th>
+          <th scope="col">階級</th>
+          <th scope="col">需要累積金額</th>
+          <th scope="col">狀態</th>
           <th scope="col">修改</th>
           <th scope="col"></th>
-					<th scope="col">快速刪除</th>
-				</tr>
+          <th scope="col">快速刪除</th>
+          <th scope="col"></th>
+					<th scope="col">復原</th>
+				  </tr>
 				</thead>
 				<tbody>
-          @foreach ($discounts as $discount)
-          <tr>
-            <th scope="row">{{ $discount->discount_id }}</th>
-						<td>{{$discount->discount_name}}</td>
-						<td>{{$discount->level}}</td>
-						<td>{{$discount->discount_threshold}}</td>
-            <td>{{$discount->discount_gift}}</td>
-            <td>{{$discount->discount_create_time}}</td>
-            <td>{{$discount->discount_status}}</td>
-            <td><a href='{{ url("/admin/editdiscount/{$discount->discount_id}") }}' class="alert-link">修改</a></td>
-            <td></td>
-						<td><a href='{{ url("/admin/deldiscount/{$discount->discount_id}") }}' class="alert-link">刪除</a></td>
-					</tr>
-          @endforeach  
+					@foreach ($levels as $level)
+					<tr>
+						<th scope="row">{{   }}</th>
+            <td>{{   }}</td>
+            <td>{{   }}</td>
+						<td>{{   }}</td>
+						<td>{{   }}</td>
+
+            <td><a href='{{}}' class="alert-link">修改</a></td>
+            <td>&nbsp;</td>
+            <td>@if(1) <a href='{{ url("/admin/dellevel/{ }") }}' class="alert-link">刪除</a> @endif</td>
+            <td>&nbsp;</td>
+            <td>@if(1) <a href='{{ url("/admin/redellevel/{ }") }}' class="alert-link">復原</a> @endif</td>
+            </tr>
+					@endforeach
 				</tbody>
 			  </table>
           </div>

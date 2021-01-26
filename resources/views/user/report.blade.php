@@ -37,7 +37,6 @@
         </div><!-- /.container-fluid -->
     </nav>
 <hr>
-
     <div class="container">
       <div class="row">
         <div class="col-md-6 h-100" style="width:200px;">
@@ -54,34 +53,27 @@
           <div class="row">
           <table class="table table-sm">
 				<thead>
-				<tr>
-					<th scope="col">訂單ID</th>
-					<th scope="col">訂單金額</th>
-					<th scope="col">訂單狀態</th>
-					<th scope="col">出貨狀態</th>
-					<th scope="col">訂單成立時間</th>
-          <th scope="col">詳細/修改</th>
-          <th scope="col"></th>
-          <th scope="col">取消訂單</th>
-          <th scope="col">退貨</th>
-
-				</tr>
+          <tr>
+            <th scope="col">客訴id</th>
+            <th scope="col">標題</th>
+            <th scope="col">最後回覆人員</th>
+            <th scope="col">最後回覆時間</th>
+            <th scope="col"></th>
+            <th scope="col">詳細</th>
+            </tr>
 				</thead>
 				<tbody>
-          @foreach ($details as $detail)
-          <tr>
-            <th scope="row">{{ $detail->detail_id }}</th>
-            <td>{{$detail->detail_totail_price}}</td>
-						<td>{{$status[ $detail->detail_status ]}}</td>
-            <td>{{$shipment[ $detail->detail_shipment ]}}</td>
-            <td>{{$detail->detail_create_time}}</td>
-            <td><a href='{{ url("/editdetail/{$detail->detail_id}") }}' class="alert-link">修改</a></td>
+          @foreach ($reports as $report)
+					<tr>
+						<th scope="row">{{$report->report_id}}</th>
+            <td>{{$report->report_description}}</td>
+            <td>{{$report->report_reply}}</td>
+            <td>{{$report->report_updata_time	}}</td>
             <td></td>
-            <td>@if($detail->detail_shipment == 1 && $detail->detail_status == 0)<a href='{{ url("/deldetail/{$detail->detail_id}") }}' class="alert-link">取消</a>@endif</td>
-            <td>@if($detail->detail_shipment == 2 && $detail->detail_status == 1)<a href='{{ url("/returndetail/{$detail->detail_id}") }}' class="alert-link">退貨</a>@endif</td>
-					</tr>
-          @endforeach  
-				</tbody>
+						<td><a href='{{ url("reportTalk/{$report->report_id}") }}' class="alert-link">詳細</a></td>
+					  </tr>
+					@endforeach
+        </tbody>
 			  </table>
           </div>
         </div>

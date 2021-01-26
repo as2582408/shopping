@@ -54,6 +54,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/contentreturn/{id}', 'ReturnController@contentReturn');
 
     //客訴頁面
+    Route::get('/report', 'ReportController@userIndex');
+     //客訴詳細畫面
+     Route::get('/reportTalk/{id}', 'ReportController@userTalk');
+     //客訴回覆頁面
+     Route::get('/reportreply/{id}', 'ReportController@userReportReplyPage');
+     //客訴回覆
+     Route::post('/reportreply', 'ReportController@userReportReply');
 
 });
 

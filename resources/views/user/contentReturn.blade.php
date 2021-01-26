@@ -39,14 +39,14 @@
 <hr>
 <div class="container">
   <div class="row">
-    <div class="col-md-6 h-100" style="width:300px;">
+    <div class="col-md-6 h-100" style="width:200px;">
       <div class="list-group">
         <a href="{{ url('mycenter') }}" class="list-group-item list-group-item-action">{{ __('shop.myprodile') }}</a>
         <a href="{{ url('profile') }}" class="list-group-item list-group-item-action">{{ __('shop.Revise personal info') }}</a>
         <a href="{{ url('password') }}" class="list-group-item list-group-item-action">{{ __('shop.editpassword') }}</a>
         <a href="{{ url('detail') }}" class="list-group-item list-group-item-action">訂單資訊</a>
         <a href="{{ url('return') }}" class="list-group-item list-group-item-action">我的退貨</a>
-        <a href="#" class="list-group-item list-group-item-action">客訴</a>
+        <a href="{{ url('report') }}" class="list-group-item list-group-item-action">客訴</a>
       </div>
     </div>
     <div class="col-md-8">

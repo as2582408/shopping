@@ -13,20 +13,30 @@
 Route::get('/', function () {
     return redirect('signin');
 });
-Route::get('/signin', 'UserController@getSignin');  //登入畫面
-Route::post('/signin', 'UserController@postSignin');//登入
-Route::get('/signup', 'UserController@getSignup');  //註冊畫面
-Route::post('/signup', 'UserController@postSignup');//註冊
+//登入畫面
+Route::get('/signin', 'UserController@getSignin');
+//登入
+Route::post('/signin', 'UserController@postSignin');
+//註冊畫面
+Route::get('/signup', 'UserController@getSignup');
+//註冊
+Route::post('/signup', 'UserController@postSignup');
 
 Route::group(['middleware' => ['auth']], function () {
 
-    Route::get('/mycenter', 'UserController@getCenter') ;      //會員中心
-    Route::get('/profile', 'UserController@getProfile') ;      //修改資料頁面
-    Route::post('/profile', 'UserController@editProfile') ;    //修改資料
-    Route::get('/password', 'UserController@getPassword') ;    //修改密碼頁面
-    Route::post('/password', 'UserController@editPassword') ;  //修改密碼
+    //會員中心
+    Route::get('/mycenter', 'UserController@getCenter');
+    //修改資料頁面
+    Route::get('/profile', 'UserController@getProfile');
+    //修改資料
+    Route::post('/profile', 'UserController@editProfile');
+    //修改密碼頁面
+    Route::get('/password', 'UserController@getPassword');
+    //修改密碼
+    Route::post('/password', 'UserController@editPassword');
+
     //訂單頁面
-    Route::get('/detail', 'DetailController@userIndex') ;
+    Route::get('/detail', 'DetailController@userIndex');
     //訂單修改頁面
     Route::get('/editdetail/{id}', 'DetailController@userEditDetailPage');
     //訂單修改
@@ -40,6 +50,10 @@ Route::group(['middleware' => ['auth']], function () {
 
     //退貨查詢頁面
     Route::get('/return', 'ReturnController@index');
+    //退貨詳細頁面
+    Route::get('/contentreturn/{id}', 'ReturnController@contentReturn');
+
+    //客訴頁面
 
 });
 

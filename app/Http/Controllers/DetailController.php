@@ -32,7 +32,7 @@ class DetailController extends Controller
             'shipment' => $shipment_arr
             ]);
     }
-    //
+
     public function editDetailPage($id)
     {
         $detail = Detail::where('detail_id', $id)->join('users', 'users.id', '=', 'detail.user_id')->first();
@@ -211,6 +211,7 @@ class DetailController extends Controller
         $product = Detail_item::whereIn('item_id', $checks)->first();
         $prCount = count($checks);
         $idArr = '';
+        $messageStr ='';
         $userId = Auth::id();
         //檢查退貨數量
         foreach( $checks as $check) {
@@ -222,11 +223,15 @@ class DetailController extends Controller
         for($i = 0; $i < $prCount; $i++) {
             if($i == $prCount-1) {
                 $idArr .= $checks[$i];
+                $mesId = $checks[$i];
+                $messageStr .= $request->$mesId;
             } else {
                 $idArr .= $checks[$i].',';
+                $mesId = $checks[$i];
+                $messageStr .= $request->$mesId.',';
             }
         }
-        
+
         Return_detail::create([
             'detail_id' => $product->item_detail_id,
             'user_id'   =>  $userId,
@@ -234,12 +239,14 @@ class DetailController extends Controller
             'return_create_time' => date("Y-m-d H:i:s"),
             'return_updata_time' => date("Y-m-d H:i:s"),
             'return_reply' => '',
-            'return_message' => ''
+            'return_message' => $messageStr
         ])->save();
 
         foreach( $checks as $check) {
             Detail_item::where('item_id', '=', $check)->increment('product_retrun_amount', $request->$check);
         }
+
+        return redirect()->intended('/detail');
     }
     
 }

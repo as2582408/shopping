@@ -37,7 +37,6 @@
         </div><!-- /.container-fluid -->
     </nav>
 <hr>
-
     <div class="container">
       <div class="row">
         <div class="col-md-6 h-100" style="width:300px;">
@@ -50,59 +49,30 @@
             <a href="#" class="list-group-item list-group-item-action">客訴</a>
           </div>
         </div>
-        
-        <div class="col-md-6">
+        <div class="col-md-8">
           <div class="row">
-            <div class="box-body">
-                @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                    @foreach ($errors->all() as $errors)
-                        <p>{{ $errors }}</p>    
-                    @endforeach
-                    
-                </div>
-                @endif
-            <form action="{{ url('profile') }}" method="post">
-                    {!! csrf_field() !!}
-            <div class="text-center">
-                
-                <div class="col-sm-5 col-xs-6 tital ">{{__('shop.name')}}:</div>
-                <div class="col-sm-4 col-xs-3  pull-right" >
-                     <input id="name" name="name" type="text"  class="form-control  " value="{{__($user->name)}}" required="">
-                </div>
-                <div class="clearfix"></div>
-                <div class="bot-border"></div>
-                <hr>
-                <div class="col-sm-5 col-xs-6 tital ">{{__('shop.email')}}:</div>
-                <div class="col-sm-4 pull-right"">
-                    <input id="email" name="email" type="text"  class="form-control  " value="{{__($user->email)}}" required="">    
-                </div>
-                <div class="clearfix"></div>
-                <div class="bot-border"></div>
-                <hr>
-                <div class="col-sm-5 col-xs-6 tital ">{{__('shop.phone')}}:</div>
-                <div class="col-sm-4 pull-right"">
-                    <input id="phone" name="phone" type="text"  class="form-control  " value="{{__($user->phone)}}" required="">    
-                </div>
-                <div class="clearfix"></div>
-                <div class="bot-border"></div>
-                <hr>
-                <div class="col-sm-5 col-xs-6 tital ">{{__('shop.address')}}:</div>
-                <div class="col-sm-4 pull-right"">
-                    <input id="address" name="address" type="text"  class="form-control  " value="{{__($user->address)}}" required=""> 
-                </div>
-                <div class="clearfix"></div>
-                <div class="bot-border"></div>
-                <!-- /.box-body -->
-                <hr>
-                <div class="btn-group pull-right">
-                    <button id="submit" name="submit" class="btn btn-sm btn-default">
-                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>{{__('shop.saveedit')}}
-                    </button>
-                </div>
-            </div>
-        </form>
-            </div>
+          <table class="table table-sm">
+				<thead>
+				<tr>
+					<th scope="col">訂單ID</th>
+					<th scope="col">退貨狀態</th>
+					<th scope="col">退貨時間</th>
+					<th scope="col">更新時間</th>
+          <th scope="col">詳細</th>
+				</tr>
+				</thead>
+				<tbody>
+          @foreach ($returnDetails as $returnDetail)
+          <tr>
+            <th scope="row">{{$returnDetail->detail_id}}</th>
+            <td>{{$status[$returnDetail->return_status]}}</td>
+						<td>{{$returnDetail->return_create_time}}</td>
+            <td>{{$returnDetail->return_updata_time}}</td>
+            <td><a href='{{ url("contentreturn/{$returnDetail->return_id}") }}' class="alert-link">詳細</a></td>
+					</tr>
+          @endforeach
+        </tbody>
+			  </table>
           </div>
         </div>
       </div>

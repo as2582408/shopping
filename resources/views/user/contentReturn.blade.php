@@ -37,66 +37,42 @@
         </div><!-- /.container-fluid -->
     </nav>
 <hr>
-
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 h-100" style="width:300px;">
-          <div class="list-group">
-            <a href="{{ url('mycenter') }}" class="list-group-item list-group-item-action">{{ __('shop.myprodile') }}</a>
-            <a href="{{ url('profile') }}" class="list-group-item list-group-item-action">{{ __('shop.Revise personal info') }}</a>
-            <a href="{{ url('password') }}" class="list-group-item list-group-item-action">{{ __('shop.editpassword') }}</a>
-
-            <a href="{{ url('detail') }}" class="list-group-item list-group-item-action">訂單資訊</a>
-            <a href="{{ url('return') }}" class="list-group-item list-group-item-action">我的退貨</a>
-            <a href="#" class="list-group-item list-group-item-action">客訴</a>
-          </div>
-        </div>
-        
-        <div class="col-md-6">
-          <div class="row">
-            <div class="box-body">
-                @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                    @foreach ($errors->all() as $errors)
-                        <p>{{ $errors }}</p>    
-                    @endforeach
-                </div>
-
-                @elseif (isset($success))
-                <div class="alert alert-success">
-                        <p>{{ $success }}</p>    
-                </div>
-                @endif 
-                <form action="{{ url('password') }}" method="post">
-                    {!! csrf_field() !!}
-            <div class="text-center">
-                
-                <hr>
-                <div class="col-sm-5 col-xs-6 tital ">{{__('shop.newpassowrd')}}:</div>
-                <div class="col-sm-4 pull-right"">
-                    <input type="password" id="password" name="password" type="text"  class="form-control  "  required="">    
-                </div>
-                <div class="clearfix"></div>
-                <div class="bot-border"></div>
-                <hr>
-                <div class="col-sm-5 col-xs-6 tital ">{{__('shop.confirmnewpassword')}}:</div>
-                <div class="col-sm-4 pull-right"">
-                    <input type="password" id="password" name="password_confirmation" class="form-control" required>
-                </div>
-                <div class="clearfix"></div>
-                <div class="bot-border"></div>
-                <!-- /.box-body -->
-                <hr>
-                <div class="btn-group pull-right">
-                    <button id="submit" name="submit" class="btn btn-sm btn-default">
-                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>{{__('shop.saveedit')}}
-                    </button>
-                </div>
-            </div>
-        </form>
-            </div>
-          </div>
-        </div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 h-100" style="width:300px;">
+      <div class="list-group">
+        <a href="{{ url('mycenter') }}" class="list-group-item list-group-item-action">{{ __('shop.myprodile') }}</a>
+        <a href="{{ url('profile') }}" class="list-group-item list-group-item-action">{{ __('shop.Revise personal info') }}</a>
+        <a href="{{ url('password') }}" class="list-group-item list-group-item-action">{{ __('shop.editpassword') }}</a>
+        <a href="{{ url('detail') }}" class="list-group-item list-group-item-action">訂單資訊</a>
+        <a href="{{ url('return') }}" class="list-group-item list-group-item-action">我的退貨</a>
+        <a href="#" class="list-group-item list-group-item-action">客訴</a>
       </div>
     </div>
-
+    <div class="col-md-8">
+      <div class="row">
+      <table class="table table-sm">
+    <thead>
+    <tr>
+      <th scope="col">商品名</th>
+      <th scope="col">單價</th>
+      <th scope="col">退貨數量</th>
+      <th scope="col">小計</th>
+    </tr>
+    </thead>
+    <tbody>
+      @foreach ($itmes as $itme)
+      <tr>
+        <th scope="row">{{$itme['name']}}</th>
+        <td>{{$itme['price']}}</td>
+        <td>{{$itme['amount']}}</td>
+        <td>{{$itme['price']*$itme['amount']}}</td>
+      </tr>
+      @endforeach
+    </tbody>
+    </table>
+    <button class="btn btn-sm btn-default" onclick="history.back()">返回</button>
+      </div>
+    </div>
+  </div>
+</div>

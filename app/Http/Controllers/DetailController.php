@@ -19,7 +19,7 @@ class DetailController extends Controller
 {
     public function index()
     {
-        $details = Detail::select('detail.detail_id', 'detail.user_id', 'detail.detail_totail_price', 'users.name', 'detail.detail_status', 'detail.detail_shipment', 'detail.detail_create_time')
+        $details = Detail::select('detail.detail_id', 'detail.user_id','detail_shopping_point' , 'detail.detail_totail_price', 'users.name', 'detail.detail_status', 'detail.detail_shipment', 'detail.detail_create_time')
         ->join('users', 'users.id', '=', 'detail.user_id')
         ->get();
 
@@ -54,7 +54,8 @@ class DetailController extends Controller
 
         Detail::where('detail_id', $request->input('id'))->update([
             'user_phone' => $request->input('phone'),
-            'user_address' => $request->input('address')
+            'user_address' => $request->input('address'),
+            'detail_updata_time' => date("Y-m-d H:i:s")
         ]);
         return redirect()->intended('/admin/detail');
     }
@@ -72,7 +73,9 @@ class DetailController extends Controller
 
         Detail::where('detail_id', '=', $request->input('id'))->update([
             'detail_remarks' => $request->input('remarks'),
-            'detail_status' => '2'
+            'detail_status' => '2',
+            'detail_updata_time' => date("Y-m-d H:i:s")
+
         ]);
 
         $this->returnPoint($request->input('id'));
@@ -84,15 +87,15 @@ class DetailController extends Controller
     public function returnPoint($detailId)
     {
         //結束訂單後才會取得禮金與累積金額，取消訂單不對禮金做動作
-        $detailData = Detail::select('user_id', 'detail_shopping_point')->where('detail_id', '=', $detailId)->first();
-
-        User::where('id', '=', $detailData->user_id)->increment('point', $detailData->detail_shopping_point);
+        $detailData = Detail::select('user_id', 'detail_shopping_point', 'detail_totail_price')->where('detail_id', '=', $detailId)->first();
+        $total = ($detailData->detail_shopping_point + $detailData->detail_totail_price);
+        User::where('id', '=', $detailData->user_id)->increment('point', $total);
         $log = User::select('point')->where('id', '=', $detailData->user_id)->first();
 
         Point_log::create([
             'log_user_id' => $detailData->user_id,
             'log_detail' => $detailId,
-            'log_change_gold' => $detailData->detail_shopping_point,
+            'log_change_gold' => $total,
             'log_new_gold' => $log->point,
             'log_type' => '3',
             'log_time' => date("Y-m-d H:i:s")
@@ -101,20 +104,29 @@ class DetailController extends Controller
 
     public function shipmentDetail($id)
     {
-        Detail::where('detail_id', '=', $id)->update(['detail_shipment' => '2']);
+        Detail::where('detail_id', '=', $id)->update([
+            'detail_shipment' => '2',
+            'detail_updata_time' => date("Y-m-d H:i:s")
+            ]);
 
         return redirect()->intended('/admin/detail');
     }
 
     public function endDetail($id)
     {
-        Detail::where('detail_id', '=', $id)->update(['detail_status' => '1' ]);
-        $userData = Detail::select('user_id', 'detail_totail_price', 'detail_gift_money')->where('detail_id', '=', $id)->first();
+        Detail::where('detail_id', '=', $id)->update([
+            'detail_status' => '1',
+            'detail_updata_time' => date("Y-m-d H:i:s")
+            ]);
+        $userData = Detail::select('user_id', 'detail_totail_price', 'detail_shopping_point', 'detail_gift_money')->where('detail_id', '=', $id)->first();
+        $total = ($userData->detail_shopping_point + $userData->detail_totail_price);
+
         //刷新累計金額與禮金
         if($userData->detail_gift_money > 0) {
             User::where('id', '=', $userData->user_id)->increment('point', $userData->detail_gift_money);
         }
-        User::where('id', '=', $userData->user_id)->increment('accumulation_point', $userData->detail_totail_price );
+
+        User::where('id', '=', $userData->user_id)->increment('accumulation_point', $total);
 
         //刷新會員等級
         $newAccumulation = User::select('point','accumulation_point')->where('id', '=', $userData->user_id)->first();
@@ -151,6 +163,7 @@ class DetailController extends Controller
             'shipment' => $shipment_arr
             ]);
     }
+
     //會員編輯訂單頁面
     public function userEditDetailPage($id)
     {
@@ -163,6 +176,7 @@ class DetailController extends Controller
             'items' => $detailItem
             ]);
     }
+
     //會員編輯訂單
     public function userEditDetail(Request $request)
     {
@@ -173,20 +187,24 @@ class DetailController extends Controller
 
         Detail::where('detail_id', $request->input('id'))->update([
             'user_phone' => $request->input('phone'),
-            'user_address' => $request->input('address')
+            'user_address' => $request->input('address'),
+            'detail_updata_time' => date("Y-m-d H:i:s")
         ]);
         return redirect()->intended('/detail');
     }
+
     //
     public function userDelDetail($id)
     {
         Detail::where('detail_id', '=', $id)->update([
-            'detail_status' => '2'
+            'detail_status' => '2',
+            'detail_updata_time' => date("Y-m-d H:i:s")
         ]);
         $this->returnPoint($id);
         
         return redirect()->intended('/detail');
     }
+
     //會員退貨頁面
     public function userReturnDetailPage($id)
     {

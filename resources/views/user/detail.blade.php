@@ -19,7 +19,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ url('poi') }}">商店</a>
+                <a class="navbar-brand" href="{{ url('shop') }}">商店</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
@@ -71,7 +71,7 @@
           @foreach ($details as $detail)
           <tr>
             <th scope="row">{{ $detail->detail_id }}</th>
-            <td>{{$detail->detail_totail_price}}</td>
+            <td>{{$detail->detail_totail_price + $detail->detail_shopping_point}}</td>
 						<td>{{$status[ $detail->detail_status ]}}</td>
             <td>{{$shipment[ $detail->detail_shipment ]}}</td>
             <td>{{$detail->detail_create_time}}</td>

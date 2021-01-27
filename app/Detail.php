@@ -11,6 +11,6 @@ class Detail extends Model
     protected $table = 'detail';
 
     protected $fillable = [
-        'detail_status', 'detail_shipment', 'detail_updata_time','detail_create_time', 'user_phone', 'user_address', 'detail_remarks' 
+        'user_id', 'detail_ discount_id', 'detail_status', 'detail_shipment', 'detail_updata_time','detail_create_time', 'user_phone', 'user_address', 'detail_remarks','detail_gift_money'
     ];
 }

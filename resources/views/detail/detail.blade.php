@@ -73,9 +73,9 @@
             <th scope="row">{{ $detail->detail_id }}</th>
 						<td>{{$detail->user_id}}</td>
             <td>{{$detail->name}}</td>
-            <td>{{$detail->detail_totail_price}}</td>
-						<td>{{$status[ $detail->detail_status ]}}</td>
-            <td>{{$shipment[ $detail->detail_shipment ]}}</td>
+            <td>{{($detail->detail_totail_price + $detail->detail_shopping_point)}}</td>
+						<td>{{$status[$detail->detail_status]}}</td>
+            <td>{{$shipment[$detail->detail_shipment]}}</td>
             <td>{{$detail->detail_create_time}}</td>
             <td><a href='{{ url("/admin/editdetail/{$detail->detail_id}") }}' class="alert-link">修改</a></td>
             <td></td>

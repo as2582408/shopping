@@ -83,7 +83,7 @@
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
 				<hr>
-				<div class="col-sm-5 col-xs-6 tital ">訂單金額:</div>
+				<div class="col-sm-5 col-xs-6 tital ">訂單使用現金:</div>
                 <div class="col-sm-4 pull-right"">
                     <input id="price" name="price" type="text"  class="form-control  " value="{{$detail->detail_totail_price}}" required="" readonly="readonly"> 
                 </div>

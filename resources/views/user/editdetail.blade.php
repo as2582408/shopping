@@ -19,7 +19,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ url('poi') }}">商店</a>
+                <a class="navbar-brand" href="{{ url('shop') }}">商店</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav navbar-right">
@@ -84,7 +84,7 @@
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
 				<hr>
-				<div class="col-sm-5 col-xs-6 tital ">訂單金額:</div>
+				<div class="col-sm-5 col-xs-6 tital ">訂單使用現金:</div>
                 <div class="col-sm-4 pull-right"">
                     <input id="price" name="price" type="text"  class="form-control  " value="{{$detail->detail_totail_price}}" required="" readonly="readonly"> 
                 </div>

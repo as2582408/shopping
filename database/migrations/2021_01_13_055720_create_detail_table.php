@@ -17,6 +17,7 @@ class CreateDetailTable extends Migration
             //
             $table->increments('detail_id');
             $table->integer('user_id');
+            $table->integer('detail_discount_id');
             $table->integer('detail_totail_price');
             $table->string('detail_description');
             $table->enum('detail_status', ['0','1','2']);

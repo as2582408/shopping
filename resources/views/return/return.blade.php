@@ -53,32 +53,28 @@
             <table class="table table-sm">
 				<thead>
 				  <tr>
-					<th scope="col">id</th>
-          <th scope="col">等級名稱</th>
-          <th scope="col">階級</th>
-          <th scope="col">需要累積金額</th>
+					<th scope="col">退貨單ID</th>
+          <th scope="col">訂單ID</th>
+          <th scope="col">會員名稱</th>
           <th scope="col">狀態</th>
-          <th scope="col">修改</th>
-          <th scope="col"></th>
-          <th scope="col">快速刪除</th>
-          <th scope="col"></th>
-					<th scope="col">復原</th>
+          <th scope="col">退貨日期</th>
+          <th scope="col">詳細</th>
+          <th scope="col">同意</th>
+          <th scope="col">拒絕</th>
 				  </tr>
 				</thead>
 				<tbody>
-					@foreach ($levels as $level)
+					@foreach ($returnDetails as $returnDetail)
 					<tr>
-						<th scope="row">{{   }}</th>
-            <td>{{   }}</td>
-            <td>{{   }}</td>
-						<td>{{   }}</td>
-						<td>{{   }}</td>
+						<th scope="row">{{$returnDetail->return_id}}</th>
+            <td>{{$returnDetail->detail_id}}</td>
+            <td>{{$returnDetail->name}}</td>
+						<td>{{$status[$returnDetail->return_status]}}</td>
+						<td>{{$returnDetail->return_create_time}}</td>
 
-            <td><a href='{{}}' class="alert-link">修改</a></td>
-            <td>&nbsp;</td>
-            <td>@if(1) <a href='{{ url("/admin/dellevel/{ }") }}' class="alert-link">刪除</a> @endif</td>
-            <td>&nbsp;</td>
-            <td>@if(1) <a href='{{ url("/admin/redellevel/{ }") }}' class="alert-link">復原</a> @endif</td>
+            <td><a href='{{ url("/admin/contentreturn/{$returnDetail->return_id}") }}' class="alert-link">詳細</a></td>
+            <td>@if($returnDetail->return_status == 0) <a href='{{ url("/admin/agreereturn/{$returnDetail->return_id}") }}' class="alert-link">同意</a> @endif</td>
+            <td>@if($returnDetail->return_status == 0) <a href='{{ url("/admin/refusereturn/{$returnDetail->return_id}") }}' class="alert-link">拒絕</a> @endif</td>
             </tr>
 					@endforeach
 				</tbody>

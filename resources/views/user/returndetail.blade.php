@@ -19,7 +19,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ url('poi') }}">商店</a>
+                <a class="navbar-brand" href="{{ url('shop') }}">商店</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav navbar-right">
@@ -83,13 +83,13 @@
 				 	<input type="checkbox" name="product[]" value="{{$product->item_id}}" >
 				  	@else
 				  	<input type="checkbox" name="product[]" value="{{$product->item_id}}" disabled="disabled" >
-					@endif
-                  <a target="_blank" href="{{ url('/poi') }}">{{$product->product_name}}</a>
+					  @endif
+                  <a target="_blank" href="{{ url('/shop') }}">{{$product->product_name}}</a>
                 </td>
                 <td class=" align-middle">{{$product->product_price}}</td>
                 <td class=" align-middle">
 				  <select name="{{$product->item_id}}" id="refundQuantity">
-					<option>0</option>
+					          <option>0</option>
                     @for($i = 1;$i <= ($product->product_amount - $product->product_retrun_amount) ;$i++ )
                     <option {{($i == ($product->product_amount - $product->product_retrun_amount))? 'selected' : ''}} value="{{$i}}">{{$i}}</option>
                     @endfor

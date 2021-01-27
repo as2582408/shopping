@@ -22,6 +22,10 @@ Route::get('/signup', 'UserController@getSignup');
 //註冊
 Route::post('/signup', 'UserController@postSignup');
 
+Route::get('/shop',function () {
+    return view('shop.shopIndex');
+});
+
 Route::group(['middleware' => ['auth']], function () {
 
     //會員中心
@@ -49,9 +53,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/returndetail', 'DetailController@userReturnDetail');
 
     //退貨查詢頁面
-    Route::get('/return', 'ReturnController@index');
+    Route::get('/return', 'ReturnController@userIndex');
     //退貨詳細頁面
-    Route::get('/contentreturn/{id}', 'ReturnController@contentReturn');
+    Route::get('/contentreturn/{id}', 'ReturnController@userContentReturn');
 
     //客訴頁面
     Route::get('/report', 'ReportController@userIndex');
@@ -62,10 +66,6 @@ Route::group(['middleware' => ['auth']], function () {
      //客訴回覆
      Route::post('/reportreply', 'ReportController@userReportReply');
 
-});
-
-Route::get('/poi',function () {
-    return view('shop.shopIndex');
 });
 
 
@@ -175,16 +175,16 @@ Route::prefix('admin')->group(function () {
         //客訴回覆
         Route::post('/reportreply', 'ReportController@reportReply');
 
-        ////退貨管理
-        //Route::get('/retrun', 'ReportController@index');
-        ////退貨詳細畫面
-        //Route::get('/retrunPage/{id}', 'ReportController@talk');
-        ////退貨同意
-        //Route::get('/reportTalk/{id}', 'ReportController@talk');
-        ////客訴拒絕頁面
-        //Route::get('/reportreply/{id}', 'ReportController@reportReplyPage');
+        //退貨管理
+        Route::get('/return', 'ReturnController@index');
+        //退貨詳細畫面
+        Route::get('/contentreturn/{id}', 'ReturnController@contentReturn');
+        //退貨同意
+        Route::get('/agreereturn/{id}', 'ReturnController@agreeReturn');
+        //退貨拒絕頁面
+        Route::get('/refusereturn/{id}', 'ReturnController@refuseReturnPage');
         ////客訴拒絕
-        //Route::post('/reportreply', 'ReportController@reportReply');
+        Route::post('/refusereturn', 'ReturnController@refuseReturn');
     });
 });
 

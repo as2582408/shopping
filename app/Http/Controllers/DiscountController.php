@@ -43,7 +43,10 @@ class DiscountController extends Controller
 
     public function delDiscount($id)
     {
-        Discount::where('discount_id', '=', $id)->delete();
+        Discount::where('discount_id', '=', $id)->update([
+            'discount_status' => 'D',
+            'discount_updata_time' => date("Y-m-d H:i:s")
+        ]);
 
         return redirect()->intended('/admin/discount');
     }

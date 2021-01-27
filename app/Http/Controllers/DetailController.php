@@ -24,7 +24,7 @@ class DetailController extends Controller
         ->get();
 
         $status_arr = ['未結束', '結束', '取消'];
-        $shipment_arr = [1 => '未出貨',2 => '已出貨'];
+        $shipment_arr = [1 => '未出貨',2 => '已出貨',3 =>'退貨'];
 
         return view('detail.detail', [
             'details' => $details,
@@ -155,7 +155,7 @@ class DetailController extends Controller
         $details = Detail::where('user_id', '=', $id)->get();
 
         $status_arr = ['未結束', '結束', '取消'];
-        $shipment_arr = [1 => '未出貨',2 => '已出貨'];
+        $shipment_arr = [1 => '未出貨',2 => '已出貨',3 =>'退貨'];
 
         return view('user.detail', [
             'details' => $details,

@@ -9,6 +9,7 @@ use App\Detail_item;
 use App\User;
 use App\Discount;
 use App\Level;
+use App\Point_log;
 use Auth;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 
@@ -104,12 +105,30 @@ class ReturnController extends Controller
         //還回額度並扣除累計金額
         User::where('id', '=', $detailData->user_id)->increment('point', $changeMoney);
         User::where('id', '=', $detailData->user_id)->decrement('accumulation_point', $changeMoney);
+
+        $log = User::where('id', '=', $detailData->user_id)->first();
+        Point_log::create([
+            'log_user_id' => $detailData->user_id,
+            'log_detail' => $detailData->detail_id,
+            'log_change_gold' => $changeMoney,
+            'log_new_gold' => $log->point,
+            'log_type' => '4',
+            'log_time' => date("Y-m-d H:i:s")
+        ])->save();
+
         //扣除訂單價格
         if($detailData->detail_totail_price < $changeMoney){
             $detailChangeMoney = $changeMoney - $detailData->detail_totail_price;
-            Detail::where('detail_id', '=', $returnData->detail_id)->decrement('detail_shopping_point', $detailChangeMoney, ['detail_totail_price' => '0']);
+            Detail::where('detail_id', '=', $returnData->detail_id)->decrement('detail_shopping_point', $detailChangeMoney, [
+                'detail_totail_price' => '0', 
+                'detail_updata_time' => date("Y-m-d H:i:s"),
+                'detail_shipment' => ''
+            ]);
         } else {
-            Detail::where('detail_id', '=', $returnData->detail_id)->decrement('detail_totail_price', $changeMoney);
+            Detail::where('detail_id', '=', $returnData->detail_id)->decrement('detail_totail_price', $changeMoney, [
+                'detail_updata_time' => date("Y-m-d H:i:s"),
+                'detail_shipment' => '3'
+            ]);
         }
 
         //計算優惠是否適用 不適用扣除訂單贈送禮金
@@ -118,7 +137,20 @@ class ReturnController extends Controller
 
         if($newDetailPrice < $discount->discount_threshold) {
             User::where('id', '=', $detailData->user_id)->decrement('point', $detailData->detail_gift_money);
-            Detail::where('detail_id', '=', $returnData->detail_id)->update(['detail_gift_money' => '0']);
+            Detail::where('detail_id', '=', $returnData->detail_id)->update([
+                'detail_gift_money' => '0',
+                'detail_updata_time' => date("Y-m-d H:i:s")
+                ]);
+
+            $log = User::where('id', '=', $detailData->user_id)->first();
+            Point_log::create([
+                'log_user_id' => $detailData->user_id,
+                'log_detail' => $detailData->detail_id,
+                'log_change_gold' => $detailData->detail_gift_money,
+                'log_new_gold' => $log->point,
+                'log_type' => '5',
+                'log_time' => date("Y-m-d H:i:s")
+                ])->save();
         }
 
         //重新計算等級

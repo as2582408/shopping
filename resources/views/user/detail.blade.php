@@ -78,7 +78,7 @@
             <td><a href='{{ url("/editdetail/{$detail->detail_id}") }}' class="alert-link">修改</a></td>
             <td></td>
             <td>@if($detail->detail_shipment == 1 && $detail->detail_status == 0)<a href='{{ url("/deldetail/{$detail->detail_id}") }}' class="alert-link">取消</a>@endif</td>
-            <td>@if($detail->detail_shipment == 2 && $detail->detail_status == 1)<a href='{{ url("/returndetail/{$detail->detail_id}") }}' class="alert-link">退貨</a>@endif</td>
+            <td>@if($detail->detail_shipment != 1 && $detail->detail_status == 1)<a href='{{ url("/returndetail/{$detail->detail_id}") }}' class="alert-link">退貨</a>@endif</td>
 					</tr>
           @endforeach  
 				</tbody>

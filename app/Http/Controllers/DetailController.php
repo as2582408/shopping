@@ -88,14 +88,13 @@ class DetailController extends Controller
     {
         //結束訂單後才會取得禮金與累積金額，取消訂單不對禮金做動作
         $detailData = Detail::select('user_id', 'detail_shopping_point', 'detail_totail_price')->where('detail_id', '=', $detailId)->first();
-        $total = ($detailData->detail_shopping_point + $detailData->detail_totail_price);
-        User::where('id', '=', $detailData->user_id)->increment('point', $total);
+        User::where('id', '=', $detailData->user_id)->increment('point', $detailData->detail_shopping_point);
         $log = User::select('point')->where('id', '=', $detailData->user_id)->first();
 
         Point_log::create([
             'log_user_id' => $detailData->user_id,
             'log_detail' => $detailId,
-            'log_change_gold' => $total,
+            'log_change_gold' => $detailData->detail_shopping_point,
             'log_new_gold' => $log->point,
             'log_type' => '3',
             'log_time' => date("Y-m-d H:i:s")

@@ -29,23 +29,31 @@ Route::group(['middleware' => ['auth']], function () {
         return redirect('shop');
     });
     Route::prefix('shop')->group(function () {
-
+        //商品頁面
         Route::get('/show/{id}', 'shopController@show');
-
+        //加入購物車
         Route::post('/addcart', 'shopController@addCart');
-
+        //快速加入購物車
         Route::get('/quicklyadd/{id}/{price}', 'shopController@quicklyAddCart');
-
+        //搜尋
         Route::get('/search', 'shopController@search');
-
+        //分類
         Route::get('/category/{id}', 'shopController@selectCategory');
-
+        //排序
         Route::get('/orderby/{orderby}/{type}', 'shopController@orderBy');
-
+        //分類排序
         Route::get('/orderByCategory/{orderby}/{type}/{categoryId}', 'shopController@orderByCategory');
-
+        //搜尋排序
         Route::get('/orderBySearch/{orderby}/{type}/{search}', 'shopController@orderBySearch');
 
+        //購物車頁面
+        Route::get('/cart', 'shopController@cart');
+        //購物車取消
+        Route::get('/removecart/{id}', 'shopController@removeCart');
+        //結帳確認
+        Route::post('/checking', 'shopController@checking');
+        //結帳
+        Route::post('/checkout', 'shopController@checkout');
 
     });
     //會員中心

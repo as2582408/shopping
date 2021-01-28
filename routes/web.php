@@ -10,9 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return redirect('signin');
-});
+
 //登入畫面
 Route::get('/signin', 'UserController@getSignin');
 //登入
@@ -22,12 +20,34 @@ Route::get('/signup', 'UserController@getSignup');
 //註冊
 Route::post('/signup', 'UserController@postSignup');
 
-Route::get('/shop',function () {
-    return view('shop.shopIndex');
-});
+Route::get('/shop', 'ShopController@index');
+
 
 Route::group(['middleware' => ['auth']], function () {
 
+    Route::get('/', function () {
+        return redirect('shop');
+    });
+    Route::prefix('shop')->group(function () {
+
+        Route::get('/show/{id}', 'shopController@show');
+
+        Route::post('/addcart', 'shopController@addCart');
+
+        Route::get('/quicklyadd/{id}/{price}', 'shopController@quicklyAddCart');
+
+        Route::get('/search', 'shopController@search');
+
+        Route::get('/category/{id}', 'shopController@selectCategory');
+
+        Route::get('/orderby/{orderby}/{type}', 'shopController@orderBy');
+
+        Route::get('/orderByCategory/{orderby}/{type}/{categoryId}', 'shopController@orderByCategory');
+
+        Route::get('/orderBySearch/{orderby}/{type}/{search}', 'shopController@orderBySearch');
+
+
+    });
     //會員中心
     Route::get('/mycenter', 'UserController@getCenter');
     //修改資料頁面

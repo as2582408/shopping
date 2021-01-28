@@ -47,7 +47,7 @@
             </div>
             @elseif (session()->has('success_message'))
                 <div class="alert alert-danger">
-					{{ session()->get('success_message') }}
+					      {{ session()->get('success_message') }}
                 </div>
             @endif 
     <div class="col-md-6 h-100 " style="width:200px;">

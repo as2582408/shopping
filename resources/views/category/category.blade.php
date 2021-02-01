@@ -51,27 +51,29 @@
         <div class= "col-md-8">
           <div class="row">
             <div class="row">
-              <a class="btn btn-primary" href="{{ url('/admin/addCategory') }}" role="button">新增分類</a>
+              <a class="btn btn-primary" href="{{ url('/admin/addCategory') }}" role="button">{{ __('shop.Add Category') }}</a>
             </div>
             <table class="table table-sm">
 				<thead>
 				  <tr>
-					<th scope="col">id</th>
-					<th scope="col">分類名</th>
-          <th scope="col">修改</th>
+					<th scope="col"></th>
+					<th scope="col">{{__('shop.Category Name')}}</th>
+          <th scope="col">{{__('shop.Edit')}}</th>
           <th scope="col"></th>
-					<th scope="col">快速刪除</th>
+					<th scope="col">{{__('shop.Delete')}}</th>
 				  </tr>
 				</thead>
 				<tbody>
-					@foreach ($categories as $category)
-					<tr>
-						<th scope="row">{{ $category->id }}</th>
-						<td>{{ $category->category_name }}</td>
-            <td><a href='{{ url("/admin/editCategory/{$category->id}") }}' class="alert-link">修改</a></td>
-            <td></td>
-						<td><a href='{{ url("/admin/delCategory/{$category->id}") }}' class="alert-link">刪除</a></td>
-					  </tr>
+          @foreach ($categories as $category)
+          @if($category->id != 10)
+            <tr>
+              <th scope="row">{{ $category->id }}</th>
+              <td>{{ $category->category_name }}</td>
+              <td><a href='{{ url("/admin/editCategory/{$category->id}") }}' class="alert-link">修改</a></td>
+              <td></td>
+              <td><a href='{{ url("/admin/delCategory/{$category->id}") }}' class="alert-link">刪除</a></td>
+            </tr>
+          @endif
 					@endforeach
 				</tbody>
 			  </table>

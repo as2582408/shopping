@@ -6,6 +6,7 @@ use Auth;
 use App\User;
 use App\Level;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class AdminController extends Controller
 {
@@ -23,7 +24,6 @@ class AdminController extends Controller
     //
     public function postSignin(Request $request)
     {
-
         $this->validate($request, [
             'email' => 'email|required',
             'password' => 'required|min:6'
@@ -36,8 +36,10 @@ class AdminController extends Controller
         if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')]) && $user->admin == 'Y') {
             $user->login_time = date("Y-m-d H:i:s");
             $user->save();
+
+            session()->put('lang', $request->language);
             
-            return redirect()->intended('admin/center');
+            return redirect('admin/center');
         } else {
             return view('admin.login', ['error' => __('shop.accountpassworderror')]);
         }

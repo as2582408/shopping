@@ -75,6 +75,9 @@ class UserController extends Controller
 
             $user->login_time = date("Y-m-d H:i:s");            ;
             $user->save();
+            
+            session()->put('lang', $request->language);
+
             return redirect()->intended('/');
         } else {
             Auth::logout();

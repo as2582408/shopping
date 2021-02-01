@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(['middleware' => ['lang']], function () {
 Route::group(['domain' => 'shop.user.net'], function () {
 
     //登入畫面
@@ -218,6 +219,7 @@ Route::group(['domain' => 'shop.admin.net'], function () {
             Route::post('/refusereturn', 'ReturnController@refuseReturn');
         });
     });
+});
 });
 
 Auth::routes();

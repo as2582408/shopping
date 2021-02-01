@@ -42,12 +42,17 @@
                         {!! csrf_field() !!}
                         <div style="margin-bottom: 25px" class="input-group">
 							<label for="email">{{__('shop.account')}}</label>
-                            <input id="email" type="text" class="form-control" name="email" value="" placeholder="{{ __('shop.email') }}">
+                            <input id="email" type="text" class="form-control" name="email" placeholder="{{ __('shop.email') }}">
                         </div>
                         <div style="margin-bottom: 25px" class="input-group">
 							<label for="password">{{__('shop.password')}}</label>
                             <input id="password" type="password" class="form-control" name="password" placeholder="{{ __('shop.password') }}">
                         </div>
+							<label for="password">{{__('shop.language')}}</label>
+							<select id="language" name="language" class="form-select" aria-label="Default select example">
+							  <option value="zh" >中文</option>
+							  <option value="en" >英文</option>
+							</select>
 						@if(isset($error))
 							<p>{{__($error)}}<p>
 						@endif

@@ -23,6 +23,11 @@
 							<label for="password">{{__('shop.password')}}</label>
                             <input id="password" type="password" class="form-control" name="password" placeholder="{{ __('shop.password') }}">
                         </div>
+						<label for="password">{{__('shop.language')}}</label>
+						<select id="language" name="language" class="form-select" aria-label="Default select example">
+						  <option value="zh" >中文</option>
+						  <option value="en" >英文</option>
+						</select>
 						@if(isset($error))
 							<p>{{__($error)}}<p>
 						@endif

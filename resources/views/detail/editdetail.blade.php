@@ -62,53 +62,70 @@
                 {!! csrf_field() !!}
                 <input id="id" name="id" type="hidden"  class="form-control  " value="{{$detail->detail_id}}" required="">
       
-                <div class="col-sm-5 col-xs-6 tital ">會員姓名:</div>
-                <div class="col-sm-4 pull-right"">
+                <div class="col-sm-5 col-xs-6 tital ">{{ __('shop.User Name') }}:</div>
+                <div class="col-sm-4 pull-right">
                     <input id="name" name="name" type="text"  class="form-control  " value="{{$detail->name}}" required="" readonly="readonly"> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
 				<hr>
-				<div class="col-sm-5 col-xs-6 tital ">電話:</div>
-                <div class="col-sm-4 pull-right"">
+				<div class="col-sm-5 col-xs-6 tital ">{{ __('shop.phone') }}:</div>
+                <div class="col-sm-4 pull-right">
                     <input id="phone" name="phone" type="text"  class="form-control  " value="{{$detail->user_phone}}" required="" @if($detail->detail_shipment == '2' || $detail->detail_status != '0'){{'readonly="readonly"'}}@endif> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
 				<hr>
-				<div class="col-sm-5 col-xs-6 tital ">地址:</div>
-                <div class="col-sm-4 pull-right"">
+				<div class="col-sm-5 col-xs-6 tital ">{{ __('shop.address') }}:</div>
+                <div class="col-sm-4 pull-right">
                     <input id="address" name="address" type="text"  class="form-control  " value="{{$detail->user_address}}" required="" @if($detail->detail_shipment == '2' || $detail->detail_status != '0'){{'readonly="readonly"'}}@endif> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
 				<hr>
-				<div class="col-sm-5 col-xs-6 tital ">訂單使用現金:</div>
-                <div class="col-sm-4 pull-right"">
+				<div class="col-sm-5 col-xs-6 tital ">{{ __('shop.orderMoney') }}:</div>
+                <div class="col-sm-4 pull-right">
                     <input id="price" name="price" type="text"  class="form-control  " value="{{$detail->detail_totail_price}}" required="" readonly="readonly"> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
 				<hr>
-				<div class="col-sm-5 col-xs-6 tital ">使用購物金:</div>
-                <div class="col-sm-4 pull-right"">
+				<div class="col-sm-5 col-xs-6 tital ">{{ __('shop.orderPoint') }}:</div>
+                <div class="col-sm-4 pull-right">
                     <input id="point" name="point" type="text"  class="form-control  " value="{{$detail->detail_shopping_point}}" required="" readonly="readonly"> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
 				<hr>
-				<div class="col-sm-5 col-xs-6 tital ">贈送禮金:</div>
-                <div class="col-sm-4 pull-right"">
+				<div class="col-sm-5 col-xs-6 tital ">{{ __('shop.orderGift') }}:</div>
+                <div class="col-sm-4 pull-right">
                     <input id="gift" name="gift" type="text"  class="form-control  " value="{{$detail->detail_gift_money}}" required="" readonly="readonly"> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
 				<hr>
-				<div class="form-group">
-					<label for="exampleFormControlTextarea1">訂單詳細</label>
-          </div>
-            @php echo $detail->detail_description @endphp
-                <div class="clearfix"></div>
+					<label for="exampleFormControlTextarea1">{{ __('shop.orderContent') }}</label>			  
+				  	<table class="table table-sm">
+					  	<thead>
+						  	<tr>
+							  	<th scope="col">商品名稱</th>
+							  	<th scope="col">單價</th>
+							 	 <th scope="col">數量</th>
+							 	 <th scope="col">小計</th>
+						  	</tr>
+						  	<tbody>
+							  @foreach ($products as $product)
+							<tr>
+									<th scope="row">{{$product->product_name}}</th>
+									<td>{{$product->product_price}}</td>
+								  	<td>{{$product->product_amount}}</td>
+								 	  <td>{{$product->product_amount * $product->product_price}}</td>
+							</tr>
+							  @endforeach
+							</tbody>
+					  	</thead>
+				  	</table>
+				<div class="clearfix"></div>
                 <div class="bot-border"></div>
 				      <hr>
                 <div class="btn-group pull-right">
@@ -118,7 +135,7 @@
                   </form>
                 </div>
                 <div>
-                  <button class="btn btn-sm btn-default" onclick="history.back()">返回</button>
+                  <button class="btn btn-sm btn-default" onclick="history.back()">{{ __('shop.Back') }}</button>
                 </div>
               </div>
           </div>

@@ -105,10 +105,28 @@
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
 				<hr>
-				<div class="form-group">
-					<label for="exampleFormControlTextarea1">訂單詳細</label>
-          </div>
-            @php echo $detail->detail_description @endphp
+			<label for="exampleFormControlTextarea1">訂單詳細</label>
+			  
+			<table class="table table-sm">
+				<thead>
+					<tr>
+						<th scope="col">商品名稱</th>
+						<th scope="col">單價</th>
+						<th scope="col">數量</th>
+						<th scope="col">小計</th>
+					</tr>
+					<tbody>
+						@foreach ($products as $product)
+						<tr>
+						  	<th scope="row">{{$product->product_name}}</th>
+						  	<td>{{$product->product_price}}</td>
+							<td>{{$product->product_amount}}</td>
+						 	<td>{{$product->product_amount * $product->product_price}}</td>
+						</tr>
+						@endforeach
+					  </tbody>
+				</thead>
+			</table>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
               <hr>

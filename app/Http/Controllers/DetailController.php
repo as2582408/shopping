@@ -36,12 +36,11 @@ class DetailController extends Controller
     public function editDetailPage($id)
     {
         $detail = Detail::where('detail_id', $id)->join('users', 'users.id', '=', 'detail.user_id')->first();
-        $detailItem = DB::table('detail_item')->select( DB::raw('count(*) as count'), 'product_name', DB::raw('SUM(product_price) as total_price'), 'product_price')
-        ->where('item_detail_id', '=', $id)
-        ->groupBy('product_name', 'product_price')->get();
+        $products = Detail_item::where('item_detail_id', '=', $id)->get();
+
         return view('detail.editdetail', [
             'detail' => $detail, 
-            'items' => $detailItem
+            'products' => $products
             ]);
     }
 
@@ -168,12 +167,11 @@ class DetailController extends Controller
     public function userEditDetailPage($id)
     {
         $detail = Detail::where('detail_id', $id)->join('users', 'users.id', '=', 'detail.user_id')->first();
-        $detailItem = DB::table('detail_item')->select( DB::raw('count(*) as count'), 'product_name', DB::raw('SUM(product_price) as total_price'), 'product_price')
-        ->where('item_detail_id', '=', $id)
-        ->groupBy('product_name', 'product_price')->get();
+        $products = Detail_item::where('item_detail_id', '=', $id)->get();
+
         return view('user.editdetail', [
             'detail' => $detail, 
-            'items' => $detailItem
+            'products' => $products
             ]);
     }
 

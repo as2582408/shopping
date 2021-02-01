@@ -86,7 +86,9 @@
 						<td>{{ $product->product_amount }}</td>
             <td>{{ $product->product_status }}</td>
             <td>{{ $product->product_create_time }}</td>
-            <td>{{ $product->category_name }}</td>
+            <td>@foreach ($productCategories[$product->product_id] as $productCategory)
+                {{$categoryName[(int)$productCategory]}}
+            @endforeach</td>
             <td><a href='{{ url("/admin/editProducts/{$product->product_id}") }}' class="alert-link">修改</a></td>
             <td></td>
 						<td><a href='{{ url("/admin/delProducts/{$product->product_id}") }}' class="alert-link">刪除</a></td>

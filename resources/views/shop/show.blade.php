@@ -7,16 +7,14 @@
 @endsection
 
 @section('content')
-        @if (session('status'))
+    @if (session('status'))
     <div class="alert alert-success" role="alert">
         {{ session('status') }}
     </div>
     @endif
-    @if (count($errors) > 0)
+    @if (session()->has('success_message'))
     <div class="alert alert-danger">
-        @foreach ($errors->all() as $errors)
-            <p>{{ $errors }}</p>    
-        @endforeach
+            <p>{{ session()->get('success_message') }}</p>    
     </div>
     @endif 
     <p><a href="{{ url('/shop') }}">{{__('shop.home')}}</a> / {{ $product->product_name }}</p>

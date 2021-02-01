@@ -97,18 +97,13 @@
                 <div class="bot-border"></div>
                 <hr>
                 <div class="col-sm-5 col-xs-6 tital ">分類:</div>
-                @php
-                    $category_arr = explode(",", $product->product_category);
-                @endphp
-                <div class="col-sm-4 pull-right"">
-                  @for ($i = 0; $i < 3; $i++)
-                  <select id="category{{$i+1}}" name="category{{$i+1}}" class="form-select" aria-label="Default select example">
-                    <option value=""></option>
-                    @foreach ($category as $categorise)
-                    <option value="{{$categorise->id}}" @if($category_arr[$i] == $categorise->id) {{'SELECTED'}} @endif> {{$categorise->category_name}}</option>
-                    @endforeach
-                  </select>
-                  @endfor
+                <div class="col-sm-4 pull-right">
+                  @foreach ($categories as $category)
+                    <input type="checkbox" name="category[]" value="{{$category->id}}"  
+                    @if (in_array($category->id ,$categoryArr))
+                        checked
+                    @endif >{{$category->category_name}}
+                  @endforeach
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
@@ -116,9 +111,9 @@
                 <div class="col-sm-5 col-xs-6 tital ">上架狀態:</div>
                 <div class="col-sm-4 pull-right"">
                   <select id="status" name="status" class="form-select" aria-label="Default select example">
-                    <option value="Y" @if($product->product_status == 'Y') {{'SELECTED'}} @endif>Y</option>
-                    <option value="N" @if($product->product_status == 'N') {{'SELECTED'}} @endif>N</option>
-                    <option value="D" @if($product->product_status == 'D') {{'SELECTED'}} @endif>D</option>
+                    <option value="Y" @if ($product->product_status == 'Y') {{'SELECTED'}} @endif>Y</option>
+                    <option value="N" @if ($product->product_status == 'N') {{'SELECTED'}} @endif>N</option>
+                    <option value="D" @if ($product->product_status == 'D') {{'SELECTED'}} @endif>D</option>
                   </select>                </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>

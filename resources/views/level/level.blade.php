@@ -56,9 +56,8 @@
             <table class="table table-sm">
 				<thead>
 				  <tr>
-					<th scope="col">id</th>
-          <th scope="col">等級名稱</th>
           <th scope="col">階級</th>
+          <th scope="col">等級名稱</th>
           <th scope="col">需要累積金額</th>
           <th scope="col">狀態</th>
           <th scope="col">修改</th>
@@ -71,12 +70,10 @@
 				<tbody>
 					@foreach ($levels as $level)
 					<tr>
-						<th scope="row">{{ $level->level_id }}</th>
+						<th scope="row">{{ $level->level_rank }}</th>
             <td>{{ $level->level_name }}</td>
-            <td>{{ $level->level_rank }}</td>
 						<td>{{ $level->level_threshold }}</td>
 						<td>{{ $level->level_status }}</td>
-
             <td><a href='{{ url("/admin/editlevel/{$level->level_id}") }}' class="alert-link">修改</a></td>
             <td>&nbsp;</td>
             <td>@if($level->level_rank == $maxLevel) <a href='{{ url("/admin/dellevel/{$level->level_id}") }}' class="alert-link">刪除</a> @endif</td>

@@ -122,7 +122,7 @@ class ReturnController extends Controller
             Detail::where('detail_id', '=', $returnData->detail_id)->decrement('detail_shopping_point', $detailChangeMoney, [
                 'detail_totail_price' => '0', 
                 'detail_updata_time' => date("Y-m-d H:i:s"),
-                'detail_shipment' => ''
+                'detail_shipment' => '3'
             ]);
         } else {
             Detail::where('detail_id', '=', $returnData->detail_id)->decrement('detail_totail_price', $changeMoney, [

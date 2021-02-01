@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Point_log;
 use Illuminate\Http\Request;
 use Auth;
 use App\User;
@@ -50,7 +51,7 @@ class UserController extends Controller
 
         Auth::login($user);
 
-        return redirect()->intended('/poi');
+        return redirect()->intended('/');
     }
 
     public function getSignin()
@@ -74,7 +75,7 @@ class UserController extends Controller
 
             $user->login_time = date("Y-m-d H:i:s");            ;
             $user->save();
-            return redirect()->intended('/poi');
+            return redirect()->intended('/');
         } else {
             Auth::logout();
             return view('welcome', ['error' => __('shop.accountpassworderror')]);
@@ -136,5 +137,21 @@ class UserController extends Controller
         $user->save();
 
         return view('user.password', ['success' => 'success']);
+    }
+
+    public function point()
+    {
+        $pointLog = Point_log::where('log_user_id', '=', Auth::id())->orderBy('log_time', 'DESC')->get();
+        $type = [
+            '1' => '消費',
+            '2' => '訂單結束取得',
+            '3' => '訂單取消返回',
+            '4' => '退貨返回',
+            '5' => '退貨扣除禮金'
+        ];
+        return view('user.point', [
+            'pointLog' => $pointLog,
+            'type' => $type
+            ]);
     }
 }

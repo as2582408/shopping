@@ -28,7 +28,7 @@
                         <li><a href="{{ url('signup') }}">{{ __('shop.signup') }}</a></li>
                     @else
                         <li><a href="{{ url('mycenter') }}">{{ __('shop.mycenter') }} <span class="fa fa-briefcase"></span></a></li>
-                        <li><a href="/cart">{{ __('shop.ShoppingCart') }} <span class="fa fa-shopping-cart"></span></a></li>
+                        <li><a href="{{ url('shop/cart') }}">{{ __('shop.ShoppingCart') }} <span class="fa fa-shopping-cart"></span></a></li>
                         <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('shop.signout') }}&emsp;{{ __(Auth::user()->name) }}</a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form></li>
                     @endif
@@ -38,6 +38,18 @@
     </nav>
 <hr>
     <div class="container">
+      @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    @foreach ($errors->all() as $errors)
+                        <p>{{ $errors }}</p>    
+                    @endforeach
+                </div>
+
+                @elseif (isset($success))
+                <div class="alert alert-success">
+                        <p>{{ $success }}</p>    
+                </div>
+                @endif 
       <div class="row">
         <div class="col-md-6 h-100" style="width:200px;">
           <div class="list-group">
@@ -80,7 +92,7 @@
               <div class="bot-border"></div>
               <hr>
               <div class="col-sm-5 col-xs-6 tital ">剩餘購物金:</div>
-              <div class="col-sm-7">{{__($user->point)}}</div>
+              <div class="col-sm-7"><a href='{{ url("/point") }}' class="alert-link">{{__($user->point)}}</a></div>
               <hr>
               <!-- /.box-body -->
           </div>

@@ -15,15 +15,31 @@ class ProductsController extends Controller
     {
         $categories = Category::all();
         $products = Product::Join('category', 'products.product_category', '=', 'category.id')->get();
+        $category = [];
 
-        return view('products.products', ['products' => $products ,'categories' => $categories]);
+        $categories = json_decode($categories, true);
+        $categoryName = [];
+        foreach ($categories as $categorys) {
+                $categoryName[$categorys['id']] = $categorys['category_name'];
+        }
+
+        foreach($products as $product) {
+            $categoryArr = explode(",", $product->product_category);
+            $category += [ $product->product_id => $categoryArr ];
+        }
+        
+        return view('products.products', [
+            'products' => $products,
+            'categoryName' => $categoryName,
+            'productCategories' => $category
+            ]);
     }
     //新增商品頁面
     public function addProductsPage()
     {
         $categories = Category::all();
 
-        return view('products.addProducts', ['category' => $categories]);
+        return view('products.addProducts', ['categories' => $categories]);
     }
     //新增商品
     public function addProducts(Request $request)
@@ -40,14 +56,18 @@ class ProductsController extends Controller
         $productsImg = $_FILES['img']['name'];
         $imgPath = '../storage/app/public';
         $request->file('img')->move($imgPath, $productsImg);
-        $product_category = $request->input('category1');
+        $productCategory = '10';
 
-        if($request->has('category2')) {
-            $product_category = '';
+        if($request->has('category')) {
+            $productCategory = '';
+            $categoryNum = count($request->category);
 
-            for( $i = 1; $i < 4; $i++) {
-                $category = 'category'.$i;
-                $product_category .= $request->input($category).',';
+            for( $i = 0; $i < $categoryNum; $i++) {
+                if($i == $categoryNum - 1) {
+                    $productCategory .= $request->category[$i];
+                } else {
+                    $productCategory .= $request->category[$i].',';
+                }
             }
         }
 
@@ -56,7 +76,7 @@ class ProductsController extends Controller
             'product_description' => $request->input('description'),
             'product_price' => $request->input('price'),
             'product_amount' => $request->input('amount'),
-            'product_category' => $product_category,
+            'product_category' => $productCategory,
             'product_img' => $productsImg,
             'product_create_time' => date("Y-m-d H:i:s"),
             'product_updata_time' => date("Y-m-d H:i:s")
@@ -82,7 +102,14 @@ class ProductsController extends Controller
         $categories = Category::all();
         $product = Product::where('product_id', $id)->first();
 
-        return view('products.editProducts', ['category' => $categories, 'product' => $product]);
+        $categoryArr = explode(",", $product->product_category);
+
+
+        return view('products.editProducts', [
+            'categories' => $categories,
+            'product' => $product,
+            'categoryArr' => $categoryArr 
+            ]);
     }
 
     public function editProducts(Request $request)
@@ -101,12 +128,18 @@ class ProductsController extends Controller
             $imgPath = '../storage/app/public';
             $request->file('img')->move($imgPath, $image_name->product_img);
 
-            if($request->has('category2')) {
-                $product_category = '';
-    
-                for( $i = 1; $i < 4; $i++) {
-                    $category = 'category'.$i;
-                    $product_category .= $request->input($category).',';
+            $productCategory = '10';
+
+            if($request->has('category')) {
+                $productCategory = '';
+                $categoryNum = count($request->category);
+
+                for( $i = 0; $i < $categoryNum; $i++) {
+                    if($i == $categoryNum - 1) {
+                        $productCategory .= $request->category[$i];
+                    } else {
+                        $productCategory .= $request->category[$i].',';
+                    }
                 }
             }
 
@@ -126,21 +159,27 @@ class ProductsController extends Controller
                 'amount' => 'required|numeric',
                 'description' => 'required'
             ]);
-            if($request->has('category2')) {
-                $product_category = '';
-    
-                for( $i = 1; $i < 4; $i++) {
-                    $category = 'category'.$i;
-                    $product_category .= $request->input($category).',';
+            $productCategory = '10';
+
+            if($request->has('category')) {
+                $productCategory = '';
+                $categoryNum = count($request->category);
+
+                for( $i = 0; $i < $categoryNum; $i++) {
+                    if($i == $categoryNum - 1) {
+                        $productCategory .= $request->category[$i];
+                    } else {
+                        $productCategory .= $request->category[$i].',';
+                    }
                 }
             }
 
-            $product = Product::where('product_id', $request->input('id'))->update([
+            Product::where('product_id', $request->input('id'))->update([
                 'product_name' => $request->input('name'),
                 'product_description' => $request->input('description'),
                 'product_price' => $request->input('price'),
                 'product_amount' => $request->input('amount'),
-                'product_category' => $product_category,
+                'product_category' => $productCategory,
                 'product_status' => $request->input('status'),
                 'product_updata_time' => date("Y-m-d H:i:s")
             ]);

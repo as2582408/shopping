@@ -13,7 +13,7 @@ class AdminController extends Controller
     public function signOut()
     {
         Auth::logout();
-        return redirect()->intended('admin');
+        return redirect()->intended('/');
     }
 
     public function getSignin()

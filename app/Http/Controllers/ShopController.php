@@ -41,6 +41,13 @@ class ShopController extends Controller
     //加入購物車
     public function addcart(Request $request)
     {
+        $product = Product::where('product_id', '=', $request->id)->first();
+
+        if($request->quantity > $product->product_amount)
+        {
+            return redirect()->back()->withSuccessMessage('數量超出庫存');
+        }
+
         $cart = Cart::where([
             ['user_id', '=', Auth::id()],
             ['product_id', '=', $request->id]
@@ -224,6 +231,7 @@ class ShopController extends Controller
             ['discount_status', '=', 'Y']
         ])->get();
         return view('shop.cart', [
+            'userPoint' => $userData->point,
             'products' => $products,
             'totalPrice' => $totalPrice,
             'discounts' => $discounts
@@ -253,7 +261,7 @@ class ShopController extends Controller
             'useGift' => '使用禮金',
             'useGiftBefore' => '使用後禮金',
             'endPrice' =>   '應付價格',
-            'discountGift' => '可獲得禮金'
+            'discountGift' => '可獲得禮金',
         ];
         foreach($products as $product)
         {
@@ -320,7 +328,7 @@ class ShopController extends Controller
             $checkout = [
                 'discountName' => $discount->discount_name, //使用折扣
                 'discountGift' => $discount->discount_gift,//可獲得禮金
-                'totalPrice' =>   $totalPrice//應付價格
+                'endPrice' =>   $totalPrice//應付價格
             ];
         }
 
@@ -335,8 +343,11 @@ class ShopController extends Controller
 
         $userData = User::where('id', '=', Auth::id())->first();
         $discountGift = ($request->input('discountGift') > 1 )  ? $request->input('discountGift') : 0;
+        $giftPoint = ($request->input('useGift') > 0) ? $request->input('useGift') : 0;
+        $newPoint = ($request->input('useGift') > 0) ? $request->input('useGiftBefore') : $userData->point;
 
-        User::where('id', '=', Auth::id())->decrement('point', $request->input('useGift'));
+        User::where('id', '=', Auth::id())->decrement('point', $giftPoint);
+
         $detailId = Detail::insertGetId([
             'user_id' => Auth::id(),
             'detail_discount_id'  => $request->input('discountId'),
@@ -347,20 +358,22 @@ class ShopController extends Controller
             'detail_create_time' => date("Y-m-d H:i:s"),
             'user_phone' => $userData->phone,
             'user_address' => $userData->address,
-            'detail_shopping_point' => $request->input('useGift'),
+            'detail_shopping_point' => $giftPoint,
             'detail_gift_money' => $discountGift,
             'detail_description' => '',
             'detail_remarks' => ''
         ]);
         //紀錄消費log
-        Point_log::create([
-            'log_user_id' => $userData->id,
-            'log_detail' => $detailId,
-            'log_change_gold' => $request->input('useGift'),
-            'log_new_gold' => $request->input('useGiftBefore'),
-            'log_type' => '1',
-            'log_time' => date("Y-m-d H:i:s")
-        ])->save();
+        if($giftPoint > 0) {
+            Point_log::create([
+                'log_user_id' => $userData->id,
+                'log_detail' => $detailId,
+                'log_change_gold' => $giftPoint,
+                'log_new_gold' => $newPoint,
+                'log_type' => '1',
+                'log_time' => date("Y-m-d H:i:s")
+            ])->save();
+        }
         //將購物車商品放置訂單細項 庫存數量扣除
         $products = Cart::join('products', 'cart.product_id', '=', 'products.product_id')->where('user_id', '=', $userData->id)->get();
         foreach($products as $product)

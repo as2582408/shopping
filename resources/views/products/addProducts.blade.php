@@ -96,25 +96,10 @@
                 <div class="bot-border"></div>
                 <hr>
                 <div class="col-sm-5 col-xs-6 tital ">分類:</div>
-                <div class="col-sm-4 pull-right"">
-                  <select id="category1" name="category1" class="form-select" aria-label="Default select example">
-                    <option value="99">未分類</option>
-                    @foreach ($category as $categorise)
-                    <option value="{{$categorise->id}}">{{$categorise->category_name}}</option>
-                    @endforeach
-                  </select>
-                  <select id="category2" name="category2" class="form-select" aria-label="Default select example">
-                    <option value=""></option>
-                    @foreach ($category as $categorise)
-                    <option value="{{$categorise->id}}">{{$categorise->category_name}}</option>
-                    @endforeach
-                  </select>
-                  <select id="category3" name="category3" class="form-select" aria-label="Default select example">
-                    <option value=""></option>
-                    @foreach ($category as $categorise)
-                    <option value="{{$categorise->id}}">{{$categorise->category_name}}</option>
-                    @endforeach
-                  </select>
+                <div class="col-sm-4 pull-right">
+                  @foreach ($categories as $category)
+                    <input type="checkbox" name="category[]" value="{{$category->id}}" >{{$category->category_name}}
+                  @endforeach
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>

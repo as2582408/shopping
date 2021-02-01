@@ -91,4 +91,34 @@ class ReportController extends Controller
 
         return redirect()->intended('/report');
     }
+
+    public function addReportPage()
+    {
+        return view('user.reportnew');
+    }
+
+    public function addReport(Request $request)
+    {
+        $this->validate($request, [
+            'reply' => 'required',
+            'title' => 'required'
+        ]);
+
+        $reportId = Report::insertGetId([
+            'user_id' => Auth::id(),
+            'report_description' => $request->title,
+            'report_reply' =>  'Member',
+            'report_updata_time' => date("Y-m-d H:i:s")
+        ]);
+        
+        $newMessage = 'Member:  "'.$request->input('reply').'"';
+
+        Report_reply::create([
+            'reply_id' => $reportId,
+            'reply' => $newMessage,
+            'reply_time' => date("Y-m-d H:i:s")
+        ])->save();
+
+        return redirect()->intended('/report');
+    }
 }

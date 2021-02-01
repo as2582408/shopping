@@ -45,19 +45,19 @@
 
         @if ($categoryId == '' && $search == '')
         <div class="col-md-3 pull-right">
-            <strong>Price: </strong>
+            <strong>上架時間: </strong>
             <a href="{{url("/shop/orderby/asc/time")}}">時間遠到近</a>
             <a href="{{url("/shop/orderby/desc/time")}}">時間近到遠</a>
         </div>
         @elseif(!empty($categoryId) && $search == '')
         <div class="col-md-3 pull-right">
-            <strong>Price: </strong>
+            <strong>上架時間: </strong>
             <a href="{{url("/shop/orderByCategory/asc/time/{$categoryId}")}}">時間遠到近</a>
             <a href="{{url("/shop/orderByCategory/desc/time/{$categoryId}")}}">時間近到遠</a>
         </div>
         @elseif(!empty($search) && $categoryId == '')
         <div class="col-md-3 pull-right">
-            <strong>Price: </strong>
+            <strong>上架時間: </strong>
             <a href="{{url("/shop/orderBySearch/asc/time/{$search}")}}">時間遠到近</a>
             <a href="{{url("/shop/orderBySearch/desc/time/{$search}")}}">時間近到遠</a>
         </div>
@@ -78,6 +78,7 @@
         @foreach ($products as $product)
         <tr>
             <td><a href='{{url("/shop/show/{$product->product_id}")}}'><img src="{{asset("storage/$product->product_img")}}" class="img-responsive" width="200" height="100"></a></td>
+            <td>{{ $product->product_create_time }}</td>
 			<td><a href='{{url("/shop/show/{$product->product_id}")}}'>{{ $product->product_name }}</a></td>
 			<td>{{ $product->product_price }}$</td>
             <td><a href='{{url("/shop/show/{$product->product_id}")}}' class="alert-link">詳細</a></td>

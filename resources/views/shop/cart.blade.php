@@ -36,7 +36,7 @@
         @endforeach  
         </tbody>
         </table>
-
+        @if($totalPrice > 0)
         <table class="table table-sm">
         <tr>
             <td></td>
@@ -44,7 +44,9 @@
             <form id="checking" action="{{url("/shop/checking")}}" method="POST" >
             <td>使用禮金結帳
                 <select name="point" id="point">
+                    @if($userPoint > 0)
                     <option value="1">是</option>
+                    @endif
                     <option value="2">否</option>
                 </select> 
             </td>
@@ -64,7 +66,10 @@
             </form> 
         </tr>
          </table>
-
+         @else
+         <td>購物車尚無商品</td>
+         @endif
+         
          </div>
     </div>
 

@@ -28,7 +28,7 @@
                             <li><a href="{{ url('signup') }}">{{ __('shop.signup') }}</a></li>
                         @else
                             <li><a href="{{ url('mycenter') }}">{{ __('shop.mycenter') }} <span class="fa fa-briefcase"></span></a></li>
-                            <li><a href="/cart">{{ __('shop.ShoppingCart') }} <span class="fa fa-shopping-cart"></span></a></li>
+                            <li><a href="{{ url('shop/cart') }}">{{ __('shop.ShoppingCart') }} <span class="fa fa-shopping-cart"></span></a></li>
                             <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('shop.signout') }}&emsp;{{ __(Auth::user()->name) }}</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form></li>
                         @endif
@@ -82,7 +82,7 @@
 					@if(($product->product_amount - $product->product_retrun_amount) != 0)
 				 	<input type="checkbox" name="product[]" value="{{$product->item_id}}" >
 				  	@else
-				  	<input type="checkbox" name="product[]" value="{{$product->item_id}}" disabled="disabled" >
+				  <input type="checkbox" name="product[]" value="{{$product->item_id}}" disabled="disabled" >
 					  @endif
                   <a target="_blank" href="{{ url('/shop') }}">{{$product->product_name}}</a>
                 </td>

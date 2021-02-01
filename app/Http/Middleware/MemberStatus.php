@@ -3,10 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
 
-
-class CheckAdmin
+class MemberStatus
 {
     /**
      * Handle an incoming request.
@@ -17,12 +15,10 @@ class CheckAdmin
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::check() && $request->user()->admin !== 'Y') {
-            Auth::logout();
-            return redirect('/');
-        } elseif(!(Auth::check())) {
-            return redirect('/');
+        if ($request->user()->status == 'N') {
+            return redirect('mycenter')->withErrors('該帳號已被停權');
         }
+
         return $next($request);
     }
 }

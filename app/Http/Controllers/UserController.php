@@ -45,6 +45,8 @@ class UserController extends Controller
             'admin' => 'N',//角色使用者
             'level' => 0,//預設等級0級
             'point' => 0,//預設金額0
+            'accumulation_point' => 0,//累計金額為0
+            'login_time' => date("Y-m-d H:i:s")
         ]);
         $user->save();
 
@@ -70,10 +72,10 @@ class UserController extends Controller
         ]);
 
         $user = User::where('email',$request->input('email'))->first();
-        //if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')]) && $user->admin == 'N' && $user->status != 'Y') {
-        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
+        //if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')]) && $user->admin == 'N' && $user->status != 'D') {
+        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')]) && $user->status != 'D') {
 
-            $user->login_time = date("Y-m-d H:i:s");            ;
+            $user->login_time = date("Y-m-d H:i:s");
             $user->save();
             
             session()->put('lang', $request->language);
@@ -136,7 +138,7 @@ class UserController extends Controller
         ]);
 
         $user->password = bcrypt(($request->input('password')));
-        $user->updated_at = date("Y-m-d H:i:s"); ;
+        $user->updated_at = date("Y-m-d H:i:s");
         $user->save();
 
         return view('user.password', ['success' => 'success']);

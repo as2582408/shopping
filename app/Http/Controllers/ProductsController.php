@@ -143,12 +143,12 @@ class ProductsController extends Controller
                 }
             }
 
-            $product = Product::where('product_id', $request->input('id'))->update([
+            Product::where('product_id', $request->input('id'))->update([
                 'product_name' => $request->input('name'),
                 'product_description' => $request->input('description'),
                 'product_price' => $request->input('price'),
                 'product_amount' => $request->input('amount'),
-                'product_category' => $product_category,
+                'product_category' => $productCategory,
                 'product_status' => $request->input('status'),
                 'product_updata_time' => date("Y-m-d H:i:s")
             ]);

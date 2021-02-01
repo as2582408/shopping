@@ -289,6 +289,7 @@ class ShopController extends Controller
                 'useGiftBefore' => $useGiftBefore,//使用後禮金
                 'endPrice' =>   $endPrice//應付價格
             ];
+            $nameArr['discountGift'] = "折價比率";
         }
 
         if($request->point == 1 && $discount->discount_gift > 1) {
@@ -321,6 +322,7 @@ class ShopController extends Controller
                 'discountPrice' => $discountPrice, //折扣後價格
                 'discountPrice' =>   $discountPrice//應付價格
             ];
+            $nameArr['discountGift'] = "折價比率";
         }
 
         if($request->point == 2 && $discount->discount_gift > 1) {
@@ -378,10 +380,13 @@ class ShopController extends Controller
         $products = Cart::join('products', 'cart.product_id', '=', 'products.product_id')->where('user_id', '=', $userData->id)->get();
         foreach($products as $product)
         {
+            //寫入細單如是折扣優惠 需要打折後再寫入
+            $price = ($request->discountGift < 1) ? $product->product_price * $request->discountGift : $product->product_price;
+            
             Detail_item::create([
                 'item_detail_id' => $detailId,
                 'product_name' => $product->product_name,
-                'product_price' => $product->product_price,
+                'product_price' => $price,
                 'product_amount' => $product->cart_product_amount,
                 'product_retrun_amount' => 0
             ])->save();

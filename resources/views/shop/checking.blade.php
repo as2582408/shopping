@@ -17,7 +17,7 @@
         <table class="table table-sm">
         <thead>
             <tr>
-                <th scope="col">結帳確認</th>
+                <th scope="col">{{ __('shop.checking') }}</th>
             </tr>
     	</thead>
 		<tbody>
@@ -34,7 +34,7 @@
         <tr>
             <td>
                 <button class="btn btn-sm btn-default" onclick="history.back()">
-                返回
+                {{__('shop.Back')}}
                 </button>
             </td>
             <form id="logout-form" action="{{url("/shop/checkout")}}" method="POST" >
@@ -49,7 +49,7 @@
                 </td>
                 <td>
                     <button id="submit" name="submit" class="btn btn-sm btn-default">
-                    確認結帳
+                        {{ __('shop.confirm') }}
                     </button>
                 </td>
             </form> 

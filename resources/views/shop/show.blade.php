@@ -31,7 +31,7 @@
                 <h3>{{__('shop.price') }}：${{ $product->product_price }}</h3> 
                 <h4>{{__('shop.stock') }}：{{ $product->product_amount }}</h4>
                 @if ($product->product_amount <= 0)
-                <h4 class="text-danger">{{__('shop.oopsnostock') }} </h4>   
+                <h4 class="text-danger">{{__('shop.nostock') }} </h4>   
                 @endif
                 @if ($product->product_status != 'Y')
                 <h4 class="text-danger">{{__('shop.notyet') }} </h4>   

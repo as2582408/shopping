@@ -63,7 +63,7 @@
                 <input id="id" name="id" type="hidden"  class="form-control  " value="{{$returnId}}" required="">
       
                 <div class="form-group">
-                  <label for="exampleFormControlTextarea1">拒絕理由</label>
+                  <label for="exampleFormControlTextarea1">{{ __('shop.reasonRejection') }}</label>
                   <textarea id="remarks" name="remarks" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>
                 <div class="clearfix"></div>
@@ -76,7 +76,7 @@
                   </form>
                 </div>
                 <div>
-                  <button class="btn btn-sm btn-default" onclick="history.back()">返回</button>
+                  <button class="btn btn-sm btn-default" onclick="history.back()">{{__('shop.Back')}}</button>
                 </div>
               </div>
           </div>

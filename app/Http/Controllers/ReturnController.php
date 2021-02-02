@@ -48,7 +48,10 @@ class ReturnController extends Controller
             ];
             $i++;
         }
-        return view('return.content', ['itmes' => $itme]); 
+        return view('return.content', [
+            'itmes' => $itme,
+            'return' => $returnDetail
+            ]); 
     }
 
     public function refuseReturnPage($id)
@@ -201,7 +204,10 @@ class ReturnController extends Controller
             ];
             $i++;
         }
-        return view('user.contentreturn', ['itmes' => $itme]); 
+        return view('user.contentreturn', [
+            'itmes' => $itme,
+            'return' => $returnDetail
+            ]); 
     }
 
 }

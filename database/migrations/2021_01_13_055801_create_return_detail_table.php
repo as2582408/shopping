@@ -17,7 +17,7 @@ class CreateReturnDetailTable extends Migration
             //
             $table->integer('detail_id');
             $table->integer('user_id');
-            $table->string('return_itme_id	');
+            $table->string('return_itme_id');
             $table->timestamp('return_create_time')->nullable();
             $table->timestamp('return_updata_time')->nullable();
             $table->enum('return_status', ['0','1','2']);

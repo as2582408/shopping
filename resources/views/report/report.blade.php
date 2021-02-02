@@ -53,13 +53,13 @@
             <table class="table table-sm">
 				<thead>
 				  <tr>
-					<th scope="col">客訴id</th>
-					<th scope="col">會員名字</th>
-          <th scope="col">標題</th>
-          <th scope="col">最後回覆人員</th>
-          <th scope="col">最後回覆時間</th>
+					<th scope="col">{{ __('shop.ID') }}</th>
+					<th scope="col">{{ __('shop.User Name') }}</th>
+          <th scope="col">{{ __('shop.Reply title') }}</th>
+          <th scope="col">{{ __('shop.Replyer') }}</th>
+          <th scope="col">{{ __('shop.Reply Time') }}</th>
           <th scope="col"></th>
-					<th scope="col">詳細</th>
+					<th scope="col">{{ __('shop.Reply Content') }}</th>
 				  </tr>
 				</thead>
 				<tbody>
@@ -71,7 +71,7 @@
             <td>{{$report->report_reply}}</td>
             <td>{{$report->report_updata_time	}}</td>
             <td></td>
-						<td><a href='{{ url("/admin/reportTalk/{$report->report_id}") }}' class="alert-link">詳細</a></td>
+						<td><a href='{{ url("/admin/reportTalk/{$report->report_id}") }}' class="alert-link">{{ __('shop.Reply Content') }}</a></td>
 					  </tr>
 					@endforeach
 				</tbody>

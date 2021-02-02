@@ -21,7 +21,7 @@
         </div>
         <div class="form-group">
             <label for="email">{{__('shop.account')}}</label>
-            <input type="text" id="email" name="email" class="form-control" placeholder="XXX@gmail.com" required value="{{ old('email') }}">
+            <input type="text" id="email" name="email" class="form-control" placeholder="abcd@gmail.com" required value="{{ old('email') }}">
         </div>
         <div class="form-group">
             <label for="email">{{__('shop.phone')}}</label>

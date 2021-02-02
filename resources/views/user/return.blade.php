@@ -28,7 +28,7 @@
                         <li><a href="{{ url('signup') }}">{{ __('shop.signup') }}</a></li>
                     @else
                         <li><a href="{{ url('mycenter') }}">{{ __('shop.mycenter') }} <span class="fa fa-briefcase"></span></a></li>
-                        <li><a href="{{ url('shop/cart') }}">{{ __('shop.ShoppingCart') }} <span class="fa fa-shopping-cart"></span></a></li>
+                        <li><a href="/cart">{{ __('shop.ShoppingCart') }} <span class="fa fa-shopping-cart"></span></a></li>
                         <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('shop.signout') }}&emsp;{{ __(Auth::user()->name) }}</a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form></li>
                     @endif
@@ -44,9 +44,9 @@
             <a href="{{ url('mycenter') }}" class="list-group-item list-group-item-action">{{ __('shop.myprodile') }}</a>
             <a href="{{ url('profile') }}" class="list-group-item list-group-item-action">{{ __('shop.Revise personal info') }}</a>
             <a href="{{ url('password') }}" class="list-group-item list-group-item-action">{{ __('shop.editpassword') }}</a>
-            <a href="{{ url('detail') }}" class="list-group-item list-group-item-action">訂單資訊</a>
-            <a href="{{ url('return') }}" class="list-group-item list-group-item-action">我的退貨</a>
-            <a href="{{ url('report') }}" class="list-group-item list-group-item-action">客訴</a>
+            <a href="{{ url('detail') }}" class="list-group-item list-group-item-action">{{ __('shop.myorder') }}</a>
+            <a href="{{ url('return') }}" class="list-group-item list-group-item-action">{{ __('shop.myRuturn') }}</a>
+            <a href="{{ url('report') }}" class="list-group-item list-group-item-action">{{ __('shop.report') }}</a>
           </div>
         </div>
         <div class="col-md-8">
@@ -54,11 +54,11 @@
           <table class="table table-sm">
 				<thead>
 				<tr>
-					<th scope="col">訂單ID</th>
-					<th scope="col">退貨狀態</th>
-					<th scope="col">退貨時間</th>
-					<th scope="col">更新時間</th>
-          <th scope="col">詳細</th>
+					<th scope="col">{{ __('shop.ID')}}</th>
+					<th scope="col">{{ __('shop.status')}}</th>
+					<th scope="col">{{ __('shop.Refund Time')}}</th>
+					<th scope="col">{{ __('shop.Up Time')}}</th>
+          <th scope="col">{{ __('shop.Content')}}</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -68,7 +68,7 @@
             <td>{{$status[$returnDetail->return_status]}}</td>
 						<td>{{$returnDetail->return_create_time}}</td>
             <td>{{$returnDetail->return_updata_time}}</td>
-            <td><a href='{{ url("contentreturn/{$returnDetail->return_id}") }}' class="alert-link">詳細</a></td>
+            <td><a href='{{ url("contentreturn/{$returnDetail->return_id}") }}' class="alert-link">{{ __('shop.Content')}}</a></td>
 					</tr>
           @endforeach
         </tbody>

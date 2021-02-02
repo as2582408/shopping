@@ -50,8 +50,8 @@
                         </div>
 							<label for="password">{{__('shop.language')}}</label>
 							<select id="language" name="language" class="form-select" aria-label="Default select example">
-							  <option value="zh" >中文</option>
-							  <option value="en" >英文</option>
+							  <option value="zh" >{{ __('shop.zh') }}</option>
+							  <option value="en" >{{ __('shop.en') }}</option>
 							</select>
 						@if(isset($error))
 							<p>{{__($error)}}<p>

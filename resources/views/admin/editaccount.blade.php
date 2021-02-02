@@ -89,7 +89,7 @@
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
                 <hr>
-                <div class="col-sm-5 col-xs-6 tital ">會員等級:</div>
+                <div class="col-sm-5 col-xs-6 tital ">{{ __('shop.level') }}:</div>
                 <div class="col-sm-4 pull-right"">
                   <select id="level" name="level" class="form-select" aria-label="Default select example">
                     @foreach ($levels as $level)
@@ -100,14 +100,14 @@
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
                 <hr>
-                <div class="col-sm-5 col-xs-6 tital ">購物金:</div>
+                <div class="col-sm-5 col-xs-6 tital ">{{ __('shop.ShoppingPoint') }}:</div>
                 <div class="col-sm-4 pull-right"">
                     <input id="point" name="point" type="text"  class="form-control  " value="{{$users_data->point}}" required=""> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
                 <hr>
-                <div class="col-sm-5 col-xs-6 tital ">停權:</div>
+                <div class="col-sm-5 col-xs-6 tital ">{{ __('shop.status') }}:</div>
                 <div class="col-sm-4 pull-right"">
                   <select id="status" name="status" class="form-select" aria-label="Default select example">
                     <option value="Y" @if($users_data->status == 'Y') {{'SELECTED'}} @endif>Y</option>
@@ -126,7 +126,7 @@
                   </form>
                 </div>
                 <div>
-                  <button class="btn btn-sm btn-default" onclick="history.back()">返回</button>
+                  <button class="btn btn-sm btn-default" onclick="history.back()">{{__('shop.Back')}}</button>
                 </div>
               </div>
           </div>

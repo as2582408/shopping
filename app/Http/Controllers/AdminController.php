@@ -25,14 +25,14 @@ class AdminController extends Controller
     public function postSignin(Request $request)
     {
         $this->validate($request, [
-            'email' => 'email|required',
+            'email'    => 'email|required',
             'password' => 'required|min:6'
         ], [
-            'email.email' => __('shop.emailvalidation'),
+            'email.email'  => __('shop.emailvalidation'),
             'password.min' => __('shop.passwordmin')
         ]);
 
-        $user = User::where('email',$request->input('email'))->first();
+        $user = User::where('email', $request->input('email'))->first();
         if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')]) && $user->admin == 'Y') {
             $user->login_time = date("Y-m-d H:i:s");
             $user->save();
@@ -73,8 +73,10 @@ class AdminController extends Controller
     //刪除會員
     public function delectAccount($id)
     {
-        $checkDetail = User::join('detail', 'users.id', '=', 'detail.user_id')->where([['detail_status', '=', '0'],['id', '=', $id]])->count();
-        if($checkDetail){
+        $checkDetail = User::join('detail', 'users.id', '=', 'detail.user_id')->where([
+            ['detail_status', '=', '0'],
+            ['id', '=', $id]])->count();
+        if ($checkDetail){
             return redirect()->back()->withErrors('此帳號尚有訂單')->withInput(); 
         }
         $user = User::where('id', $id)->first();

@@ -14,7 +14,7 @@ class ProductsController extends Controller
     public function products()
     {
         $categories = Category::all();
-        $products = Product::Join('category', 'products.product_category', '=', 'category.id')->get();
+        $products = Product::all();
         $category = [];
 
         $categories = json_decode($categories, true);
@@ -191,8 +191,26 @@ class ProductsController extends Controller
     public function searchProducts(Request $request)
     {
         $query = $request->input('query');
-
+        
+        $categories = Category::all();
         $products = Product::where('product_name', 'LIKE', '%'.$query.'%')->get();
-        return view('products.products', ['products' => $products]);
+        $category = [];
+
+        $categories = json_decode($categories, true);
+        $categoryName = [];
+        foreach ($categories as $categorys) {
+                $categoryName[$categorys['id']] = $categorys['category_name'];
+        }
+
+        foreach($products as $product) {
+            $categoryArr = explode(",", $product->product_category);
+            $category += [ $product->product_id => $categoryArr ];
+        }
+        
+        return view('products.products', [
+            'products' => $products,
+            'categoryName' => $categoryName,
+            'productCategories' => $category
+            ]);
     }
 }

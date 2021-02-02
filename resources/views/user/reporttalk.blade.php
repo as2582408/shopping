@@ -44,21 +44,21 @@
             <a href="{{ url('mycenter') }}" class="list-group-item list-group-item-action">{{ __('shop.myprodile') }}</a>
             <a href="{{ url('profile') }}" class="list-group-item list-group-item-action">{{ __('shop.Revise personal info') }}</a>
             <a href="{{ url('password') }}" class="list-group-item list-group-item-action">{{ __('shop.editpassword') }}</a>
-            <a href="{{ url('detail') }}" class="list-group-item list-group-item-action">訂單資訊</a>
-            <a href="{{ url('return') }}" class="list-group-item list-group-item-action">我的退貨</a>
-            <a href="{{ url('report') }}" class="list-group-item list-group-item-action">客訴</a>
+            <a href="{{ url('detail') }}" class="list-group-item list-group-item-action">{{ __('shop.myorder') }}</a>
+            <a href="{{ url('return') }}" class="list-group-item list-group-item-action">{{ __('shop.myRuturn') }}</a>
+            <a href="{{ url('report') }}" class="list-group-item list-group-item-action">{{ __('shop.report') }}</a>
           </div>
         </div>
         <div class= "col-md-8">
           <div class="row">
-            <a class="btn btn-primary" href="{{ url("reportreply/{$reply_id}") }}" role="button">新回覆</a>
+            <a class="btn btn-primary" href="{{ url("reportreply/{$reply_id}") }}" role="button">{{ __('shop.Reply') }}</a>
           </div>
           <div class="row">
             <table class="table table-sm">
 				<thead>
 				  <tr>
-          <th scope="col">回覆訊息</th>
-          <th scope="col">回覆時間</th>
+          <th scope="col">{{ __('shop.message') }}</th>
+          <th scope="col">{{ __('shop.Reply Time') }}</th>
 				  </tr>
 				</thead>
 				<tbody>
@@ -72,7 +72,7 @@
 			  </table>
           </div>
           <div>
-            <button class="btn btn-sm btn-default" onclick="history.back()">返回</button>
+            <button class="btn btn-sm btn-default" onclick="history.back()">{{__('shop.Back')}}</button>
           </div>
         </div>
       </div>

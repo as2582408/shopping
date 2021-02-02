@@ -50,22 +50,22 @@
         </div>
         <div class="col-md-8">
           <div class="row">
-            <a class="btn btn-primary" href="{{ url('/admin/adddiscount') }}" role="button">新增優惠</a>
+            <a class="btn btn-primary" href="{{ url('/admin/adddiscount') }}" role="button">{{ __('shop.Add Offer') }}</a>
           </div>
           <div class="row">
           <table class="table table-sm">
 				<thead>
 				<tr>
-					<th scope="col">id</th>
-					<th scope="col">優惠名</th>
-					<th scope="col">需求會員等級</th>
-					<th scope="col">需求消費金額</th>
-					<th scope="col">優惠比例</th>
-					<th scope="col">建立時間</th>
-					<th scope="col">啟用狀態</th>
-          <th scope="col">修改</th>
+					<th scope="col">{{ __('shop.ID') }}</th>
+					<th scope="col">{{ __('shop.DiscountName') }}</th>
+					<th scope="col">{{ __('shop.Beneficiary Member') }}</th>
+					<th scope="col">{{ __('shop.DiscountThreshold') }}</th>
+					<th scope="col">{{ __('shop.DiscountPercnet') }}</th>
+					<th scope="col">{{ __('shop.DiscountTime') }}</th>
+					<th scope="col">{{ __('shop.status') }}</th>
+          <th scope="col">{{ __('shop.Edit') }}</th>
           <th scope="col"></th>
-					<th scope="col">快速刪除</th>
+					<th scope="col">{{ __('shop.Delete') }}</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -78,9 +78,9 @@
             <td>{{$discount->discount_gift}}</td>
             <td>{{$discount->discount_create_time}}</td>
             <td>{{$discount->discount_status}}</td>
-            <td><a href='{{ url("/admin/editdiscount/{$discount->discount_id}") }}' class="alert-link">修改</a></td>
+            <td><a href='{{ url("/admin/editdiscount/{$discount->discount_id}") }}' class="alert-link">{{ __('shop.Edit') }}</a></td>
             <td></td>
-						<td><a href='{{ url("/admin/deldiscount/{$discount->discount_id}") }}' class="alert-link">刪除</a></td>
+						<td><a href='{{ url("/admin/deldiscount/{$discount->discount_id}") }}' class="alert-link">{{ __('shop.Delete') }}</a></td>
 					</tr>
           @endforeach  
 				</tbody>

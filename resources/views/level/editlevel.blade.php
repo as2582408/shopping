@@ -61,14 +61,14 @@
               <form action="{{ url('/admin/editlevel') }}" method="post">
                 {!! csrf_field() !!}
                 <input id="id" name="id" type="hidden"  class="form-control  " value="{{$level->level_id}}" required="">
-                <div class="col-sm-5 col-xs-6 tital ">等級名稱:</div>
+                <div class="col-sm-5 col-xs-6 tital ">{{__('shop.Level Name')}}:</div>
                 <div class="col-sm-4 pull-right">
                     <input id="name" name="name" type="text"  class="form-control  " value="{{$level->level_name}}" required=""> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
                 <hr>
-                <div class="col-sm-5 col-xs-6 tital ">所需消費金額:</div>
+                <div class="col-sm-5 col-xs-6 tital ">{{__('shop.Upgrate Condition')}}:</div>
                 <div class="col-sm-4 pull-right">
                     <input id="threshold" name="threshold" type="text"  class="form-control  " value="{{$level->level_threshold}}" required=""> 
                 </div>
@@ -92,7 +92,7 @@
                   </form>
                 </div>
                 <div>
-                  <button class="btn btn-sm btn-default" onclick="history.back()">返回</button>
+                  <button class="btn btn-sm btn-default" onclick="history.back()">{{__('shop.Back')}}</button>
                 </div>
               </div>
           </div>

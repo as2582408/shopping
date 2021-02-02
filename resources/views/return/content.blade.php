@@ -53,10 +53,10 @@
       <table class="table table-sm">
     <thead>
     <tr>
-      <th scope="col">商品名</th>
-      <th scope="col">單價</th>
-      <th scope="col">退貨數量</th>
-      <th scope="col">小計</th>
+      <th scope="col">{{ __('shop.Product Name') }}</th>
+      <th scope="col">{{ __('shop.unit') }}</th>
+      <th scope="col">{{ __('shop.quantity') }}</th>
+      <th scope="col">{{ __('shop.subtotal') }}</th>
     </tr>
     </thead>
     <tbody>
@@ -70,7 +70,21 @@
       @endforeach
     </tbody>
     </table>
-    <button class="btn btn-sm btn-default" onclick="history.back()">返回</button>
+    @if (!empty($return->return_reply))
+    <table class="table table-sm">
+      <thead>
+        <tr>
+          <th scope="col">{{ __('shop.reasonRejection') }}</th>
+        </tr>
+      </thead>
+        <tbody>
+          <tr>
+            <th scope="row">{{$return->return_reply}}</th>
+          </tr>
+        </tbody>
+      </table>
+    @endif
+    <button class="btn btn-sm btn-default" onclick="history.back()">{{__('shop.Back')}}</button>
       </div>
     </div>
   </div>

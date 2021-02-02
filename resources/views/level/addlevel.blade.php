@@ -60,14 +60,14 @@
             <div class="text-center">
               <form action="{{ url('/admin/addlevel') }}" method="post">
                 {!! csrf_field() !!}      
-                <div class="col-sm-5 col-xs-6 tital ">階級:</div>
+                <div class="col-sm-5 col-xs-6 tital ">{{__('shop.level')}}:</div>
                 <div class="col-sm-4 pull-right">
                     <input id="rank" name="rank" type="text"  class="form-control  " value="{{$max+1}}" required="" readonly="readonly"> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
                 <hr>
-                <div class="col-sm-5 col-xs-6 tital ">名稱:</div>
+                <div class="col-sm-5 col-xs-6 tital ">{{__('shop.Level Name')}}:</div>
                 <div class="col-sm-4 pull-right">
                     <input id="name" name="name" type="text"  class="form-control  " value="" required=""> 
                 </div>
@@ -75,7 +75,7 @@
                 <div class="bot-border"></div>
                 <hr>
                 <input id="upThreshold" name="upThreshold" type="hidden"  class="form-control" value="{{$rankMoney}}" required="" >
-                <div class="col-sm-5 col-xs-6 tital ">所需累計金額(須大於顯示數字):</div>
+                <div class="col-sm-5 col-xs-6 tital ">{{__('shop.Upgrate Condition')}}{{__('shop.Upgrate Condition2')}}:</div>
                 <div class="col-sm-4 pull-right">
                     <input id="threshold" name="threshold" type="text"  class="form-control  " value="{{$rankMoney}}" required=""> 
                 </div>
@@ -89,7 +89,7 @@
                   </form>
                 </div>
                 <div>
-                  <button class="btn btn-sm btn-default" onclick="history.back()">返回</button>
+                  <button class="btn btn-sm btn-default" onclick="history.back()">{{__('shop.Back')}}</button>
                 </div>
               </div>
           </div>

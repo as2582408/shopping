@@ -50,10 +50,10 @@
         </div>
         <div class= "col-md-8">
           <div class="row">
-            <div class="row">
-              <a class="btn btn-primary" href="{{ url('/admin/addCategory') }}" role="button">{{ __('shop.Add Category') }}</a>
-            </div>
-            <table class="table table-sm">
+            <a class="btn btn-primary" href="{{ url('/admin/addCategory') }}" role="button">{{ __('shop.Add Category') }}</a>
+          </div>
+          <div class="row">
+          <table class="table table-sm">
 				<thead>
 				  <tr>
 					<th scope="col"></th>
@@ -69,9 +69,9 @@
             <tr>
               <th scope="row">{{ $category->id }}</th>
               <td>{{ $category->category_name }}</td>
-              <td><a href='{{ url("/admin/editCategory/{$category->id}") }}' class="alert-link">修改</a></td>
+              <td><a href='{{ url("/admin/editCategory/{$category->id}") }}' class="alert-link">{{ __('shop.Edit') }}</a></td>
               <td></td>
-              <td><a href='{{ url("/admin/delCategory/{$category->id}") }}' class="alert-link">刪除</a></td>
+              <td><a href='{{ url("/admin/delCategory/{$category->id}") }}' class="alert-link">{{ __('shop.Delete') }}</a></td>
             </tr>
           @endif
 					@endforeach

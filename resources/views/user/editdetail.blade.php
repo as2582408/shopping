@@ -51,9 +51,9 @@
             <a href="{{ url('mycenter') }}" class="list-group-item list-group-item-action">{{ __('shop.myprodile') }}</a>
             <a href="{{ url('profile') }}" class="list-group-item list-group-item-action">{{ __('shop.Revise personal info') }}</a>
             <a href="{{ url('password') }}" class="list-group-item list-group-item-action">{{ __('shop.editpassword') }}</a>
-            <a href="{{ url('detail') }}" class="list-group-item list-group-item-action">訂單資訊</a>
-            <a href="{{ url('return') }}" class="list-group-item list-group-item-action">我的退貨</a>
-            <a href="{{ url('report') }}" class="list-group-item list-group-item-action">客訴</a>
+            <a href="{{ url('detail') }}" class="list-group-item list-group-item-action">{{ __('shop.myorder') }}</a>
+            <a href="{{ url('return') }}" class="list-group-item list-group-item-action">{{ __('shop.myRuturn') }}</a>
+            <a href="{{ url('report') }}" class="list-group-item list-group-item-action">{{ __('shop.report') }}</a>
           </div>
         </div>
         <div class="col-md-8">
@@ -63,49 +63,49 @@
                 {!! csrf_field() !!}
                 <input id="id" name="id" type="hidden"  class="form-control  " value="{{$detail->detail_id}}" required="">
       
-                <div class="col-sm-5 col-xs-6 tital ">會員姓名:</div>
-                <div class="col-sm-4 pull-right"">
+                <div class="col-sm-5 col-xs-6 tital ">{{ __('shop.User Name') }}:</div>
+                <div class="col-sm-4 pull-right">
                     <input id="name" name="name" type="text"  class="form-control  " value="{{$detail->name}}" required="" readonly="readonly"> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
 				<hr>
-				<div class="col-sm-5 col-xs-6 tital ">電話:</div>
-                <div class="col-sm-4 pull-right"">
+				<div class="col-sm-5 col-xs-6 tital ">{{ __('shop.phone') }}:</div>
+                <div class="col-sm-4 pull-right">
                     <input id="phone" name="phone" type="text"  class="form-control  " value="{{$detail->user_phone}}" required="" @if($detail->detail_shipment == '2' || $detail->detail_status != '0'){{'readonly="readonly"'}}@endif> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
 				<hr>
-				<div class="col-sm-5 col-xs-6 tital ">地址:</div>
-                <div class="col-sm-4 pull-right"">
+				<div class="col-sm-5 col-xs-6 tital ">{{ __('shop.address') }}:</div>
+                <div class="col-sm-4 pull-right">
                     <input id="address" name="address" type="text"  class="form-control  " value="{{$detail->user_address}}" required="" @if($detail->detail_shipment == '2' || $detail->detail_status != '0'){{'readonly="readonly"'}}@endif> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
 				<hr>
-				<div class="col-sm-5 col-xs-6 tital ">訂單使用現金:</div>
-                <div class="col-sm-4 pull-right"">
+				<div class="col-sm-5 col-xs-6 tital ">{{ __('shop.orderMoney') }}:</div>
+                <div class="col-sm-4 pull-right">
                     <input id="price" name="price" type="text"  class="form-control  " value="{{$detail->detail_totail_price}}" required="" readonly="readonly"> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
 				<hr>
-				<div class="col-sm-5 col-xs-6 tital ">使用購物金:</div>
-                <div class="col-sm-4 pull-right"">
+				<div class="col-sm-5 col-xs-6 tital ">{{ __('shop.orderPoint') }}:</div>
+                <div class="col-sm-4 pull-right">
                     <input id="point" name="point" type="text"  class="form-control  " value="{{$detail->detail_shopping_point}}" required="" readonly="readonly"> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
 				<hr>
-				<div class="col-sm-5 col-xs-6 tital ">贈送禮金:</div>
-                <div class="col-sm-4 pull-right"">
+				<div class="col-sm-5 col-xs-6 tital ">{{ __('shop.orderGift') }}:</div>
+                <div class="col-sm-4 pull-right">
                     <input id="gift" name="gift" type="text"  class="form-control  " value="{{$detail->detail_gift_money}}" required="" readonly="readonly"> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
 				<hr>
-			<label for="exampleFormControlTextarea1">訂單詳細</label>
+			<label for="exampleFormControlTextarea1">{{ __('shop.orderContent') }}</label>
 			  
 			<table class="table table-sm">
 				<thead>
@@ -146,7 +146,7 @@
                   </form>
                 </div>
                 <div>
-                  <button class="btn btn-sm btn-default" onclick="history.back()">返回</button>
+                  <button class="btn btn-sm btn-default" onclick="history.back()">{{__('shop.Back')}}</button>
                 </div>
               </div>
           </div>

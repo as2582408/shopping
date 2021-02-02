@@ -67,15 +67,15 @@
             <table class="table table-sm">
 				<thead>
 				  <tr>
-					<th scope="col">id</th>
-					<th scope="col">名字</th>
-					<th scope="col">信箱</th>
-					<th scope="col">購物金</th>
-					<th scope="col">會員等級</th>
-					<th scope="col">停權</th>
-          <th scope="col">修改</th>
+					<th scope="col">{{ __('shop.ID') }}</th>
+					<th scope="col">{{ __('shop.name') }}</th>
+					<th scope="col">{{ __('shop.email') }}</th>
+					<th scope="col">{{ __('shop.ShoppingPoint') }}</th>
+					<th scope="col">{{ __('shop.level') }}</th>
+					<th scope="col">{{ __('shop.status') }}</th>
+          <th scope="col">{{ __('shop.Edit') }}</th>
           <th scope="col"></th>
-					<th scope="col">快速刪除</th>
+					<th scope="col">{{ __('shop.Delete') }}</th>
 				  </tr>
 				</thead>
 				<tbody>
@@ -87,9 +87,9 @@
 						<td>{{ $user->point }}</td>
 						<td>{{ $user->level }}</td>
 						<td>{{ $user->status }}</td>
-            <td><a href='{{ url("/admin/accountedit/{$user->id}") }}' class="alert-link">修改</a></td>
+            <td><a href='{{ url("/admin/accountedit/{$user->id}") }}' class="alert-link">{{ __('shop.Edit') }}</a></td>
             <td></td>
-						<td><a href='{{ url("/admin/accountdel/{$user->id}") }}' class="alert-link">刪除</a></td>
+						<td><a href='{{ url("/admin/accountdel/{$user->id}") }}' class="alert-link">{{ __('shop.Delete') }}</a></td>
 					  </tr>
 					@endforeach
 				</tbody>

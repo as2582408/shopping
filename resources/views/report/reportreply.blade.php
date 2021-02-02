@@ -63,7 +63,7 @@
                 <input id="id" name="id" type="hidden"  class="form-control  " value="{{$reply_id}}" required="">
       
                 <div class="form-group">
-                  <label for="exampleFormControlTextarea1">新回覆</label>
+                  <label for="exampleFormControlTextarea1">{{__('shop.Reply')}}</label>
                   <textarea id="reply" name="reply" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>
                 <div class="clearfix"></div>
@@ -71,12 +71,12 @@
                 <hr>
                 <div class="btn-group pull-right">
                     <button id="submit" name="submit" class="btn btn-sm btn-default">
-                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>{{__('shop.saveedit')}}
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>{{__('shop.submit')}}
                     </button>
                   </form>
                 </div>
                 <div>
-                  <button class="btn btn-sm btn-default" onclick="history.back()">返回</button>
+                  <button class="btn btn-sm btn-default" onclick="history.back()">{{__('shop.Back')}}</button>
                 </div>
               </div>
           </div>

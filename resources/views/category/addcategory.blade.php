@@ -60,7 +60,7 @@
             <div class="text-center">
               <form action="{{ url('/admin/addCategory') }}" method="post">
                 {!! csrf_field() !!}      
-                <div class="col-sm-5 col-xs-6 tital ">分類名稱:</div>
+                <div class="col-sm-5 col-xs-6 tital ">{{__('shop.Category Name')}}:</div>
                 <div class="col-sm-4 pull-right"">
                     <input id="name" name="name" type="text"  class="form-control  " value="" required=""> 
                 </div>
@@ -74,7 +74,7 @@
                   </form>
                 </div>
                 <div>
-                  <button class="btn btn-sm btn-default" onclick="history.back()">返回</button>
+                  <button class="btn btn-sm btn-default" onclick="history.back()">{{__('shop.Back')}}</button>
                 </div>
               </div>
           </div>

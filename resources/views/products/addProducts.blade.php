@@ -67,35 +67,35 @@
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
                 <hr>
-                <div class="col-sm-5 col-xs-6 tital ">商品名稱:</div>
-                <div class="col-sm-4 pull-right"">
+                <div class="col-sm-5 col-xs-6 tital ">{{__('shop.Product Name')}}:</div>
+                <div class="col-sm-4 pull-right">
                     <input id="name" name="name" type="text"  class="form-control  " value="" required="">    
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
                 <hr>
-                <div class="col-sm-5 col-xs-6 tital ">商品描述:</div>
-                <div class="col-sm-4 pull-right"">
+                <div class="col-sm-5 col-xs-6 tital ">{{__('shop.Description')}}:</div>
+                <div class="col-sm-4 pull-right">
                     <input id="description" name="description" type="text"  class="form-control  " value="" required="">    
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
                 <hr>
-                <div class="col-sm-5 col-xs-6 tital ">價格:</div>
-                <div class="col-sm-4 pull-right"">
+                <div class="col-sm-5 col-xs-6 tital ">{{__('shop.price')}}:</div>
+                <div class="col-sm-4 pull-right">
                     <input id="price" name="price" type="text"  class="form-control  " value="" required=""> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
                 <hr>
-                <div class="col-sm-5 col-xs-6 tital ">數量:</div>
-                <div class="col-sm-4 pull-right"">
+                <div class="col-sm-5 col-xs-6 tital ">{{__('shop.quantity')}}:</div>
+                <div class="col-sm-4 pull-right">
                     <input id="amount" name="amount" type="text"  class="form-control  " value="" required=""> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
                 <hr>
-                <div class="col-sm-5 col-xs-6 tital ">分類:</div>
+                <div class="col-sm-5 col-xs-6 tital ">{{__('shop.Category')}}:</div>
                 <div class="col-sm-4 pull-right">
                   @foreach ($categories as $category)
                     <input type="checkbox" name="category[]" value="{{$category->id}}" >{{$category->category_name}}
@@ -113,7 +113,7 @@
                   </form>
                 </div>
                 <div>
-                  <button class="btn btn-sm btn-default" onclick="history.back()">返回</button>
+                  <button class="btn btn-sm btn-default" onclick="history.back()">{{__('shop.Back')}}</button>
                 </div>
               </div>
           </div>

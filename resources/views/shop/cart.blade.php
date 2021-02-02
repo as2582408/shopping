@@ -17,11 +17,11 @@
         <table class="table table-sm">
         <thead>
             <tr>
-                <th scope="col">商品名</th>
-                <th scope="col">單價</th>
-                <th scope="col">數量</th>
+                <th scope="col">{{ __('shop.Product Name') }}</th>
+                <th scope="col">{{ __('shop.unit') }}</th>
+                <th scope="col">{{ __('shop.quantity') }}</th>
                 <th scope="col"></th>
-                <th scope="col">移出購物車</th>
+                <th scope="col">{{ __('shop.remove') }}</th>
             </tr>
     	</thead>
 		<tbody>
@@ -31,7 +31,7 @@
             <td>{{ $product->product_price }}$</td>
             <td>{{ $product->cart_product_amount }}</td>
             <td></td>
-			<td><a href='{{url("/shop/removecart/{$product->product_id}")}}' class="alert-link">移出購物車</a></td>
+			<td><a href='{{url("/shop/removecart/{$product->product_id}")}}' class="alert-link">{{ __('shop.remove') }}</a></td>
 		</tr>
         @endforeach  
         </tbody>
@@ -40,17 +40,17 @@
         <table class="table table-sm">
         <tr>
             <td></td>
-            <td class="text-danger">總價：{{$totalPrice}}＄</td>
+            <td class="text-danger">{{ __('shop.orderTotal') }}：{{$totalPrice}}＄</td>
             <form id="checking" action="{{url("/shop/checking")}}" method="POST" >
-            <td>使用禮金結帳
+            <td>{{ __('shop.usevirtual') }}
                 <select name="point" id="point">
                     @if($userPoint > 0)
-                    <option value="1">是</option>
+                    <option value="1">{{ __('shop.Yes') }}</option>
                     @endif
-                    <option value="2">否</option>
+                    <option value="2">{{ __('shop.No') }}</option>
                 </select> 
             </td>
-            <td>使用優惠
+            <td>{{ __('shop.dicount') }}
                 <select name="discount" id="discount">
                     @foreach ($discounts as $discount)
                         <option value="{{$discount->discount_id}}">{{$discount->discount_name}}</option>
@@ -60,14 +60,14 @@
             <td>
             {{ csrf_field() }}
             <button id="submit" name="submit" class="btn btn-sm btn-default">
-                前往結帳
+                {{ __('shop.checkout') }}
             </button>
             </td>
             </form> 
         </tr>
          </table>
          @else
-         <td>購物車尚無商品</td>
+         <td>{{ __('shop.signin') }}購物車尚無商品</td>
          @endif
          
          </div>

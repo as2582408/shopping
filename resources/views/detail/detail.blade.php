@@ -53,18 +53,18 @@
           <table class="table table-sm">
 				<thead>
 				<tr>
-					<th scope="col">訂單ID</th>
-					<th scope="col">會員ID</th>
-					<th scope="col">會員名稱</th>
-					<th scope="col">訂單金額</th>
-					<th scope="col">訂單狀態</th>
-					<th scope="col">出貨狀態</th>
-					<th scope="col">訂單成立時間</th>
-          <th scope="col">詳細/修改</th>
+					<th scope="col">{{ __('shop.ordernumber') }}</th>
+					<th scope="col">{{ __('shop.Member ID') }}</th>
+					<th scope="col">{{ __('shop.User Name') }}</th>
+					<th scope="col">{{ __('shop.orderTotal') }}</th>
+					<th scope="col">{{ __('shop.orderstatus') }}</th>
+					<th scope="col">{{ __('shop.orderSend') }}</th>
+					<th scope="col">{{ __('shop.Order Time') }}</th>
+          <th scope="col">{{ __('shop.orderDetail') }}</th>
           <th scope="col"></th>
-          <th scope="col">取消訂單</th>
-          <th scope="col">出貨</th>
-					<th scope="col">完成</th>
+          <th scope="col">{{ __('shop.cancel') }}</th>
+          <th scope="col">{{ __('shop.Send') }}</th>
+					<th scope="col">{{ __('shop.End') }}</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -77,11 +77,11 @@
 						<td>{{$status[$detail->detail_status]}}</td>
             <td>{{$shipment[$detail->detail_shipment]}}</td>
             <td>{{$detail->detail_create_time}}</td>
-            <td><a href='{{ url("/admin/editdetail/{$detail->detail_id}") }}' class="alert-link">修改</a></td>
+            <td><a href='{{ url("/admin/editdetail/{$detail->detail_id}") }}' class="alert-link">{{ __('shop.Edit') }}</a></td>
             <td></td>
-            <td>@if($detail->detail_shipment == 1 && $detail->detail_status == 0)<a href='{{ url("/admin/deldetail/{$detail->detail_id}") }}' class="alert-link">刪除</a>@endif</td>
-            <td>@if($detail->detail_shipment == 1 && $detail->detail_status == 0)<a href='{{ url("/admin/shipmentdetail/{$detail->detail_id}") }}' class="alert-link">出貨</a>@endif</td>
-            <td>@if($detail->detail_status == 0 && $detail->detail_shipment == 2)<a href='{{ url("/admin/enddetail/{$detail->detail_id}") }}' class="alert-link">完成</a>@endif</td>
+            <td>@if($detail->detail_shipment == 1 && $detail->detail_status == 0)<a href='{{ url("/admin/deldetail/{$detail->detail_id}") }}' class="alert-link">{{ __('shop.Delete') }}</a>@endif</td>
+            <td>@if($detail->detail_shipment == 1 && $detail->detail_status == 0)<a href='{{ url("/admin/shipmentdetail/{$detail->detail_id}") }}' class="alert-link">{{ __('shop.Send') }}</a>@endif</td>
+            <td>@if($detail->detail_status == 0 && $detail->detail_shipment == 2)<a href='{{ url("/admin/enddetail/{$detail->detail_id}") }}' class="alert-link">{{ __('shop.End') }}</a>@endif</td>
 
 					</tr>
           @endforeach  

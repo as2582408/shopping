@@ -61,35 +61,35 @@
               <form action="{{ url('/admin/editdiscount') }}" method="post" class="form-horizontal" enctype="multipart/form-data" role="form">
                 {!! csrf_field() !!}
                 <input id="id" name="id" type="hidden"  class="form-control  " value=" {{$discount->discount_id}} " required="">
-                <div class="col-sm-5 col-xs-6 tital ">優惠名稱:</div>
+                <div class="col-sm-5 col-xs-6 tital ">{{ __('shop.DiscountName') }}:</div>
                 <div class="col-sm-4 pull-right"">
                     <input id="name" name="name" type="text"  class="form-control  " value="{{ $discount->discount_name }}" required="">    
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
                 <hr>
-                <div class="col-sm-5 col-xs-6 tital ">優惠需求等級:</div>
+                <div class="col-sm-5 col-xs-6 tital ">{{ __('shop.Beneficiary Member') }}:</div>
                 <div class="col-sm-4 pull-right"">
                     <input id="level" name="level" type="text"  class="form-control  " value="{{ $discount->level }}" required="">    
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
                 <hr>
-                <div class="col-sm-5 col-xs-6 tital ">優惠需求消費金額(1以下為折扣 以上為禮金):</div>
+                <div class="col-sm-5 col-xs-6 tital ">{{ __('shop.DiscountThreshold') }}:</div>
                 <div class="col-sm-4 pull-right"">
                     <input id="threshold" name="threshold" type="text"  class="form-control  " value="{{ $discount->discount_threshold }}" required=""> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
                 <hr>
-                <div class="col-sm-5 col-xs-6 tital ">優惠比例:</div>
+                <div class="col-sm-5 col-xs-6 tital ">{{ __('shop.DiscountPercnet') }}{{ __('shop.DiscountPercnet2') }}:</div>
                 <div class="col-sm-4 pull-right"">
                     <input id="gift" name="gift" type="text"  class="form-control  " value="{{ $discount->discount_gift }}" required=""> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
                 <hr>
-                <div class="col-sm-5 col-xs-6 tital ">啟用狀態:</div>
+                <div class="col-sm-5 col-xs-6 tital ">{{ __('shop.status') }}:</div>
                 <div class="col-sm-4 pull-right"">
                   <select id="status" name="status" class="form-select" aria-label="Default select example">
                     <option value="Y" @if($discount->discount_status == 'Y') {{'SELECTED'}} @endif>Y</option>
@@ -107,7 +107,7 @@
                   </form>
                 </div>
                 <div>
-                  <button class="btn btn-sm btn-default" onclick="history.back()">返回</button>
+                  <button class="btn btn-sm btn-default" onclick="history.back()">{{__('shop.Back')}}</button>
                 </div>
               </div>
           </div>

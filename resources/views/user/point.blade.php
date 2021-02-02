@@ -8,9 +8,9 @@
 				<a href="{{ url('mycenter') }}" class="list-group-item list-group-item-action">{{ __('shop.myprodile') }}</a>
 				<a href="{{ url('profile') }}" class="list-group-item list-group-item-action">{{ __('shop.Revise personal info') }}</a>
 				<a href="{{ url('password') }}" class="list-group-item list-group-item-action">{{ __('shop.editpassword') }}</a>
-				<a href="{{ url('detail') }}" class="list-group-item list-group-item-action">訂單資訊</a>
-				<a href="{{ url('return') }}" class="list-group-item list-group-item-action">我的退貨</a>
-				<a href="{{ url('report') }}" class="list-group-item list-group-item-action">客訴</a>
+				<a href="{{ url('detail') }}" class="list-group-item list-group-item-action">{{ __('shop.myorder') }}</a>
+				<a href="{{ url('return') }}" class="list-group-item list-group-item-action">{{ __('shop.myRuturn') }}</a>
+				<a href="{{ url('report') }}" class="list-group-item list-group-item-action">{{ __('shop.report') }}</a>
 			</div>
         </div>
         <div class="col-md-8">
@@ -18,11 +18,11 @@
           <table class="table table-sm">
 			<thead>
 			<tr>
-				<th scope="col">訂單ID</th>
-				<th scope="col">時間</th>
-				<th scope="col">類型</th>
-				<th scope="col">變動購物金</th>
-				<th scope="col">變動後購物金</th>
+				<th scope="col">{{ __('shop.ordernumber') }}</th>
+				<th scope="col">{{ __('shop.time') }}</th>
+				<th scope="col">{{ __('shop.operate') }}</th>
+				<th scope="col">{{ __('shop.ChagePoint') }}</th>
+				<th scope="col">{{ __('shop.BeforePoint') }}</th>
 			</tr>
 			</thead>
 			<tbody>

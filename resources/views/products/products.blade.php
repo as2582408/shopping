@@ -57,23 +57,23 @@
             </form>
           </div>
           <div class="row">
-            <a class="btn btn-primary" href="{{ url('/admin/addProducts') }}" role="button">新增商品</a>
+            <a class="btn btn-primary" href="{{ url('/admin/addProducts') }}" role="button">{{ __('shop.Add Product') }}</a>
           </div>
           <div class="row">
           <table class="table table-sm">
 				<thead>
 				<tr>
-					<th scope="col">id</th>
-					<th scope="col">圖片</th>
-					<th scope="col">商品名</th>
-					<th scope="col">價格</th>
-					<th scope="col">數量</th>
-					<th scope="col">上架</th>
-					<th scope="col">上架時間</th>
-					<th scope="col">商品分類</th>
-          <th scope="col">修改</th>
+					<th scope="col">{{ __('shop.ID') }}</th>
+					<th scope="col">{{ __('shop.Image') }}</th>
+					<th scope="col">{{ __('shop.Product Name') }}</th>
+					<th scope="col">{{ __('shop.price') }}</th>
+					<th scope="col">{{ __('shop.quantity') }}</th>
+					<th scope="col">{{ __('shop.status') }}</th>
+					<th scope="col">{{ __('shop.DiscountTime') }}</th>
+					<th scope="col">{{ __('shop.Category') }}</th>
+          <th scope="col">{{ __('shop.Edit') }}</th>
           <th scope="col"></th>
-					<th scope="col">快速刪除</th>
+					<th scope="col">{{ __('shop.Delete') }}</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -89,9 +89,9 @@
             <td>@foreach ($productCategories[$product->product_id] as $productCategory)
                 {{$categoryName[(int)$productCategory]}}
             @endforeach</td>
-            <td><a href='{{ url("/admin/editProducts/{$product->product_id}") }}' class="alert-link">修改</a></td>
+            <td><a href='{{ url("/admin/editProducts/{$product->product_id}") }}' class="alert-link">{{ __('shop.Edit') }}</a></td>
             <td></td>
-						<td><a href='{{ url("/admin/delProducts/{$product->product_id}") }}' class="alert-link">刪除</a></td>
+						<td><a href='{{ url("/admin/delProducts/{$product->product_id}") }}' class="alert-link">{{ __('shop.Delete') }}</a></td>
 					</tr>
           @endforeach  
 				</tbody>

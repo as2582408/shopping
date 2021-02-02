@@ -44,26 +44,26 @@
             <a href="{{ url('mycenter') }}" class="list-group-item list-group-item-action">{{ __('shop.myprodile') }}</a>
             <a href="{{ url('profile') }}" class="list-group-item list-group-item-action">{{ __('shop.Revise personal info') }}</a>
             <a href="{{ url('password') }}" class="list-group-item list-group-item-action">{{ __('shop.editpassword') }}</a>
-            <a href="{{ url('detail') }}" class="list-group-item list-group-item-action">訂單資訊</a>
-            <a href="{{ url('return') }}" class="list-group-item list-group-item-action">我的退貨</a>
-            <a href="{{ url('report') }}" class="list-group-item list-group-item-action">客訴</a>
+            <a href="{{ url('detail') }}" class="list-group-item list-group-item-action">{{ __('shop.myorder') }}</a>
+            <a href="{{ url('return') }}" class="list-group-item list-group-item-action">{{ __('shop.myRuturn') }}</a>
+            <a href="{{ url('report') }}" class="list-group-item list-group-item-action">{{ __('shop.report') }}</a>
           </div>
         </div>
         <div class="col-md-8">
           <div class="row">
           <table class="table table-sm">
             <div class="row">
-              <a class="btn btn-primary" href="{{ url("reportnew") }}" role="button">新客訴</a>
+              <a class="btn btn-primary" href="{{ url("reportnew") }}" role="button">{{ __('shop.Reply Add') }}</a>
             </div>
 				  <thead>
-          <tr>
-            <th scope="col">客訴id</th>
-            <th scope="col">標題</th>
-            <th scope="col">最後回覆人員</th>
-            <th scope="col">最後回覆時間</th>
-            <th scope="col"></th>
-            <th scope="col">詳細</th>
-            </tr>
+            <tr>
+              <th scope="col">{{ __('shop.ID') }}</th>
+              <th scope="col">{{ __('shop.Reply title') }}</th>
+              <th scope="col">{{ __('shop.Replyer') }}</th>
+              <th scope="col">{{ __('shop.Reply Time') }}</th>
+              <th scope="col"></th>
+              <th scope="col">{{ __('shop.Reply Content') }}</th>
+              </tr>
 				</thead>
 				<tbody>
           @foreach ($reports as $report)
@@ -73,7 +73,7 @@
             <td>{{$report->report_reply}}</td>
             <td>{{$report->report_updata_time	}}</td>
             <td></td>
-						<td><a href='{{ url("reportTalk/{$report->report_id}") }}' class="alert-link">詳細</a></td>
+						<td><a href='{{ url("reportTalk/{$report->report_id}") }}' class="alert-link">{{ __('shop.Content') }}</a></td>
 					  </tr>
 					@endforeach
         </tbody>

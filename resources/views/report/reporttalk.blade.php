@@ -50,14 +50,14 @@
         </div>
         <div class= "col-md-8">
           <div class="row">
-            <a class="btn btn-primary" href="{{ url("/admin/reportreply/{$reply_id}") }}" role="button">新回覆</a>
+            <a class="btn btn-primary" href="{{ url("/admin/reportreply/{$reply_id}") }}" role="button">{{__('shop.Reply')}}</a>
           </div>
           <div class="row">
             <table class="table table-sm">
 				<thead>
 				  <tr>
-          <th scope="col">回覆訊息</th>
-          <th scope="col">回覆時間</th>
+          <th scope="col">{{__('shop.message')}}</th>
+          <th scope="col">{{__('shop.Reply Time')}}</th>
 				  </tr>
 				</thead>
 				<tbody>
@@ -71,7 +71,7 @@
 			  </table>
           </div>
           <div>
-            <button class="btn btn-sm btn-default" onclick="history.back()">返回</button>
+            <button class="btn btn-sm btn-default" onclick="history.back()">{{__('shop.Back')}}</button>
           </div>
         </div>
       </div>

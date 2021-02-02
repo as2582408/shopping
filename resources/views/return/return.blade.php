@@ -53,14 +53,14 @@
             <table class="table table-sm">
 				<thead>
 				  <tr>
-					<th scope="col">退貨單ID</th>
-          <th scope="col">訂單ID</th>
-          <th scope="col">會員名稱</th>
-          <th scope="col">狀態</th>
-          <th scope="col">退貨日期</th>
-          <th scope="col">詳細</th>
-          <th scope="col">同意</th>
-          <th scope="col">拒絕</th>
+					<th scope="col">{{ __('shop.ID')}}</th>
+          <th scope="col">{{ __('shop.ordernumber')}}</th>
+          <th scope="col">{{ __('shop.User Name')}}</th>
+          <th scope="col">{{ __('shop.status')}}</th>
+          <th scope="col">{{ __('shop.Refund Time')}}</th>
+          <th scope="col">{{ __('shop.Content')}}</th>
+          <th scope="col">{{ __('shop.Agree')}}</th>
+          <th scope="col">{{ __('shop.Refused Refund')}}</th>
 				  </tr>
 				</thead>
 				<tbody>
@@ -72,9 +72,9 @@
 						<td>{{$status[$returnDetail->return_status]}}</td>
 						<td>{{$returnDetail->return_create_time}}</td>
 
-            <td><a href='{{ url("/admin/contentreturn/{$returnDetail->return_id}") }}' class="alert-link">詳細</a></td>
-            <td>@if($returnDetail->return_status == 0) <a href='{{ url("/admin/agreereturn/{$returnDetail->return_id}") }}' class="alert-link">同意</a> @endif</td>
-            <td>@if($returnDetail->return_status == 0) <a href='{{ url("/admin/refusereturn/{$returnDetail->return_id}") }}' class="alert-link">拒絕</a> @endif</td>
+            <td><a href='{{ url("/admin/contentreturn/{$returnDetail->return_id}") }}' class="alert-link">{{ __('shop.Content')}}</a></td>
+            <td>@if($returnDetail->return_status == 0) <a href='{{ url("/admin/agreereturn/{$returnDetail->return_id}") }}' class="alert-link">{{ __('shop.Agree')}}</a> @endif</td>
+            <td>@if($returnDetail->return_status == 0) <a href='{{ url("/admin/refusereturn/{$returnDetail->return_id}") }}' class="alert-link">{{ __('shop.Refused Refund')}}</a> @endif</td>
             </tr>
 					@endforeach
 				</tbody>

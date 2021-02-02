@@ -60,28 +60,28 @@
             <div class="text-center">
               <form action="{{ url('/admin/adddiscount') }}" method="post">
                 {!! csrf_field() !!}      
-                <div class="col-sm-5 col-xs-6 tital ">優惠名稱:</div>
+                <div class="col-sm-5 col-xs-6 tital ">{{ __('shop.DiscountName') }}:</div>
                 <div class="col-sm-4 pull-right"">
                     <input id="name" name="name" type="text"  class="form-control  " value="" required=""> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
                 <hr>
-                <div class="col-sm-5 col-xs-6 tital ">優惠需求等級:</div>
+                <div class="col-sm-5 col-xs-6 tital ">{{ __('shop.Beneficiary Member') }}:</div>
                 <div class="col-sm-4 pull-right"">
                     <input id="level" name="level" type="text"  class="form-control  " value="" required=""> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
                 <hr>
-                <div class="col-sm-5 col-xs-6 tital ">優惠需求消費金額:</div>
+                <div class="col-sm-5 col-xs-6 tital ">{{ __('shop.DiscountThreshold') }}:</div>
                 <div class="col-sm-4 pull-right"">
                     <input id="threshold" name="threshold" type="text"  class="form-control  " value="" required=""> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
                 <hr>
-                <div class="col-sm-5 col-xs-6 tital ">優惠比例:(1以下為折扣 以上為禮金)</div>
+                <div class="col-sm-5 col-xs-6 tital ">{{ __('shop.DiscountPercnet') }}{{ __('shop.DiscountPercnet2') }}:</div>
                 <div class="col-sm-4 pull-right"">
                     <input id="gift" name="gift" type="text"  class="form-control  " value="" required=""> 
                 </div>
@@ -95,7 +95,7 @@
                   </form>
                 </div>
                 <div>
-                  <button class="btn btn-sm btn-default" onclick="history.back()">返回</button>
+                  <button class="btn btn-sm btn-default" onclick="history.back()">{{__('shop.Back')}}</button>
                 </div>
               </div>
           </div>

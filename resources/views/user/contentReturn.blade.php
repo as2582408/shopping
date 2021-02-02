@@ -44,9 +44,9 @@
         <a href="{{ url('mycenter') }}" class="list-group-item list-group-item-action">{{ __('shop.myprodile') }}</a>
         <a href="{{ url('profile') }}" class="list-group-item list-group-item-action">{{ __('shop.Revise personal info') }}</a>
         <a href="{{ url('password') }}" class="list-group-item list-group-item-action">{{ __('shop.editpassword') }}</a>
-        <a href="{{ url('detail') }}" class="list-group-item list-group-item-action">訂單資訊</a>
-        <a href="{{ url('return') }}" class="list-group-item list-group-item-action">我的退貨</a>
-        <a href="{{ url('report') }}" class="list-group-item list-group-item-action">客訴</a>
+        <a href="{{ url('detail') }}" class="list-group-item list-group-item-action">{{ __('shop.myorder') }}</a>
+        <a href="{{ url('return') }}" class="list-group-item list-group-item-action">{{ __('shop.myRuturn') }}</a>
+        <a href="{{ url('report') }}" class="list-group-item list-group-item-action">{{ __('shop.report') }}</a>
       </div>
     </div>
     <div class="col-md-8">
@@ -54,10 +54,10 @@
       <table class="table table-sm">
     <thead>
     <tr>
-      <th scope="col">商品名</th>
-      <th scope="col">單價</th>
-      <th scope="col">退貨數量</th>
-      <th scope="col">小計</th>
+      <th scope="col">{{ __('shop.Product Name') }}</th>
+      <th scope="col">{{ __('shop.unit') }}</th>
+      <th scope="col">{{ __('shop.RefundQuantity') }}</th>
+      <th scope="col">{{ __('shop.subtotal') }}</th>
     </tr>
     </thead>
     <tbody>
@@ -71,7 +71,21 @@
       @endforeach
     </tbody>
     </table>
-    <button class="btn btn-sm btn-default" onclick="history.back()">返回</button>
+    @if (!empty($return->return_reply))
+    <table class="table table-sm">
+      <thead>
+        <tr>
+          <th scope="col">{{ __('shop.reasonRejection') }}</th>
+        </tr>
+      </thead>
+        <tbody>
+          <tr>
+            <th scope="row">{{$return->return_reply}}</th>
+          </tr>
+        </tbody>
+      </table>
+    @endif
+    <button class="btn btn-sm btn-default" onclick="history.back()">{{__('shop.Back')}}</button>
       </div>
     </div>
   </div>

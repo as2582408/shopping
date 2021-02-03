@@ -23,8 +23,8 @@ class DetailController extends Controller
         ->join('users', 'users.id', '=', 'detail.user_id')
         ->get();
 
-        $status_arr = ['未結束', '結束', '取消'];
-        $shipment_arr = [1 => '未出貨',2 => '已出貨',3 =>'退貨'];
+        $status_arr = [__('shop.Not End'), __('shop.End'), __('shop.cancel')];
+        $shipment_arr = [1 => __('shop.Not Send'),2 => __('shop.Send'),3 =>__('shop.RefundStatus')];
 
         return view('detail.detail', [
             'details' => $details,
@@ -153,8 +153,8 @@ class DetailController extends Controller
 
         $details = Detail::where('user_id', '=', $id)->get();
 
-        $status_arr = ['未結束', '結束', '取消'];
-        $shipment_arr = [1 => '未出貨',2 => '已出貨',3 =>'退貨'];
+        $status_arr = [__('shop.Not End'), __('shop.End'), __('shop.cancel')];
+        $shipment_arr = [1 => __('shop.Not Send'),2 => __('shop.Send'),3 =>__('shop.RefundStatus')];
 
         return view('user.detail', [
             'details' => $details,
@@ -232,7 +232,7 @@ class DetailController extends Controller
         //檢查退貨數量
         foreach( $checks as $check) {
             if($request->$check == 0){
-                return  redirect()->back()->withSuccessMessage('退貨數量不能為0');;
+                return  redirect()->back()->withSuccessMessage(__('shop.quantityrequired'));;
             }       
         }
 

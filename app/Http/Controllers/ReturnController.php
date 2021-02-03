@@ -137,8 +137,8 @@ class ReturnController extends Controller
         //計算優惠是否適用 不適用扣除訂單贈送禮金
         $newDetailPrice = $detailData->detail_totail_price + $detailData->detail_shopping_point - $changeMoney;
         $discount = Discount::where('discount_id', '=', $detailData->detail_discount_id)->first();
-
-        if($newDetailPrice < $discount->discount_threshold) {
+        //優惠如是折扣不需進入
+        if($newDetailPrice < $discount->discount_threshold && $discount->discount_gift > 1) {
             User::where('id', '=', $detailData->user_id)->decrement('point', $detailData->detail_gift_money);
             Detail::where('detail_id', '=', $returnData->detail_id)->update([
                 'detail_gift_money' => '0',

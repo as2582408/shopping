@@ -35,18 +35,28 @@ class CategoryController extends Controller
 
     public function delCategory($id)
     {
-        $delcategory = Category::where('id' , '=', $id)->first();
         $products = Product::where('product_category', 'LIKE' ,'%'.$id.'%')->get();
+        $productsNum = count($products);
 
-        $products_num = count($products);
-        for($i = 0; $i < $products_num; $i++) {
+        for($i = 0; $i < $productsNum; $i++) {
+
             $product_category_arr = explode(',', $products[$i]['product_category']);
             $new_category = '';
-            for($j = 0; $j < 3; $j++){
+            $categoryNum = count($product_category_arr);
+
+            for($j = 0; $j < $categoryNum; $j++){
                 if($product_category_arr[$j] != $id)
                 {
-                    $new_category .= $product_category_arr[$j].',';
+                    if($j == $categoryNum-1) {
+                        $new_category .= $product_category_arr[$j];
+                    } else {
+                        $new_category .= $product_category_arr[$j].',';
+                    }
                 }
+            }
+            //無分類時設置為未分類
+            if ($new_category == '') {
+                $new_category = '10';
             }
             $products[$i]['product_category'] = $new_category;
         }

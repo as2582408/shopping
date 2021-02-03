@@ -52,7 +52,7 @@ class AdminController extends Controller
         return view('admin.adminCenter');
     }
 
-    //會員主頁面
+    //後台會員主頁面
     public function account()
     {
         $user = User::all();
@@ -70,14 +70,14 @@ class AdminController extends Controller
             'levels' => $levels
             ]);
     }
-    //刪除會員
+    //後台刪除會員
     public function delectAccount($id)
     {
         $checkDetail = User::join('detail', 'users.id', '=', 'detail.user_id')->where([
             ['detail_status', '=', '0'],
             ['id', '=', $id]])->count();
         if ($checkDetail){
-            return redirect()->back()->withErrors('此帳號尚有訂單')->withInput(); 
+            return redirect()->back()->withErrors(__('shop.orderIsHas'))->withInput(); 
         }
         $user = User::where('id', $id)->first();
         $user->status = 'D';
@@ -87,7 +87,7 @@ class AdminController extends Controller
         return redirect()->intended('admin/account');
     }
 
-    //修改會員資料
+    //後台修改會員資料
     public function editAccount(Request $request)
     {   
         $user = User::where('id', $request->input('id'))->first();

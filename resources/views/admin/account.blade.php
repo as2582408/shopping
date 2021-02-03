@@ -23,6 +23,11 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
+                    @if(App::getLocale() == 'zh')
+                        <li><a href="/lang/en">英文</a></li>
+                    @else
+                        <li><a href="/lang/zh">chinese</a></li>
+                    @endif
                       @if(!Auth::user())
                           <li><a href="{{ url('/admin/login') }}">{{ __('shop.signin') }}</a></li>
                       @else
@@ -35,11 +40,6 @@
     </nav>
 <hr>
     <div class="container">
-      @if (session()->has('success_message'))
-      <div class="alert alert-success">
-			{{ session()->get('success_message') }}
-      </div>
-      @endif
       <div class="row">
         <div class="col-md-6 h-100 " style="width:200px;">
           <div class="list-group">
@@ -54,13 +54,18 @@
           </div>
         </div>
         <div class= "col-md-8">
-          @if (count($errors) > 0)
+                @if (count($errors) > 0)
                 <div class="alert alert-danger">
                     @foreach ($errors->all() as $errors)
                         <p>{{ $errors }}</p>    
                     @endforeach
                 </div>
                 @endif
+                @if (session()->has('success_message'))
+                <div class="alert alert-success">
+			          {{ session()->get('success_message') }}
+                </div>
+      @endif
           <div class="row">
             <div style="margin-top:10px;">
               <form action="{{ url('/admin/accountSearch') }}" method="GET" class="search-form">

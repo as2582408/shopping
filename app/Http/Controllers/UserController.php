@@ -76,7 +76,6 @@ class UserController extends Controller
         //if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')]) && $user->status == 'Y') {
             $user->login_time = date("Y-m-d H:i:s");
             $user->save();
-            session()->put('lang', $request->language);
             return redirect()->intended('/');
         } elseif ($user->admin == 'N' && $user->status == 'N') {
             return redirect('/mycenter')->withErrors('該帳號已被停權');
@@ -161,5 +160,12 @@ class UserController extends Controller
             'pointLog' => $pointLog,
             'type' => $type
             ]);
+    }
+
+    public function chageLang($lang)
+    {   
+        session()->put('lang', $lang);
+
+        return redirect()->back();
     }
 }

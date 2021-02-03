@@ -25,11 +25,13 @@ class DiscountController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:255',
-            'level' => 'required|numeric',
-            'threshold' => 'required|numeric',
+            'level' => 'required|numeric|min:0|integer',
+            'threshold' => 'required|numeric|min:0',
             'gift' => 'required|numeric'
         ]);
-
+        if((float)$request->gift <= 0) {
+            return redirect()->back()->withErrors('優惠比例請輸入大於0的數字');
+        }
         Discount::where('discount_id', '=', $request->input('id'))->update([
             'discount_name' => $request->input('name'),
             'level' => $request->input('level'),

@@ -24,6 +24,11 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
+					@if(App::getLocale() == 'zh')
+                        <li><a href="/lang/en">英文</a></li>
+                    @else
+                        <li><a href="/lang/zh">chinese</a></li>
+                    @endif
                         <li><a href="{{ url('/admin/login') }}">{{ __('shop.signin') }}</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -49,10 +54,6 @@
                             <input id="password" type="password" class="form-control" name="password" placeholder="{{ __('shop.password') }}">
                         </div>
 							<label for="password">{{__('shop.language')}}</label>
-							<select id="language" name="language" class="form-select" aria-label="Default select example">
-							  <option value="zh" >{{ __('shop.zh') }}</option>
-							  <option value="en" >{{ __('shop.en') }}</option>
-							</select>
 						@if(isset($error))
 							<p>{{__($error)}}<p>
 						@endif

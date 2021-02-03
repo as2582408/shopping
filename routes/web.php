@@ -21,7 +21,9 @@ Route::group(['middleware' => ['lang']], function () {
         Route::get('/signup', 'UserController@getSignup');
         //註冊
         Route::post('/signup', 'UserController@postSignup');
-    
+        //切換語系
+        Route::get('/lang/{lang}', 'UserController@chageLang');
+
         Route::get('/shop', 'ShopController@index')->middleware(['member']);;
     
         Route::group(['middleware' => ['auth']], function () {
@@ -105,7 +107,9 @@ Route::group(['middleware' => ['lang']], function () {
         Route::get('/',function () {
             return view('admin.adminhome');
         });
-    
+        //切換語系
+        Route::get('/lang/{lang}', 'UserController@chageLang');
+
         Route::prefix('admin')->group(function () {
             //登出
             Route::post('/logout', 'AdminController@signOut');
@@ -113,7 +117,7 @@ Route::group(['middleware' => ['lang']], function () {
             Route::get('/login', 'AdminController@getSignin');
             //登入
             Route::post('/login', 'AdminController@postSignin');
-        
+
             Route::group(['middleware' => ['admin']], function () {
                 //後台首頁
                 Route::get('/center', 'AdminController@adminCenter');

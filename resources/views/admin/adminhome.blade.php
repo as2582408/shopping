@@ -24,6 +24,11 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
+                    @if(App::getLocale() == 'zh')
+                        <li><a href="/lang/en">英文</a></li>
+                    @else
+                        <li><a href="/lang/zh">chinese</a></li>
+                    @endif
                         <li><a href="{{ url('/admin/login') }}">{{ __('shop.signin') }}</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->

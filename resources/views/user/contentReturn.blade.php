@@ -19,10 +19,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ url('shopp') }}">商店</a>
+                <a class="navbar-brand" href="{{ url('shop') }}">商店</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
+                      @if(App::getLocale() == 'zh') 
+                        <li><a href="/lang/en">英文</a></li>
+                    @else
+                        <li><a href="/lang/zh">chinese</a></li>
+                    @endif
                     @if(!Auth::user())
                         <li><a href="{{ url('signin') }}">{{ __('shop.signin') }}</a></li>
                         <li><a href="{{ url('signup') }}">{{ __('shop.signup') }}</a></li>

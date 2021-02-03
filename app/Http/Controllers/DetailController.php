@@ -143,7 +143,7 @@ class DetailController extends Controller
                 'log_time' => date("Y-m-d H:i:s")
             ])->save();
         }
-        return redirect()->intended('/admin/detail');
+        return redirect()->intended('/detail');
     }
 
     //會員訂單頁面

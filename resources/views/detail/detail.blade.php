@@ -64,7 +64,6 @@
           <th scope="col"></th>
           <th scope="col">{{ __('shop.cancel') }}</th>
           <th scope="col">{{ __('shop.Send') }}</th>
-					<th scope="col">{{ __('shop.End') }}</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -73,7 +72,7 @@
             <th scope="row">{{ $detail->detail_id }}</th>
 						<td>{{$detail->user_id}}</td>
             <td>{{$detail->name}}</td>
-            <td>{{($detail->detail_totail_price + $detail->detail_shopping_point)}}</td>
+            <td>${{($detail->detail_totail_price + $detail->detail_shopping_point)}}</td>
 						<td>{{$status[$detail->detail_status]}}</td>
             <td>{{$shipment[$detail->detail_shipment]}}</td>
             <td>{{$detail->detail_create_time}}</td>
@@ -81,8 +80,6 @@
             <td></td>
             <td>@if($detail->detail_shipment == 1 && $detail->detail_status == 0)<a href='{{ url("/admin/deldetail/{$detail->detail_id}") }}' class="alert-link">{{ __('shop.Delete') }}</a>@endif</td>
             <td>@if($detail->detail_shipment == 1 && $detail->detail_status == 0)<a href='{{ url("/admin/shipmentdetail/{$detail->detail_id}") }}' class="alert-link">{{ __('shop.Send') }}</a>@endif</td>
-            <td>@if($detail->detail_status == 0 && $detail->detail_shipment == 2)<a href='{{ url("/admin/enddetail/{$detail->detail_id}") }}' class="alert-link">{{ __('shop.End') }}</a>@endif</td>
-
 					</tr>
           @endforeach  
 				</tbody>

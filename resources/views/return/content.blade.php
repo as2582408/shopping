@@ -63,9 +63,9 @@
       @foreach ($itmes as $itme)
       <tr>
         <th scope="row">{{$itme['name']}}</th>
-        <td>{{$itme['price']}}</td>
+        <td>${{$itme['price']}}</td>
         <td>{{$itme['amount']}}</td>
-        <td>{{$itme['price']*$itme['amount']}}</td>
+        <td>${{$itme['price']*$itme['amount']}}</td>
       </tr>
       @endforeach
     </tbody>

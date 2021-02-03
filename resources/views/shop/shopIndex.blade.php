@@ -80,7 +80,7 @@
             <td><a href='{{url("/shop/show/{$product->product_id}")}}'><img src="{{asset("storage/$product->product_img")}}" class="img-responsive" width="200" height="100"></a></td>
             <td>{{ $product->product_create_time }}</td>
 			<td><a href='{{url("/shop/show/{$product->product_id}")}}'>{{ $product->product_name }}</a></td>
-			<td>{{ $product->product_price }}$</td>
+			<td>${{ $product->product_price }}</td>
             <td><a href='{{url("/shop/show/{$product->product_id}")}}' class="alert-link">{{__('shop.Content') }}</a></td>
             <td></td>
 			<td><a href='{{url("/shop/quicklyadd/{$product->product_id}/{$product->product_price}")}}' class="alert-link">{{__('shop.FastAdd') }}</a></td>

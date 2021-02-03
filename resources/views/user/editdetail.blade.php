@@ -118,10 +118,10 @@
 					<tbody>
 						@foreach ($products as $product)
 						<tr>
-						  	<th scope="row">{{$product->product_name}}</th>
-						  	<td>{{$product->product_price}}</td>
+						  <th scope="row">{{$product->product_name}}</th>
+						  <td>${{$product->product_price}}</td>
 							<td>{{$product->product_amount}}</td>
-						 	<td>{{$product->product_amount * $product->product_price}}</td>
+						 	<td>${{$product->product_amount * $product->product_price}}</td>
 						</tr>
 						@endforeach
 					  </tbody>

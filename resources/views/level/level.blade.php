@@ -72,7 +72,7 @@
 					<tr>
 						<th scope="row">{{ $level->level_rank }}</th>
             <td>{{ $level->level_name }}</td>
-						<td>{{ $level->level_threshold }}</td>
+						<td>${{ $level->level_threshold }}</td>
 						<td>{{ $level->level_status }}</td>
             <td><a href='{{ url("/admin/editlevel/{$level->level_id}") }}' class="alert-link">{{ __('shop.Edit') }}</a></td>
             <td>&nbsp;</td>

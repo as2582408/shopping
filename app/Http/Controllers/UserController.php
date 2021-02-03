@@ -130,13 +130,17 @@ class UserController extends Controller
         $user = Auth::user();
         $this->validate($request, [
             'password' => 'required|min:6|confirmed|regex:/^.*(?=.*[a-z])(?=.*[0-9]).*$/',
+            'oldpassword' => 'required|min:6|regex:/^.*(?=.*[a-z])(?=.*[0-9]).*$/',
         ], [
             'password.min' => __('shop.passwordmin'),
             'password.confirmed' => __('shop.passowrdcomfirmed'),
             'password.regex' => __('shop.passwordregex')
         ]);
-
-        $user->password = bcrypt(($request->input('password')));
+        if(!Auth::attempt(['email' => $user->email, 'password' => $request->input('oldpassword')]))
+        {
+            return view('user.password')->withErrors('舊密碼錯誤');
+        }
+        $user->password = bcrypt($request->input('password'));
         $user->updated_at = date("Y-m-d H:i:s");
         $user->save();
 

@@ -87,7 +87,7 @@
             <th scope="row">{{ $product->product_id }}</th>
             <td><img src="{{asset("storage/$product->product_img")}}" class="img-responsive" width="200" height="100"></td>
 						<td>{{ $product->product_name }}</td>
-						<td>{{ $product->product_price }}</td>
+						<td>${{ $product->product_price }}</td>
 						<td>{{ $product->product_amount }}</td>
             <td>{{ $product->product_status }}</td>
             <td>{{ $product->product_create_time }}</td>

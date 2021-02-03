@@ -37,13 +37,13 @@ class LevelController extends Controller
     {
         if(empty($request->input('upMoney'))) { //最高層，無更上層
             $this->validate($request, [
-                'threshold' => 'required|numeric|min:'.$request->input('downMoney')
+                'threshold' => 'required|numeric|min:'.($request->input('downMoney')+1)
             ]);
         }
 
         if(empty($request->input('downMoney'))) { //最下層，無更下層
             $this->validate($request, [
-                'threshold' => 'required|numeric|max:'.$request->input('upMoney')
+                'threshold' => 'required|numeric|max:'.($request->input('upMoney')-1)
             ]);
         }
         $this->validate($request, [
@@ -108,7 +108,7 @@ class LevelController extends Controller
         $this->validate($request, [
             'name' => 'required|max:255',
             'rank' => 'required|numeric',
-            'threshold' => 'required|numeric|min:'.($request->input('upThreshold'))
+            'threshold' => 'required|numeric|min:'.($request->input('upThreshold')+1)
         ]);
 
         $addLevel = Level::create([

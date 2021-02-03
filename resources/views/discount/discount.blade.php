@@ -74,7 +74,7 @@
             <th scope="row">{{ $discount->discount_id }}</th>
 						<td>{{$discount->discount_name}}</td>
 						<td>{{$discount->level}}</td>
-						<td>{{$discount->discount_threshold}}</td>
+						<td>${{$discount->discount_threshold}}</td>
             <td>{{$discount->discount_gift}}</td>
             <td>{{$discount->discount_create_time}}</td>
             <td>{{$discount->discount_status}}</td>

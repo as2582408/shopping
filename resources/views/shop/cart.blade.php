@@ -52,6 +52,7 @@
             </td>
             <td>{{ __('shop.dicount') }}
                 <select name="discount" id="discount">
+                    <option value="0">不使用</option>
                     @foreach ($discounts as $discount)
                         <option value="{{$discount->discount_id}}">{{$discount->discount_name}}</option>
                     @endforeach

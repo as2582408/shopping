@@ -268,7 +268,34 @@ class ShopController extends Controller
             $totalPrice += ($product->product_price * $product->cart_product_amount);
         }
 
-        if($request->point == 1 && $discount->discount_gift < 1) {
+        if($request->point == 2 && $request->discount == 0)
+        {
+            $checkout = [
+                'discountName' => '無', //使用折扣
+                'endPrice' =>  $totalPrice//應付價格
+            ];
+        }
+        
+        if($request->point == 1 && $request->discount == 0)
+        {
+            if($totalPrice >= $userData->point){
+                $useGiftBefore = 0;
+                $useGift = $userData->point;
+                $endPrice = ($totalPrice - $userData->point);
+            } else {
+                $useGift = $totalPrice;
+                $useGiftBefore = ($userData->point - $totalPrice);
+                $endPrice = 0;
+            };
+
+            $checkout = [
+                'useGift' => $useGift, //使用禮金
+                'useGiftBefore' => $useGiftBefore,//使用後禮金
+                'endPrice' =>   $endPrice//應付價格
+            ];
+        }
+
+        if(isset($discount) && $request->point == 1 && $discount->discount_gift < 1) {
             $discountPrice = $totalPrice * $discount->discount_gift;
 
             if($discountPrice >= $userData->point){
@@ -292,7 +319,7 @@ class ShopController extends Controller
             $nameArr['discountGift'] = "折價比率";
         }
 
-        if($request->point == 1 && $discount->discount_gift > 1) {
+        if(isset($discount) && $request->point == 1 && $discount->discount_gift > 1) {
 
             if($totalPrice >= $userData->point){
                 $useGiftBefore = 0;
@@ -313,7 +340,7 @@ class ShopController extends Controller
             ];
         }
 
-        if($request->point == 2 && $discount->discount_gift < 1) {
+        if(isset($discount) && $request->point == 2 && $discount->discount_gift < 1) {
             $discountPrice = $totalPrice * $discount->discount_gift;
 
             $checkout = [
@@ -325,7 +352,7 @@ class ShopController extends Controller
             $nameArr['discountGift'] = "折價比率";
         }
 
-        if($request->point == 2 && $discount->discount_gift > 1) {
+        if(isset($discount) && $request->point == 2 && $discount->discount_gift > 1) {
 
             $checkout = [
                 'discountName' => $discount->discount_name, //使用折扣
@@ -370,7 +397,7 @@ class ShopController extends Controller
             Point_log::create([
                 'log_user_id' => $userData->id,
                 'log_detail' => $detailId,
-                'log_change_gold' => $giftPoint,
+                'log_change_gold' => -$giftPoint,
                 'log_new_gold' => $newPoint,
                 'log_type' => '1',
                 'log_time' => date("Y-m-d H:i:s")
@@ -381,7 +408,7 @@ class ShopController extends Controller
         foreach($products as $product)
         {
             //寫入細單如是折扣優惠 需要打折後再寫入
-            $price = ($request->discountGift < 1) ? $product->product_price * $request->discountGift : $product->product_price;
+            $price = ($request->discountGift < 1 && $request->discountGift != 0) ? $product->product_price * $request->discountGift : $product->product_price;
             
             Detail_item::create([
                 'item_detail_id' => $detailId,

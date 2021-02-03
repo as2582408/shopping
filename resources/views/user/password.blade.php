@@ -67,7 +67,7 @@
                 </div>
                 @endif 
                 <form action="{{ url('password') }}" method="post">
-                    {!! csrf_field() !!}
+                  {!! csrf_field() !!}
             <div class="text-center">
                 
                 <hr>
@@ -81,6 +81,13 @@
                 <div class="col-sm-5 col-xs-6 tital ">{{__('shop.confirmnewpassword')}}:</div>
                 <div class="col-sm-4 pull-right">
                     <input type="password" id="password" name="password_confirmation" class="form-control" required>
+                </div>
+                <div class="clearfix"></div>
+                <div class="bot-border"></div>
+                <hr>
+                <div class="col-sm-5 col-xs-6 tital ">{{__('shop.oldpassword')}}:</div>
+                <div class="col-sm-4 pull-right">
+                    <input type="password" id="oldpassword" name="oldpassword" class="form-control" required>
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>

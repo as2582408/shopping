@@ -38,6 +38,18 @@
     </nav>
 <hr>
     <div class="container">
+                @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    @foreach ($errors->all() as $errors)
+                        <p>{{ $errors }}</p>    
+                    @endforeach
+                </div>
+
+                @elseif (isset($success))
+                <div class="alert alert-success">
+                        <p>{{ $success }}</p>    
+                </div>
+                @endif 
       <div class="row">
         <div class="col-md-6 h-100" style="width:200px;">
           <div class="list-group">

@@ -149,7 +149,7 @@ class ReturnController extends Controller
             Point_log::create([
                 'log_user_id' => $detailData->user_id,
                 'log_detail' => $detailData->detail_id,
-                'log_change_gold' => $detailData->detail_gift_money,
+                'log_change_gold' => -$detailData->detail_gift_money,
                 'log_new_gold' => $log->point,
                 'log_type' => '5',
                 'log_time' => date("Y-m-d H:i:s")

@@ -86,7 +86,7 @@
 					  @endif
                   <a target="_blank" href="{{ url('/shop') }}">{{$product->product_name}}</a>
                 </td>
-                <td class=" align-middle">{{$product->product_price}}</td>
+                <td class=" align-middle">${{$product->product_price}}</td>
                 <td class=" align-middle">
 				        <select name="{{$product->item_id}}" id="refundQuantity">
 					          <option>0</option>
@@ -95,7 +95,7 @@
                     @endfor
                   </select>
                 </td>
-                <td class="text-right align-middle">{{($product->product_amount - $product->product_retrun_amount) * $product->product_price}}</td>
+                <td class="text-right align-middle">${{($product->product_amount - $product->product_retrun_amount) * $product->product_price}}</td>
               </tr>
               @endforeach
           </tbody>

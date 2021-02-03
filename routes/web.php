@@ -22,15 +22,12 @@ Route::group(['middleware' => ['lang']], function () {
         //註冊
         Route::post('/signup', 'UserController@postSignup');
     
-        Route::get('/shop', 'ShopController@index');
+        Route::get('/shop', 'ShopController@index')->middleware(['member']);;
     
         Route::group(['middleware' => ['auth']], function () {
             Route::get('/', function () {
                 return redirect('shop');
             });
-            //會員中心
-            Route::get('/mycenter', 'UserController@getCenter');
-        
         Route::group(['middleware' => ['member']], function () {
             Route::prefix('shop')->group(function () {
                 //商品頁面
@@ -58,6 +55,8 @@ Route::group(['middleware' => ['lang']], function () {
                 //結帳
                 Route::post('/checkout', 'shopController@checkout');
             });
+            //會員中心
+            Route::get('/mycenter', 'UserController@getCenter');
             //修改資料頁面
             Route::get('/profile', 'UserController@getProfile');
             //修改資料
@@ -76,6 +75,8 @@ Route::group(['middleware' => ['lang']], function () {
             Route::post('/editdetail', 'DetailController@userEditDetail');
             //訂單刪除
             Route::get('/deldetail/{id}', 'DetailController@userDelDetail');
+            //訂單完成
+            Route::get('/enddetail/{id}', 'DetailController@endDetail');
             //退貨頁面
             Route::get('/returndetail/{id}', 'DetailController@userReturnDetailPage');
             //退貨
@@ -195,8 +196,6 @@ Route::group(['middleware' => ['lang']], function () {
                 Route::post('/deldetail', 'DetailController@delDetail');
                 //訂單出貨
                 Route::get('/shipmentdetail/{id}', 'DetailController@shipmentDetail');
-                //訂單完成
-                Route::get('/enddetail/{id}', 'DetailController@endDetail');
             
                 //客訴管理
                 Route::get('/report', 'ReportController@index');

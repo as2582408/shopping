@@ -64,6 +64,7 @@
           <th scope="col"></th>
           <th scope="col">{{ __('shop.cancel') }}</th>
           <th scope="col">{{ __('shop.RefundStatus') }}</th>
+					<th scope="col">{{ __('shop.End') }}</th>
 
 				</tr>
 				</thead>
@@ -79,6 +80,7 @@
             <td></td>
             <td>@if($detail->detail_shipment == 1 && $detail->detail_status == 0)<a href='{{ url("/deldetail/{$detail->detail_id}") }}' class="alert-link">取消</a>@endif</td>
             <td>@if(($detail->detail_shipment != 1 && $detail->detail_status == 1) && (strtotime(date('Y-m-d H:i:s')) <= strtotime(date('Y-m-d H:i:s', strtotime($detail->detail_create_time."+7 day")))))<a href='{{ url("/returndetail/{$detail->detail_id}") }}' class="alert-link">退貨</a>@endif</td>
+            <td>@if($detail->detail_status == 0 && $detail->detail_shipment == 2)<a href='{{ url("/enddetail/{$detail->detail_id}") }}' class="alert-link">{{ __('shop.End') }}</a>@endif</td>
 					</tr>
           @endforeach  
 				</tbody>

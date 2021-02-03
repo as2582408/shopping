@@ -15,8 +15,8 @@ class MemberStatus
      */
     public function handle($request, Closure $next)
     {
-        if ($request->user()->status == 'N') {
-            return redirect('mycenter')->withErrors('該帳號已被停權');
+        if (isset($request->user()->status) && $request->user()->status == 'N') {
+            return redirect('report')->withErrors('該帳號已被停權');
         }
 
         return $next($request);

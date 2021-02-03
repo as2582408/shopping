@@ -83,7 +83,7 @@ class ProductsController extends Controller
         ]);
         $products->save();
         
-        return redirect()->intended('admin/products');
+        return redirect()->intended('admin/products')->withSuccessMessage('新增商品成功');
     }
 
     //刪除商品
@@ -94,7 +94,7 @@ class ProductsController extends Controller
             'product_updata_time' => date("Y-m-d H:i:s")
         ]);
 
-        return redirect()->intended('admin/products');
+        return redirect()->intended('admin/products')->withSuccessMessage('刪除商品成功');
     }
 
     public function editProductsPage($id)
@@ -185,7 +185,7 @@ class ProductsController extends Controller
             ]);
         }
 
-        return redirect()->intended('admin/products');
+        return redirect()->intended('admin/products')->withSuccessMessage('修改成功');
     }
 
     public function searchProducts(Request $request)

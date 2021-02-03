@@ -35,6 +35,11 @@
     </nav>
 <hr>
     <div class="container">
+      @if (session()->has('success_message'))
+      <div class="alert alert-success">
+			{{ session()->get('success_message') }}
+      </div>
+      @endif
       <div class="row">
         <div class="col-md-6 h-100 " style="width:200px;">
           <div class="list-group">
@@ -86,16 +91,20 @@
 						<td>{{ $product->product_amount }}</td>
             <td>{{ $product->product_status }}</td>
             <td>{{ $product->product_create_time }}</td>
-            <td>@foreach ($productCategories[$product->product_id] as $productCategory)
+            <td>
+            @foreach ($productCategories[$product->product_id] as $productCategory)
                 {{$categoryName[(int)$productCategory]}}
-            @endforeach</td>
+            @endforeach
+          	</td>
             <td><a href='{{ url("/admin/editProducts/{$product->product_id}") }}' class="alert-link">{{ __('shop.Edit') }}</a></td>
-            <td></td>
-						<td><a href='{{ url("/admin/delProducts/{$product->product_id}") }}' class="alert-link">{{ __('shop.Delete') }}</a></td>
-					</tr>
-          @endforeach  
-				</tbody>
-			  </table>
+			<td></td>
+			@if ($product->product_status != 'D')
+				<td><a href='{{ url("/admin/delProducts/{$product->product_id}") }}' class="alert-link">{{ __('shop.Delete') }}</a></td>
+			@endif
+			</tr>
+         	@endforeach  
+			</tbody>
+			</table>
           </div>
         </div>
       </div>

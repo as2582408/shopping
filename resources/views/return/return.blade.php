@@ -71,7 +71,6 @@
             <td>{{$returnDetail->name}}</td>
 						<td>{{$status[$returnDetail->return_status]}}</td>
 						<td>{{$returnDetail->return_create_time}}</td>
-
             <td><a href='{{ url("/admin/contentreturn/{$returnDetail->return_id}") }}' class="alert-link">{{ __('shop.Content')}}</a></td>
             <td>@if($returnDetail->return_status == 0) <a href='{{ url("/admin/agreereturn/{$returnDetail->return_id}") }}' class="alert-link">{{ __('shop.Agree')}}</a> @endif</td>
             <td>@if($returnDetail->return_status == 0) <a href='{{ url("/admin/refusereturn/{$returnDetail->return_id}") }}' class="alert-link">{{ __('shop.Refused Refund')}}</a> @endif</td>

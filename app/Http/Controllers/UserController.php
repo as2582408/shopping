@@ -72,15 +72,14 @@ class UserController extends Controller
         ]);
 
         $user = User::where('email',$request->input('email'))->first();
-        //if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')]) && $user->admin == 'N' && $user->status != 'D') {
-        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')]) && $user->status != 'D') {
-
+        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')]) && $user->admin == 'N' && $user->status == 'Y') {
+        //if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')]) && $user->status == 'Y') {
             $user->login_time = date("Y-m-d H:i:s");
             $user->save();
-            
             session()->put('lang', $request->language);
-
             return redirect()->intended('/');
+        } elseif ($user->admin == 'N' && $user->status == 'N') {
+            return redirect('/mycenter')->withErrors('該帳號已被停權');
         } else {
             Auth::logout();
             return view('welcome', ['error' => __('shop.accountpassworderror')]);

@@ -35,6 +35,11 @@
     </nav>
 <hr>
     <div class="container">
+      @if (session()->has('success_message'))
+      <div class="alert alert-success">
+			{{ session()->get('success_message') }}
+      </div>
+      @endif
       <div class="row">
         <div class="col-md-6 h-100 " style="width:200px;">
           <div class="list-group">
@@ -89,7 +94,9 @@
 						<td>{{ $user->status }}</td>
             <td><a href='{{ url("/admin/accountedit/{$user->id}") }}' class="alert-link">{{ __('shop.Edit') }}</a></td>
             <td></td>
-						<td><a href='{{ url("/admin/accountdel/{$user->id}") }}' class="alert-link">{{ __('shop.Delete') }}</a></td>
+            @if ($user->status != 'D')
+            <td><a href='{{ url("/admin/accountdel/{$user->id}") }}' class="alert-link">{{ __('shop.Delete') }}</a></td>
+            @endif
 					  </tr>
 					@endforeach
 				</tbody>

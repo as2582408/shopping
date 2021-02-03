@@ -77,14 +77,14 @@ class AdminController extends Controller
             ['detail_status', '=', '0'],
             ['id', '=', $id]])->count();
         if ($checkDetail){
-            return redirect()->back()->withErrors(__('shop.orderIsHas'))->withInput(); 
+            return redirect()->back()->withErrors(__('shop.orderIsHas')); 
         }
         $user = User::where('id', $id)->first();
         $user->status = 'D';
         $user->updated_at = date("Y-m-d H:i:s"); ;
         $user->save();
 
-        return redirect()->intended('admin/account');
+        return redirect()->intended('admin/account')->withSuccessMessage('刪除成功');
     }
 
     //後台修改會員資料
@@ -113,7 +113,7 @@ class AdminController extends Controller
         $user->updated_at = date("Y-m-d H:i:s");
         $user->save();
 
-        return redirect()->intended('admin/account');
+        return redirect()->intended('admin/account')->withSuccessMessage('修改成功');
     }
 
     public function searchAccount(Request $request)

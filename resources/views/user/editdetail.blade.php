@@ -138,7 +138,7 @@
                 <div class="bot-border"></div>
                 <hr>
                 <div class="btn-group pull-right">
-                  @if($detail->detail_shipment == '1' && $detail->detail_shipment == '0')
+                  @if($detail->detail_shipment == '1' && $detail->detail_status == '0')
                     <button id="submit" name="submit" class="btn btn-sm btn-default">
                       <i class="fa fa-pencil-square-o" aria-hidden="true"></i>{{__('shop.saveedit')}}
                     </button>

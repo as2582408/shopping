@@ -119,6 +119,6 @@ class ReportController extends Controller
             'reply_time' => date("Y-m-d H:i:s")
         ])->save();
 
-        return redirect()->intended('/report');
+        return redirect('/report');
     }
 }

@@ -47,7 +47,7 @@ class DetailController extends Controller
     public function editDetail(Request $request)
     {
         $this->validate($request, [
-            'address' => 'required|max:255',
+            'address' => 'required|max:255|regex:/^[A-Za-z0-9\x7f-\xffA]+$/',
             'phone' => 'required|numeric|regex:/^09\d{8}$/',
         ]);
 
@@ -67,7 +67,7 @@ class DetailController extends Controller
     public function delDetail(Request $request)
     {
         $this->validate($request, [
-            'remarks' => 'required|max:255',
+            'remarks' => 'required|max:255|regex:/^[A-Za-z0-9\x7f-\xffA]+$/',
         ]);
 
         Detail::where('detail_id', '=', $request->input('id'))->update([
@@ -179,7 +179,7 @@ class DetailController extends Controller
     public function userEditDetail(Request $request)
     {
         $this->validate($request, [
-            'address' => 'required|max:255',
+            'address' => 'required|max:255|regex:/^[A-Za-z0-9\x7f-\xffA]+$/',
             'phone' => 'required|numeric|regex:/^09\d{8}$/',
         ]);
 

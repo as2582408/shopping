@@ -23,7 +23,7 @@ class CategoryController extends Controller
     public function editCategory(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|max:255',
+            'name' => 'required|max:255|regex:/^[A-Za-z0-9\x7f-\xffA]+$/',
         ]);
 
         Category::where('id', '=', $request->input('id'))->update([
@@ -78,9 +78,8 @@ class CategoryController extends Controller
     public function addCategory(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|max:255',
+            'name' => 'required|max:255|regex:/^[A-Za-z0-9\x7f-\xffA]+$/',
         ]);
-
         $category = Category::create([
             'category_name' => $request->input('name')
         ]);

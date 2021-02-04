@@ -62,7 +62,7 @@ class ReturnController extends Controller
     public function refuseReturn(Request $request)
     {
         $this->validate($request, [
-            'remarks' => 'required|max:255',
+            'remarks' => 'required|max:255|regex:/^[A-Za-z0-9\x7f-\xffA]+$/',
         ]);
         Return_detail::where('return_id', '=', $request->input('id'))->update([
             'return_reply' => $request->input('remarks'),

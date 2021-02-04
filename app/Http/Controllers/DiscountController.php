@@ -24,7 +24,7 @@ class DiscountController extends Controller
     public function editDiscount(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|max:255',
+            'name' => 'required|max:255|regex:/^[A-Za-z0-9\x7f-\xffA]+$/',
             'level' => 'required|numeric|min:0|integer',
             'threshold' => 'required|numeric|min:0',
             'gift' => 'required|numeric'
@@ -61,7 +61,7 @@ class DiscountController extends Controller
     public function addDiscount(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|max:255',
+            'name' => 'required|max:255|regex:/^[A-Za-z0-9\x7f-\xffA]+$/',
             'level' => 'required|numeric',
             'threshold' => 'required|numeric',
             'gift' => 'required|numeric'

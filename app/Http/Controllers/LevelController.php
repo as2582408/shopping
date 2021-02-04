@@ -47,7 +47,7 @@ class LevelController extends Controller
             ]);
         }
         $this->validate($request, [
-            'name' => 'required|max:255',
+            'name' => 'required|max:255|regex:/^[A-Za-z0-9\x7f-\xffA]+$/',
             'threshold' => 'required|numeric|max:'.($request->input('upMoney')-1).'|min:'.($request->input('downMoney')+1)
         ]);
 

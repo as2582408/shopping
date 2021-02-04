@@ -47,7 +47,7 @@ class ProductsController extends Controller
 
         $this->validate($request, [
             'img' =>  'required|image',
-            'name' => 'required|max:255',
+            'name' => 'required|max:255|regex:/^[A-Za-z0-9\x7f-\xffA]+$/',
             'price' => 'required|numeric',
             'amount' => 'required|numeric',
         ]);
@@ -118,10 +118,10 @@ class ProductsController extends Controller
         if($request->hasFile('img')){
             $this->validate($request, [
                 'img' =>  'required|image',
-                'name' => 'required|max:255',
+                'name' => 'required|max:255|regex:/^[A-Za-z0-9\x7f-\xffA]+$/',
                 'price' => 'required|numeric',
                 'amount' => 'required|numeric',
-                'description' => 'required'
+                'description' => 'required|regex:/^[A-Za-z0-9\x7f-\xffA]+$/'
             ]);
             //重新放置檔案，檔名不變
             $image_name = Product::where('product_id', $request->input('id'))->select('product_img')->first();
@@ -157,7 +157,7 @@ class ProductsController extends Controller
                 'name' => 'required|max:255',
                 'price' => 'required|numeric',
                 'amount' => 'required|numeric',
-                'description' => 'required'
+                'description' => 'required|regex:/^[A-Za-z0-9\x7f-\xffA]+$/'
             ]);
             $productCategory = '10';
 

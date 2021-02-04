@@ -26,8 +26,8 @@ class DiscountController extends Controller
         $this->validate($request, [
             'name' => 'required|max:255|regex:/^[A-Za-z0-9\x7f-\xffA]+$/',
             'level' => 'required|numeric|min:0|integer',
-            'threshold' => 'required|numeric|min:0',
-            'gift' => 'required|numeric'
+            'threshold' => 'required|numeric|min:0|digits_between:0,10',
+            'gift' => 'required|numeric|digits_between:0,10'
         ]);
         if((float)$request->gift <= 0) {
             return redirect()->back()->withErrors('優惠比例請輸入大於0的數字');
@@ -62,11 +62,13 @@ class DiscountController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:255|regex:/^[A-Za-z0-9\x7f-\xffA]+$/',
-            'level' => 'required|numeric',
-            'threshold' => 'required|numeric',
-            'gift' => 'required|numeric'
+            'level' => 'required|numeric|min:0|integer',
+            'threshold' => 'required|numeric|min:0|digits_between:0,10',
+            'gift' => 'required|numeric|digits_between:0,10'
         ]);
-
+        if((float)$request->gift <= 0) {
+            return redirect()->back()->withErrors('優惠比例請輸入大於0的數字');
+        }
         Discount::create([
             'discount_name' => $request->input('name'),
             'level' => $request->input('level'),

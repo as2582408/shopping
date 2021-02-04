@@ -48,8 +48,8 @@ class ProductsController extends Controller
         $this->validate($request, [
             'img' =>  'required|image',
             'name' => 'required|max:255|regex:/^[A-Za-z0-9\x7f-\xffA]+$/',
-            'price' => 'required|numeric',
-            'amount' => 'required|numeric',
+            'price' => 'required|numeric|digits_between:0,10',
+            'amount' => 'required|numeric|digits_between:0,10',
         ]);
 
         //放置檔案
@@ -119,8 +119,8 @@ class ProductsController extends Controller
             $this->validate($request, [
                 'img' =>  'required|image',
                 'name' => 'required|max:255|regex:/^[A-Za-z0-9\x7f-\xffA]+$/',
-                'price' => 'required|numeric',
-                'amount' => 'required|numeric',
+                'price' => 'required|numeric|digits_between:0,10',
+                'amount' => 'required|numeric|digits_between:0,10',
                 'description' => 'required|regex:/^[A-Za-z0-9\x7f-\xffA]+$/'
             ]);
             //重新放置檔案，檔名不變
@@ -155,8 +155,8 @@ class ProductsController extends Controller
         }else{
             $this->validate($request, [
                 'name' => 'required|max:255',
-                'price' => 'required|numeric',
-                'amount' => 'required|numeric',
+                'price' => 'required|numeric|digits_between:0,10',
+                'amount' => 'required|numeric|digits_between:0,10',
                 'description' => 'required|regex:/^[A-Za-z0-9\x7f-\xffA]+$/'
             ]);
             $productCategory = '10';

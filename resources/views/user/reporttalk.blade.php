@@ -56,14 +56,17 @@
         </div>
         <div class= "col-md-8">
           <div class="row">
-            <a class="btn btn-primary" href="{{ url("reportreply/{$reply_id}") }}" role="button">{{ __('shop.Reply') }}</a>
-          </div>
+            <form action="{{ url('/reportreply') }}" method="post">
+              <button id="submit" name="submit" class="btn btn-primary">
+                <i ria-hidden="true"></i>{{__('shop.submit')}}
+              </button>          
+            </div>
           <div class="row">
-            <table class="table table-sm">
+          <table class="table table-sm">
 				<thead>
 				  <tr>
-          <th scope="col">{{ __('shop.message') }}</th>
-          <th scope="col">{{ __('shop.Reply Time') }}</th>
+          <th scope="col">{{__('shop.message')}}</th>
+          <th scope="col">{{__('shop.Reply Time')}}</th>
 				  </tr>
 				</thead>
 				<tbody>
@@ -72,7 +75,18 @@
             <td>{{$reply->reply}}</td>
             <td>{{$reply->reply_time}}</td>
           </tr>
-					@endforeach
+          @endforeach
+            {!! csrf_field() !!}
+            <input id="id" name="id" type="hidden"  class="form-control  " value="{{$reply_id}}" required="">
+  
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">{{__('shop.Reply')}}</label>
+              <textarea id="reply" name="reply" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <div class="clearfix"></div>
+            <div class="bot-border"></div>
+            <hr>
+            </form>
 				</tbody>
 			  </table>
           </div>

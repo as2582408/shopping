@@ -47,7 +47,7 @@ class ReportController extends Controller
         'report_reply' => 'System'
         ]);
 
-        return redirect()->intended('/admin/report');
+        return redirect()->back();
     }
 
     public function userIndex()
@@ -89,7 +89,7 @@ class ReportController extends Controller
         'report_reply' => 'Member'
         ]);
 
-        return redirect()->intended('/report');
+        return redirect()->back();
     }
 
     public function addReportPage()

@@ -76,11 +76,15 @@ class AdminController extends Controller
         $checkDetail = User::join('detail', 'users.id', '=', 'detail.user_id')->where([
             ['detail_status', '=', '0'],
             ['id', '=', $id]])->count();
+
         if ($checkDetail){
             return redirect()->back()->withErrors(__('shop.orderIsHas')); 
         }
+
         $user = User::where('id', $id)->first();
         $user->status = 'D';
+        $user->email = '(D)'.$user->email;
+        $user->name = '(D)'.$user->name;
         $user->updated_at = date("Y-m-d H:i:s"); ;
         $user->save();
 
@@ -91,20 +95,49 @@ class AdminController extends Controller
     public function editAccount(Request $request)
     {   
         $user = User::where('id', $request->input('id'))->first();
-        $this->validate($request, [
-            'name' => 'required|max:255|regex:/^[\x7f-\xffA-Za-z0-9 ()（）\s]+$/',
-            'email' => 'email|required|unique:users,email,'.$user->id,
-            'phone' => 'required|numeric|regex:/^09\d{8}$/',
-            'point' => 'required|numeric',
-            'level' => 'required|numeric'
+        if($user->status == 'D') {
+            $this->validate($request, [
+                'name' => 'required|max:255|regex:/^[\x7f-\xffA-Za-z0-9 ()（）\s]+$/',
+                'email' => 'required',
+                'phone' => 'required|numeric|regex:/^09\d{8}$/',
+                'point' => 'required|numeric',
+                'level' => 'required|numeric'
+    
+            ], [
+                'name.regex' => __('shop.nameregex'),
+                'email.email' => __('shop.emailvalidation'),
+            ]);
+        } else {
+            $this->validate($request, [
+                'name' => 'required|max:255|regex:/^[\x7f-\xffA-Za-z0-9 ()（）\s]+$/',
+                'email' => 'email|required|unique:users,email,'.$user->id,
+                'phone' => 'required|numeric|regex:/^09\d{8}$/',
+                'point' => 'required|numeric',
+                'level' => 'required|numeric'
+    
+            ], [
+                'name.regex' => __('shop.nameregex'),
+                'email.email' => __('shop.emailvalidation'),
+            ]);
+        }
 
-        ], [
-            'name.regex' => __('shop.nameregex'),
-            'email.email' => __('shop.emailvalidation'),
-        ]);
+        $newName = $request->input('name');
+        $newemail = $request->input('email');
 
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
+        if($request->input('status') == 'D' && $user->status != 'D') {
+            $newName = '(D)'.$request->input('name');
+            $newemail = '(D)'.$request->input('email');
+        } elseif($request->input('status') != 'D' && $user->status == 'D') {
+            $newName = str_replace('(D)', '', $request->input('name'));
+            $newemail = str_replace('(D)', '', $request->input('email'));
+
+            $userCheck = User::where('email', $newemail)->first();
+            if(isset($userCheck)) {
+                return redirect()->intended('admin/account')->withSuccessMessage('復原失敗 已有重複信箱');
+            }
+        }
+        $user->name = $newName;
+        $user->email = $newemail;
         $user->phone = $request->input('phone');
         $user->address = $request->input('address');
         $user->point = $request->input('point');

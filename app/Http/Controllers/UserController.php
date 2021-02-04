@@ -20,20 +20,26 @@ class UserController extends Controller
     public function postSignup(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|max:255|unique:users,name|regex:/^[\x7f-\xffA-Za-z0-9 ()（）\s]+$/',
-            'email' => 'email|required|unique:users,email',
+            'name' => 'required|max:255|regex:/^[\x7f-\xffA-Za-z0-9 ()（）\s]+$/',
+            'email' => 'email|required',
             'password' => 'required|min:6|confirmed|regex:/^.*(?=.*[a-z])(?=.*[0-9]).*$/',
             'phone' => 'required|digits_between:10,12|numeric'
         ], [
             'name.regex' => __('shop.nameregex'),
-            'name.unique' => __('shop.nameunique'),
             'email.email' => __('shop.emailvalidation'),
-            'email.unique' => __('shop.emailunique'),
             'password.min' => __('shop.passwordmin'),
             'password.confirmed' => __('shop.passowrdcomfirmed'),
             'password.regex' => __('shop.passwordregex')
         ]);
 
+        $userCheck = User::where([
+            ['email', '=', $request->input('email')],
+            ['status', '!=', 'D']
+            ])->first();
+
+        if (isset($userCheck)) {
+            return redirect()->back()->withErrors(__('shop.emailunique'));
+        }
 
         $user = new User([
             'name' => $request->input('name'),

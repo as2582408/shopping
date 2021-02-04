@@ -68,28 +68,28 @@
                 <input id="id" name="id" type="hidden"  class="form-control  " value=" {{$users_data->id}} " required="">
                 <div class="col-sm-5 col-xs-6 tital ">{{__('shop.name')}}:</div>
                 <div class="col-sm-4 col-xs-3  pull-right" >
-                     <input id="name" name="name" type="text"  class="form-control  " value="{{$users_data->name}}" required="">
+                     <input id="name" name="name" type="text"  class="form-control  " value="{{$users_data->name}}" required="" @if($users_data->status == 'D'){{'readonly="readonly"'}}@endif>
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
                 <hr>
                 <div class="col-sm-5 col-xs-6 tital ">{{__('shop.email')}}:</div>
                 <div class="col-sm-4 pull-right"">
-                    <input id="email" name="email" type="text"  class="form-control  " value="{{$users_data->email}}" required="">    
+                    <input id="email" name="email" type="text"  class="form-control  " value="{{$users_data->email}}" required="" @if($users_data->status == 'D'){{'readonly="readonly"'}}@endif>    
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
                 <hr>
                 <div class="col-sm-5 col-xs-6 tital ">{{__('shop.phone')}}:</div>
                 <div class="col-sm-4 pull-right"">
-                    <input id="phone" name="phone" type="text"  class="form-control  " value="{{$users_data->phone}}" required="">    
+                    <input id="phone" name="phone" type="text"  class="form-control  " value="{{$users_data->phone}}" required="" @if($users_data->status == 'D'){{'readonly="readonly"'}}@endif>    
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
                 <hr>
                 <div class="col-sm-5 col-xs-6 tital ">{{__('shop.address')}}:</div>
                 <div class="col-sm-4 pull-right"">
-                    <input id="address" name="address" type="text"  class="form-control  " value="{{$users_data->address}}" required=""> 
+                    <input id="address" name="address" type="text"  class="form-control  " value="{{$users_data->address}}" required="" @if($users_data->status == 'D'){{'readonly="readonly"'}}@endif> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
@@ -107,7 +107,7 @@
                 <hr>
                 <div class="col-sm-5 col-xs-6 tital ">{{ __('shop.ShoppingPoint') }}:</div>
                 <div class="col-sm-4 pull-right"">
-                    <input id="point" name="point" type="text"  class="form-control  " value="{{$users_data->point}}" required=""> 
+                    <input id="point" name="point" type="text"  class="form-control  " value="{{$users_data->point}}" required="" @if($users_data->status == 'D'){{'readonly="readonly"'}}@endif> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>

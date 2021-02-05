@@ -83,8 +83,8 @@ class UserController extends Controller
             $user->login_time = date("Y-m-d H:i:s");
             $user->save();
             return redirect()->intended('/');
-        } elseif ($user->admin == 'N' && $user->status == 'N') {
-            return redirect('/mycenter')->withErrors('該帳號已被停權');
+        } elseif (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')]) && $user->admin == 'N' && $user->status == 'N') {
+            return redirect('/mycenter')->withErrors(__('shop.suspended'));
         } else {
             Auth::logout();
             return view('welcome', ['error' => __('shop.accountpassworderror')]);
@@ -143,7 +143,7 @@ class UserController extends Controller
         ]);
         if(!Auth::attempt(['email' => $user->email, 'password' => $request->input('oldpassword')]))
         {
-            return view('user.password')->withErrors('舊密碼錯誤');
+            return view('user.password')->withErrors(__('shop.oldpassworderror'));
         }
         $user->password = bcrypt($request->input('password'));
         $user->updated_at = date("Y-m-d H:i:s");
@@ -156,11 +156,11 @@ class UserController extends Controller
     {
         $pointLog = Point_log::where('log_user_id', '=', Auth::id())->orderBy('log_time', 'DESC')->get();
         $type = [
-            '1' => '消費',
-            '2' => '訂單結束取得',
-            '3' => '訂單取消返回',
-            '4' => '退貨返回',
-            '5' => '退貨扣除禮金'
+            '1' => __('shop.shopping'),
+            '2' => __('shop.order End'),
+            '3' => __('shop.order cancel'),
+            '4' => __('shop.return order'),
+            '5' => __('shop.return gift'),
         ];
         return view('user.point', [
             'pointLog' => $pointLog,

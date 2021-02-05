@@ -15,6 +15,7 @@ class CreateReturnDetailTable extends Migration
     {
         Schema::create('return_detail', function (Blueprint $table) {
             //
+            $table->increments('return_id');
             $table->integer('detail_id');
             $table->integer('user_id');
             $table->string('return_itme_id');

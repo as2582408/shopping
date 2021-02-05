@@ -138,7 +138,7 @@ class ReturnController extends Controller
         $newDetailPrice = $detailData->detail_totail_price + $detailData->detail_shopping_point - $changeMoney;
         $discount = Discount::where('discount_id', '=', $detailData->detail_discount_id)->first();
         //優惠如是折扣不需進入
-        if($newDetailPrice < $discount->discount_threshold && $discount->discount_gift > 1) {
+        if(isset($discount) && $newDetailPrice < $discount->discount_threshold && $discount->discount_gift > 1) {
             User::where('id', '=', $detailData->user_id)->decrement('point', $detailData->detail_gift_money);
             Detail::where('detail_id', '=', $returnData->detail_id)->update([
                 'detail_gift_money' => '0',
@@ -160,7 +160,7 @@ class ReturnController extends Controller
         $newAccumulation = User::where('id', '=', $detailData->user_id)->first();
         $newLevel = Level::select('level_rank')->where('level_threshold', '<=', $newAccumulation->accumulation_point)->orderBy('level_threshold', 'desc')->first();
         if(!isset($newLevel->level_rank)){
-            $level_rank = 1;
+            $level_rank = 0;
         } else {
             $level_rank = $newLevel->level_rank;
         }

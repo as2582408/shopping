@@ -21,7 +21,7 @@ class CreateDetailTable extends Migration
             $table->integer('detail_totail_price');
             $table->string('detail_description');
             $table->enum('detail_status', ['0','1','2']);
-            $table->enum('detail_shipment', ['1','2']);
+            $table->enum('detail_shipment', ['1','2','3']);
             $table->timestamp('detail_updata_time')->nullable();
             $table->timestamp('detail_create_time')->nullable();
             $table->string('user_phone');

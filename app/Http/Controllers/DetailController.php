@@ -112,11 +112,12 @@ class DetailController extends Controller
     }
 
     public function endDetail($id)
-    {
+    {        
         Detail::where('detail_id', '=', $id)->update([
             'detail_status' => '1',
             'detail_updata_time' => date("Y-m-d H:i:s")
             ]);
+
         $userData = Detail::select('user_id', 'detail_totail_price', 'detail_shopping_point', 'detail_gift_money')->where('detail_id', '=', $id)->first();
         $total = ($userData->detail_shopping_point + $userData->detail_totail_price);
 
@@ -128,9 +129,10 @@ class DetailController extends Controller
         User::where('id', '=', $userData->user_id)->increment('accumulation_point', $total);
 
         //刷新會員等級
-        $newAccumulation = User::select('point','accumulation_point')->where('id', '=', $userData->user_id)->first();
+        $newAccumulation = User::select('level','point','accumulation_point')->where('id', '=', $userData->user_id)->first();
         $newLevel = Level::select('level_rank')->where('level_threshold', '<=', $newAccumulation->accumulation_point)->orderBy('level_threshold', 'desc')->first();
-        User::where('id', '=', $userData->user_id)->update(['level' => $newLevel->level_rank]);
+        $levelRank = (isset($newLevel)) ? $newLevel->level_rank : $newAccumulation->level;
+        User::where('id', '=', $userData->user_id)->update(['level' => $levelRank]);
 
         if($userData->detail_gift_money > 0) {
 
@@ -262,7 +264,7 @@ class DetailController extends Controller
             Detail_item::where('item_id', '=', $check)->increment('product_retrun_amount', $request->$check);
         }
 
-        return redirect()->intended('/detail');
+        return redirect()->intended('/return');
     }
     
 }

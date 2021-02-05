@@ -15,6 +15,7 @@ class CreatDetailItemTable extends Migration
     {
         Schema::create('detail_item', function (Blueprint $table) {
             //
+            $table->increments('item_id');
             $table->integer('item_detail_id');
             $table->string('product_name');
             $table->integer('product_price');

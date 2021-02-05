@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>商店</title>
+    <title>{{ __('shop.shop') }}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
@@ -20,7 +20,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ url('shop') }}">商店</a>
+                <a class="navbar-brand" href="{{ url('shop') }}">{{ __('shop.shop') }}</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">

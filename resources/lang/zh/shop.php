@@ -2,7 +2,7 @@
 
 return [
 
-    'home' => '首頁',
+    'shop' => '商店',
     'language' => ' 語 言' ,
     'en' => '英文',
     'zh' => '中文',
@@ -90,6 +90,7 @@ return [
     'newpassowrd' => '新密碼',
     'confirmnewpassword' => '確認新密碼',
     'oldpassword' => '舊密碼',
+    'oldpassworderror' => '舊密碼錯誤',
     'confirm' => '確認',
     'level' => '等級',
     'time' => '時間',
@@ -115,7 +116,7 @@ return [
     'passwordmin' => '密碼長度至少6碼',
     'passowrdcomfirmed' => '確認密碼不相同',
     'passwordregex' => '密碼必須包含字母與整數',
-    'suspended' => '此帳號已被停權，請聯絡我們',
+    'suspended' => '此帳號已被停權',
     'accountpassworderror' => '帳號/密碼錯誤，請重新輸入！',
     'reset' => '修改密碼成功!',
     'productrequired' => '必須勾選退貨商品',
@@ -227,5 +228,10 @@ return [
     'ChagePoint' => '變動購物金',
     'BeforePoint' => '變動後額度',
     'Up Time' => '更新時間',
+    'shopping' => '消費',
+    'order End' => '訂單結束取得',
+    'order cancel' => '訂單取消返回',
+    'return order' => '退貨返回',
+    'return gift' => '退貨扣除禮金'
 
 ];

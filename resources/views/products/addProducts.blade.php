@@ -102,6 +102,7 @@
                 <hr>
                 <div class="col-sm-5 col-xs-6 tital ">{{__('shop.Category')}}:</div>
                 <div class="col-sm-4 pull-right">
+					<input type="checkbox" name="all" id="all">全選
                   @foreach ($categories as $category)
                     <input type="checkbox" name="category[]" value="{{$category->id}}" >{{$category->category_name}}
                   @endforeach
@@ -124,5 +125,17 @@
           </div>
         </div>
       </div>
-    </div>
+	</div>
+	
+    <script>
+    $("#all").click(function(){
+      	if ($(this).is(":checked")) {
+			  
+    		$("input[name='category[]']").prop("checked",true);
+    	} else {
+
+    		$("input[name='category[]']").prop("checked",false);
+    	}
+    	});
+	</script>
 

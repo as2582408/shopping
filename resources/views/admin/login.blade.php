@@ -53,7 +53,6 @@
 							<label for="password">{{__('shop.password')}}</label>
                             <input id="password" type="password" class="form-control" name="password" placeholder="{{ __('shop.password') }}">
                         </div>
-							<label for="password">{{__('shop.language')}}</label>
 						@if(isset($error))
 							<p>{{__($error)}}<p>
 						@endif

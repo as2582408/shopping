@@ -115,7 +115,8 @@ class DetailController extends Controller
     {        
         Detail::where('detail_id', '=', $id)->update([
             'detail_status' => '1',
-            'detail_updata_time' => date("Y-m-d H:i:s")
+            'detail_updata_time' => date("Y-m-d H:i:s"),
+            'detail_end_time' => date("Y-m-d H:i:s")
             ]);
 
         $userData = Detail::select('user_id', 'detail_totail_price', 'detail_shopping_point', 'detail_gift_money')->where('detail_id', '=', $id)->first();

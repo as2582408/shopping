@@ -56,15 +56,23 @@ class AdminController extends Controller
     public function account()
     {
         $user = User::all();
+        $status = [
+            'Y' => __('shop.Enable'),
+            'N' => __('shop.Disable'),
+            'D' => __('shop.Delete')
+        ];
 
-        return view('admin.account', ['users_data' => $user]);
+        return view('admin.account', [
+            'users_data' => $user,
+            'status' => $status
+            ]);
     }
     //編輯會員資料頁面
     public function editAccountPage($id)
     {
         $user = User::where('id', $id)->first();
         $levels = Level::where('level_status', '=', 'Y')->orderBy('level_rank', 'asc')->get();
-        
+
         return view('admin.editaccount', [
             'users_data' => $user,
             'levels' => $levels

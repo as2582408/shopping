@@ -174,6 +174,7 @@ return [
     'Order Management' => 'Order Management',
     'Buyer' => 'Buyer',
     'Order Time' => 'Order Time',
+    'End Time' => 'End Time',
     'Send' => 'Send',
     'Not Send' => 'Not Send',
     'End' => 'End',
@@ -216,6 +217,10 @@ return [
     'order End' => 'order End',
     'order cancel' => 'order cancel',
     'return order' => 'return order',
-    'return gift' => 'return gift'
+    'return gift' => 'return gift',
+    'Enable' => 'Enable',
+    'Disable' => 'Disable',
+    'Put' => 'Put',
+    'Stop Put' => 'Stop Put'
 
 ];

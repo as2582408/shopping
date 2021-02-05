@@ -94,7 +94,7 @@
 						<td>{{ $product->product_name }}</td>
 						<td>${{ $product->product_price }}</td>
 						<td>{{ $product->product_amount }}</td>
-            <td>{{ $product->product_status }}</td>
+            <td>{{ $status[$product->product_status] }}</td>
             <td>{{ $product->product_create_time }}</td>
             <td>
             @foreach ($productCategories[$product->product_id] as $productCategory)

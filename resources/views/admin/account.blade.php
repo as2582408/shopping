@@ -96,7 +96,7 @@
 						<td>{{ $user->email }}</td>
 						<td>${{ $user->point }}</td>
 						<td>{{ $user->level }}</td>
-						<td>{{ $user->status }}</td>
+						<td>{{ $status[$user->status] }}</td>
             <td><a href='{{ url("/admin/accountedit/{$user->id}") }}' class="alert-link">{{ __('shop.Edit') }}</a></td>
             <td></td>
             @if ($user->status != 'D')

@@ -55,7 +55,7 @@
         </div>
         <div class= "col-md-8">
           <div class="row">
-            <a class="btn btn-primary" href="{{ url('/admin/addlevel') }}" role="button">新增等級</a>
+            <a class="btn btn-primary" href="{{ url('/admin/addlevel') }}" role="button">{{__('shop.Add Level')}}</a>
           </div>
           <div class="row">
           <table class="table table-sm">
@@ -78,7 +78,7 @@
 						<th scope="row">{{ $level->level_rank }}</th>
             <td>{{ $level->level_name }}</td>
 						<td>${{ $level->level_threshold }}</td>
-						<td>{{ $level->level_status }}</td>
+						<td>{{ $status[$level->level_status] }}</td>
             <td><a href='{{ url("/admin/editlevel/{$level->level_id}") }}' class="alert-link">{{ __('shop.Edit') }}</a></td>
             <td>&nbsp;</td>
             <td>@if($level->level_rank == $maxLevel) <a href='{{ url("/admin/dellevel/{$level->level_id}") }}' class="alert-link">{{ __('shop.Delete') }}</a> @endif</td>

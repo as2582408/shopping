@@ -64,7 +64,8 @@
 					<th scope="col">{{ __('shop.orderTotal') }}</th>
 					<th scope="col">{{ __('shop.orderstatus') }}</th>
 					<th scope="col">{{ __('shop.orderSend') }}</th>
-					<th scope="col">{{ __('shop.Order Time') }}</th>
+          <th scope="col">{{ __('shop.Order Time') }}</th>
+          <th scope="col">{{ __('shop.End Time') }}</th>
           <th scope="col">{{ __('shop.orderDetail') }}</th>
           <th scope="col"></th>
           <th scope="col">{{ __('shop.cancel') }}</th>
@@ -81,6 +82,7 @@
 						<td>{{$status[$detail->detail_status]}}</td>
             <td>{{$shipment[$detail->detail_shipment]}}</td>
             <td>{{$detail->detail_create_time}}</td>
+            <td>{{$detail->detail_end_time}}</td>
             <td><a href='{{ url("/admin/editdetail/{$detail->detail_id}") }}' class="alert-link">{{ __('shop.Edit') }}</a></td>
             <td></td>
             <td>@if($detail->detail_shipment == 1 && $detail->detail_status == 0)<a href='{{ url("/admin/deldetail/{$detail->detail_id}") }}' class="alert-link">{{ __('shop.Delete') }}</a>@endif</td>

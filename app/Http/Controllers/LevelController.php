@@ -13,10 +13,16 @@ class LevelController extends Controller
     {
         $levels = Level::orderBy('level_rank', 'desc')->get();
         $maxLevel = Level::where('level_status', '=', 'Y')->max('level_rank');
+        $status = [
+            'Y' => __('shop.Enable'),
+            'N' => __('shop.Disable'),
+            'D' => __('shop.Delete')
+        ];
 
         return view('level.level', [
             'levels' => $levels,
-            'maxLevel' => $maxLevel
+            'maxLevel' => $maxLevel,
+            'status' => $status
             ]);
     }
 

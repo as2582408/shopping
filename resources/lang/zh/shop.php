@@ -182,12 +182,13 @@ return [
     'Beneficiary Member' => '所需會員等級',
     'DiscountName' => '優惠名稱',
     'DiscountPercnet' => '優惠比例',
-    'DiscountPercnet2' => '(1以下為折扣 以上為禮金)',
+    'DiscountPercnet2' => '(請輸入0以上的數字，1以下的數字為折扣比率：以上為禮金數字)',
     'DiscountThreshold' => '消費金額門檻',
     'DiscountTime' => '建立時間',
     'Order Management' => '訂單管理',
     'Buyer' => '買家',
     'Order Time' => '訂購時間',
+    'End Time' => '結束時間',
     'Send' => '出貨',
     'Not Send' => '未出貨',
     'End' => '完成訂單',
@@ -232,6 +233,10 @@ return [
     'order End' => '訂單結束取得',
     'order cancel' => '訂單取消返回',
     'return order' => '退貨返回',
-    'return gift' => '退貨扣除禮金'
+    'return gift' => '退貨扣除禮金',
+    'Enable' => '啟用',
+    'Disable' => '停用',
+    'Put' => '上架',
+    'Stop Put' => '下架'
 
 ];

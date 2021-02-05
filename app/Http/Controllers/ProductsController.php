@@ -16,6 +16,11 @@ class ProductsController extends Controller
         $categories = Category::all();
         $products = Product::all();
         $category = [];
+        $status = [
+            'Y' => __('shop.Put'),
+            'N' => __('shop.Stop Put'),
+            'D' => __('shop.Delete')
+        ];
 
         $categories = json_decode($categories, true);
         $categoryName = [];
@@ -31,7 +36,8 @@ class ProductsController extends Controller
         return view('products.products', [
             'products' => $products,
             'categoryName' => $categoryName,
-            'productCategories' => $category
+            'productCategories' => $category,
+            'status' => $status
             ]);
     }
     //新增商品頁面

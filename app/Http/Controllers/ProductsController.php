@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Category;
+use App\Product_category;
 use Storage;
 use Auth;
 use File;
@@ -13,12 +14,23 @@ class ProductsController extends Controller
 {
     public function products()
     {
+        $product = Product::find(1);
+        $product->category()->detach();
+        //$products = $product->category()->attach('1',['category_id' => '10','product_id' => '10']);
+        //$products->where('product_id', '2')->get();
+
+        echo($product->category()->get());
+        die();
+        //$cate = Product_category::join('category', 'product_category.category_id', '=', 'category.id')->get();
         $categories = Category::all();
         $products = Product::all();
         $category = [];
 
         $categories = json_decode($categories, true);
+        $cate = json_decode($cate, true);
+
         $categoryName = [];
+        $categoryArr = [];
         foreach ($categories as $categorys) {
                 $categoryName[$categorys['id']] = $categorys['category_name'];
         }
@@ -27,6 +39,25 @@ class ProductsController extends Controller
             $categoryArr = explode(",", $product->product_category);
             $category += [ $product->product_id => $categoryArr ];
         }
+        //$nu = count($cate);
+        //for($i = 1; $i < $nu ;$i++)
+        //{
+        //    if($i == 1) {
+        //        $categoryArr[] = $cate[0]['category_id'];
+        //    }
+//
+        //    if($cate[$i]['product_id'] == $cate[$i-1]['product_id']){
+        //        $categoryArr[] = $cate[$i]['category_id'];
+        //    } else {
+        //        $category += [ $cate[$i-1]['product_id'] => $categoryArr];
+        //        $categoryArr = [];
+        //        $categoryArr[] = $cate[$i]['category_id'];
+        //    }
+//
+        //    if (($i+1) == $nu) {
+        //        $category += [ $cate[$i-1]['product_id'] => $categoryArr];
+        //    } 
+        //}
         
         return view('products.products', [
             'products' => $products,
@@ -58,20 +89,7 @@ class ProductsController extends Controller
         $request->file('img')->move($imgPath, $productsImg);
         $productCategory = '10';
 
-        if($request->has('category')) {
-            $productCategory = '';
-            $categoryNum = count($request->category);
-
-            for( $i = 0; $i < $categoryNum; $i++) {
-                if($i == $categoryNum - 1) {
-                    $productCategory .= $request->category[$i];
-                } else {
-                    $productCategory .= $request->category[$i].',';
-                }
-            }
-        }
-
-        $products = Product::create([
+        $products = Product::insertGetId([
             'product_name' => $request->input('name'),
             'product_description' => $request->input('description'),
             'product_price' => $request->input('price'),
@@ -81,7 +99,17 @@ class ProductsController extends Controller
             'product_create_time' => date("Y-m-d H:i:s"),
             'product_updata_time' => date("Y-m-d H:i:s")
         ]);
-        $products->save();
+
+        if($request->has('category')) {
+            $categoryNum = count($request->category);
+            for( $i = 0; $i < $categoryNum; $i++) {
+                $productCategory = Product_category::create([
+                    'product_id' => $products,
+                    'category_id' => $request->category[$i]
+                ]);
+            }
+            $productCategory->save();
+        }
         
         return redirect()->intended('admin/products')->withSuccessMessage('新增商品成功');
     }

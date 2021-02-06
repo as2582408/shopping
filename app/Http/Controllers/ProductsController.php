@@ -89,7 +89,7 @@ class ProductsController extends Controller
         ]);
         $products->save();
         
-        return redirect()->intended('admin/products')->withSuccessMessage('新增商品成功');
+        return redirect()->intended('admin/products')->withSuccessMessage(__('shop.add Products Succ'));
     }
 
     //刪除商品
@@ -100,7 +100,7 @@ class ProductsController extends Controller
             'product_updata_time' => date("Y-m-d H:i:s")
         ]);
 
-        return redirect()->intended('admin/products')->withSuccessMessage('刪除商品成功');
+        return redirect()->intended('admin/products')->withSuccessMessage(__('shop.delete Products Success'));
     }
 
     public function editProductsPage($id)

@@ -19,9 +19,9 @@ class ReturnController extends Controller
     {
         $returnDetails = Return_detail::join('users', 'users.id', '=', 'return_detail.user_id')->get();
         $status = [
-            0 => '未處理',
-            1 => '同意',
-            2 => '拒絕'
+            0 => __('shop.Unprocessed'),
+            1 => __('shop.Agree'),
+            2 => __('shop.Disagree')
         ];
         return view('return.return', [
             'returnDetails' => $returnDetails,
@@ -174,9 +174,9 @@ class ReturnController extends Controller
         $id = Auth::id();
         $returnDetails = Return_detail::where('user_id', '=', $id)->get();
         $status = [
-            0 => '未處理',
-            1 => '同意',
-            2 => '拒絕'
+            0 => __('shop.Unprocessed'),
+            1 => __('shop.Agree'),
+            2 => __('shop.Disagree')
         ];
 
         return view('user.return', [

@@ -141,7 +141,7 @@ class AdminController extends Controller
 
             $userCheck = User::where('email', $newemail)->first();
             if(isset($userCheck)) {
-                return redirect()->intended('admin/account')->withSuccessMessage('復原失敗 已有重複信箱');
+                return redirect()->intended('admin/account')->withErrors(__('shop.emailunique'));
             }
         }
         $user->name = $newName;
@@ -154,7 +154,7 @@ class AdminController extends Controller
         $user->updated_at = date("Y-m-d H:i:s");
         $user->save();
 
-        return redirect()->intended('admin/account')->withSuccessMessage('修改成功');
+        return redirect()->intended('admin/account')->withSuccessMessage(__('shop.edit Success'));
     }
 
     public function searchAccount(Request $request)

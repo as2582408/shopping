@@ -237,6 +237,19 @@ return [
     'Enable' => '啟用',
     'Disable' => '停用',
     'Put' => '上架',
-    'Stop Put' => '下架'
+    'Stop Put' => '下架',
+    'edit Success' => '修改成功',
+    'discount error1' => '優惠比例請輸入大於0的數字',
+    'add Products Success' => '新增商品成功',
+    'delete Products Success' => '刪除商品成功'
+    'product Over' => '數量超出庫存'
+    'discountName' => '使用折扣',
+    'discountGift' => '折扣比率',
+    'discountPrice' => '折扣後價格',
+    'useGift' => '使用禮金',
+    'useGiftBefore' => '使用後禮金',
+    'endPrice' =>   '應付價格',
+    'discountGift' => '可獲得禮金'
+    
 
 ];

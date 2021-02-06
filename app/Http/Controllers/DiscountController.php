@@ -30,7 +30,7 @@ class DiscountController extends Controller
             'gift' => 'required|numeric|digits_between:0,10'
         ]);
         if((float)$request->gift <= 0) {
-            return redirect()->back()->withErrors('優惠比例請輸入大於0的數字');
+            return redirect()->back()->withErrors(__('shop.discount error1'));
         }
         Discount::where('discount_id', '=', $request->input('id'))->update([
             'discount_name' => $request->input('name'),
@@ -67,7 +67,7 @@ class DiscountController extends Controller
             'gift' => 'required|numeric|digits_between:0,10'
         ]);
         if((float)$request->gift <= 0) {
-            return redirect()->back()->withErrors('優惠比例請輸入大於0的數字');
+            return redirect()->back()->withErrors(__('shop.discount error1'));
         }
         Discount::create([
             'discount_name' => $request->input('name'),

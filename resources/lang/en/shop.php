@@ -221,6 +221,18 @@ return [
     'Enable' => 'Enable',
     'Disable' => 'Disable',
     'Put' => 'Put',
-    'Stop Put' => 'Stop Put'
+    'Stop Put' => 'Stop Put',
+    'edit Success' => 'edit Success',
+    'discount error1' => '優惠比例請輸入大於0的數字',
+    'add Products Success' => 'add Products Success',
+    'delete Products Success' => 'delete Products Success'
+    'product Over' => 'product Over'
+    'discountName' => 'discount',
+    'discountGift' => 'discount Gift',
+    'discountPrice' => 'discount Price',
+    'useGift' => 'use Gift',
+    'useGiftBefore' => 'use Gift Before',
+    'endPrice' =>   'Price',
+    'discountGift' => 'discountGift'
 
 ];

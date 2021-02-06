@@ -45,7 +45,7 @@ class ShopController extends Controller
 
         if($request->quantity > $product->product_amount)
         {
-            return redirect()->back()->withSuccessMessage('數量超出庫存');
+            return redirect()->back()->withSuccessMessage(__('shop.product Over'));
         }
 
         $cart = Cart::where([
@@ -255,13 +255,13 @@ class ShopController extends Controller
         $products = Cart::join('products', 'cart.product_id', '=', 'products.product_id')->where('user_id', '=', $userData->id)->get();
         $totalPrice = 0;
         $nameArr = [
-            'discountName' => '使用折扣',
-            'discountGift' => '折扣比率',
-            'discountPrice' => '折扣後價格',
-            'useGift' => '使用禮金',
-            'useGiftBefore' => '使用後禮金',
-            'endPrice' =>   '應付價格',
-            'discountGift' => '可獲得禮金',
+            'discountName' => __('shop.discountName'),
+            'discountGift' => __('shop.discountGift'),
+            'discountPrice' => __('shop.discountPrice'),
+            'useGift' => __('shop.useGift'),
+            'useGiftBefore' => __('shop.useGiftBefore'),
+            'endPrice' =>   __('shop.endPrice'),
+            'discountGift' => __('shop.discountGift'),
         ];
         foreach($products as $product)
         {

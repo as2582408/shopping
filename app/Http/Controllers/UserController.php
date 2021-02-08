@@ -134,6 +134,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $this->validate($request, [
+            'name' => 'required|max:255|regex:/^[\x7f-\xffA-Za-z0-9 ()（）\s]+$/',
             'password' => 'required|min:6|confirmed|regex:/^.*(?=.*[a-z])(?=.*[0-9]).*$/',
             'oldpassword' => 'required|min:6|regex:/^.*(?=.*[a-z])(?=.*[0-9]).*$/',
         ], [
@@ -154,7 +155,7 @@ class UserController extends Controller
 
     public function point()
     {
-        $pointLog = Point_log::where('log_user_id', '=', Auth::id())->orderBy('log_time', 'DESC')->get();
+        $pointLog = Point_log::where('log_user_id', '=', Auth::id())->orderBy('log_id', 'DESC')->get();
         $type = [
             '1' => __('shop.shopping'),
             '2' => __('shop.order End'),

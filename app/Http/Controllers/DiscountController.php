@@ -37,6 +37,7 @@ class DiscountController extends Controller
             'level' => $request->input('level'),
             'discount_threshold' => $request->input('threshold'),
             'discount_gift' => $request->input('gift'),
+            'discount_status' => $request->input('status'),
             'discount_updata_time' => date("Y-m-d H:i:s")
         ]);
         

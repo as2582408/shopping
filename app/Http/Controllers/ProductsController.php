@@ -55,8 +55,9 @@ class ProductsController extends Controller
         $this->validate($request, [
             'img' =>  'required|image',
             'name' => 'required|max:255|regex:/^[A-Za-z0-9\x7f-\xffA]+$/',
-            'price' => 'required|numeric|digits_between:0,10',
-            'amount' => 'required|numeric|digits_between:0,10',
+            'price' => 'required|numeric|digits_between:1,10|min:1',
+            'amount' => 'required|numeric|digits_between:0,10|min:1',
+            'description' => 'required|regex:/^[\x7f-\xffA-Za-z0-9 ()（）!,:;\n\s]+$/'
         ]);
 
         //放置檔案
@@ -128,9 +129,9 @@ class ProductsController extends Controller
             $this->validate($request, [
                 'img' =>  'required|image',
                 'name' => 'required|max:255|regex:/^[A-Za-z0-9\x7f-\xffA]+$/',
-                'price' => 'required|numeric|digits_between:0,10',
-                'amount' => 'required|numeric|digits_between:0,10',
-                'description' => 'required|regex:/^[A-Za-z0-9\x7f-\xffA]+$/'
+                'price' => 'required|numeric|digits_between:1,10|min:1',
+                'amount' => 'required|numeric|digits_between:0,10|min:1',
+                'description' => 'required|regex:/^[\x7f-\xffA-Za-z0-9 ()（）!,:;\n\s]+$/'
             ]);
             //重新放置檔案，檔名不變
             $image_name = Product::where('product_id', $request->input('id'))->select('product_img')->first();
@@ -163,10 +164,10 @@ class ProductsController extends Controller
             ]);
         }else{
             $this->validate($request, [
-                'name' => 'required|max:255',
-                'price' => 'required|numeric|digits_between:0,10',
-                'amount' => 'required|numeric|digits_between:0,10',
-                'description' => 'required|regex:/^[A-Za-z0-9\x7f-\xffA]+$/'
+                'name' => 'required|max:255|regex:/^[A-Za-z0-9\x7f-\xffA]+$/',
+                'price' => 'required|numeric|digits_between:1,10|min:1',
+                'amount' => 'required|numeric|digits_between:0,10|min:1',
+                'description' => 'required|regex:/^[\x7f-\xffA-Za-z0-9 ()（）!,:;\n\s]+$/'
             ]);
             $productCategory = '10';
 
@@ -204,6 +205,11 @@ class ProductsController extends Controller
         $categories = Category::all();
         $products = Product::where('product_name', 'LIKE', '%'.$query.'%')->get();
         $category = [];
+        $status = [
+            'Y' => __('shop.Put'),
+            'N' => __('shop.Stop Put'),
+            'D' => __('shop.Delete')
+        ];
 
         $categories = json_decode($categories, true);
         $categoryName = [];
@@ -219,7 +225,8 @@ class ProductsController extends Controller
         return view('products.products', [
             'products' => $products,
             'categoryName' => $categoryName,
-            'productCategories' => $category
+            'productCategories' => $category,
+            'status' => $status
             ]);
     }
 }

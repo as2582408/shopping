@@ -62,7 +62,6 @@ class ShopController extends Controller
             Cart::create([
                 'user_id' => Auth::id(),
                 'product_id' => $request->id,
-                'cart_product_price' => $request->price,
                 'cart_product_amount' => $request->quantity,
                 'cart_input_time' => date("Y-m-d H:i:s")
             ])->save();
@@ -87,7 +86,6 @@ class ShopController extends Controller
             Cart::create([
                 'user_id' => Auth::id(),
                 'product_id' => $id,
-                'cart_product_price' => $price,
                 'cart_product_amount' => '1',
                 'cart_input_time' => date("Y-m-d H:i:s")
             ])->save();
@@ -347,7 +345,7 @@ class ShopController extends Controller
                 'discountName' => $discount->discount_name, //使用折扣
                 'discountGift' => $discount->discount_gift,//折扣比率
                 'discountPrice' => $discountPrice, //折扣後價格
-                'discountPrice' =>   $discountPrice//應付價格
+                'endPrice' =>   $discountPrice//應付價格
             ];
             $nameArr['discountGift'] = "折價比率";
         }

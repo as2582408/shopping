@@ -25,7 +25,7 @@ class CreateDetailTable extends Migration
             $table->timestamp('detail_updata_time')->nullable();
             $table->timestamp('detail_create_time')->nullable();
             $table->timestamp('detail_end_time')->nullable();
-            $table->string('user_phone');
+            $table->string('user_phone', 10);
             $table->string('user_address');
             $table->integer('detail_shopping_point');
             $table->integer('detail_gift_money');

@@ -55,7 +55,7 @@ class AdminController extends Controller
         $user = User::all();
         $status = [
             'Y' => __('shop.Enable'),
-            'N' => __('shop.Disable'),
+            'N' => __('shop.Suspension'),
             'D' => __('shop.Delete')
         ];
 
@@ -159,6 +159,15 @@ class AdminController extends Controller
         $query = $request->input('query');
         $user = User::where('name', 'LIKE', '%'.$query.'%')->get();
 
-        return view('admin.account', ['users_data' => $user]);
+        $status = [
+            'Y' => __('shop.Enable'),
+            'N' => __('shop.Suspension'),
+            'D' => __('shop.Delete')
+        ];
+
+        return view('admin.account', [
+            'users_data' => $user,
+            'status' => $status
+        ]);
     }
 }

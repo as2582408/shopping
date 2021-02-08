@@ -80,10 +80,13 @@ class CategoryController extends Controller
         $this->validate($request, [
             'name' => 'required|max:255|regex:/^[A-Za-z0-9\x7f-\xffA]+$/',
         ]);
-        $category = Category::create([
-            'category_name' => $request->input('name')
-        ]);
-        $category->save();
-        return redirect()->intended('/admin/category');
+        $check = Category::where('category_name', '=', $request->input('name'))->first();
+        if(!isset($check)){
+            Category::create([
+                'category_name' => $request->input('name')
+            ])->save();
+            return redirect()->intended('/admin/category');
+        }
+        return redirect()->intended('/admin/addCategory')->withErrors('重複分類名');
     }
 }

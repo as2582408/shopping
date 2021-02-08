@@ -116,7 +116,7 @@
                 <div class="col-sm-4 pull-right"">
                   <select id="status" name="status" class="form-select" aria-label="Default select example">
                     <option value="Y" @if($users_data->status == 'Y') {{'SELECTED'}} @endif>{{__('shop.Enable')}}</option>
-                    <option value="N" @if($users_data->status == 'N') {{'SELECTED'}} @endif>{{__('shop.Disable')}}</option>
+                    <option value="N" @if($users_data->status == 'N') {{'SELECTED'}} @endif>{{__('shop.Suspension')}}</option>
                     <option value="D" @if($users_data->status == 'D') {{'SELECTED'}} @endif>{{__('shop.Delete')}}</option>
                   </select>
                 </div>

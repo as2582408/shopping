@@ -11,6 +11,6 @@ class Cart extends Model
     protected $table = 'cart';
     
     protected $fillable = [
-        'user_id','product_id','cart_product_price','cart_input_time','cart_product_amount'
+        'user_id','product_id','cart_input_time','cart_product_amount'
     ];
 }

@@ -17,12 +17,12 @@ class CreateDiscountTable extends Migration
             //
             $table->increments('discount_id');
             $table->string('discount_name', 20);
-            $table->integer('level');
+            $table->tinyInteger('level');
             $table->integer('discount_threshold');
             $table->float('discount_gift');
             $table->timestamp('discount_create_time')->nullable();
             $table->timestamp('discount_updata_time')->nullable();
-            $table->enum('discount_status', ['Y','N']);
+            $table->enum('discount_status', ['Y','N','D']);
 
             
         });

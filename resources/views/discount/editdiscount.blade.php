@@ -107,7 +107,7 @@
                 <hr>
                 <div class="btn-group pull-right">
                     <button id="submit" name="submit" class="btn btn-sm btn-default">
-                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>{{__('shop.Edit Product')}}
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>{{__('shop.saveedit')}}
                     </button>
                   </form>
                 </div>

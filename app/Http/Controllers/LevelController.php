@@ -15,7 +15,7 @@ class LevelController extends Controller
         $maxLevel = Level::where('level_status', '=', 'Y')->max('level_rank');
         $status = [
             'Y' => __('shop.Enable'),
-            'N' => __('shop.Disable'),
+            'N' => __('shop.Suspension'),
             'D' => __('shop.Delete')
         ];
 
@@ -43,19 +43,20 @@ class LevelController extends Controller
     {
         if(empty($request->input('upMoney'))) { //最高層，無更上層
             $this->validate($request, [
+                'name' => 'required|max:255|regex:/^[A-Za-z0-9\x7f-\xffA]+$/',
                 'threshold' => 'required|numeric|min:'.($request->input('downMoney')+1)
             ]);
-        }
-
-        if(empty($request->input('downMoney'))) { //最下層，無更下層
+        } elseif (empty($request->input('downMoney'))) { //最下層，無更下層
             $this->validate($request, [
+                'name' => 'required|max:255|regex:/^[A-Za-z0-9\x7f-\xffA]+$/',
                 'threshold' => 'required|numeric|max:'.($request->input('upMoney')-1)
             ]);
+        } else {
+            $this->validate($request, [
+                'name' => 'required|max:255|regex:/^[A-Za-z0-9\x7f-\xffA]+$/',
+                'threshold' => 'required|numeric|max:'.($request->input('upMoney')-1).'|min:'.($request->input('downMoney')+1)
+            ]);
         }
-        $this->validate($request, [
-            'name' => 'required|max:255|regex:/^[A-Za-z0-9\x7f-\xffA]+$/',
-            'threshold' => 'required|numeric|max:'.($request->input('upMoney')-1).'|min:'.($request->input('downMoney')+1)
-        ]);
 
         Level::where('level_id', '=', $request->input('id'))->update([
             'level_name' => $request->input('name'),
@@ -112,7 +113,7 @@ class LevelController extends Controller
     public function addLevel(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|max:255',
+            'name' => 'required|max:255|regex:/^[A-Za-z0-9\x7f-\xffA]+$/',
             'rank' => 'required|numeric',
             'threshold' => 'required|numeric|min:'.($request->input('upThreshold')+1)
         ]);

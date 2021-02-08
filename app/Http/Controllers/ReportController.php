@@ -32,7 +32,7 @@ class ReportController extends Controller
     public function reportReply(Request $request)
     {
         $this->validate($request, [
-            'reply' => 'required|regex:/^[A-Za-z0-9\x7f-\xffA]+$/',
+            'reply' => 'required|regex:/^[\x7f-\xffA-Za-z0-9 ()（）!,:;\n\s]+$/',
         ]);
         $newMessage = 'System:  "'.$request->input('reply').'"';
 
@@ -74,7 +74,7 @@ class ReportController extends Controller
     public function userReportReply(Request $request)
     {
         $this->validate($request, [
-            'reply' => 'required|regex:/^[A-Za-z0-9\x7f-\xffA]+$/',
+            'reply' => 'required|regex:/^[\x7f-\xffA-Za-z0-9 ()（）!,:;\n\s]+$/',
         ]);
         $newMessage = 'Member:  "'.$request->input('reply').'"';
 
@@ -100,8 +100,8 @@ class ReportController extends Controller
     public function addReport(Request $request)
     {
         $this->validate($request, [
-            'reply' => 'required|regex:/^[A-Za-z0-9\x7f-\xffA]+$/',
-            'title' => 'required|regex:/^[A-Za-z0-9\x7f-\xffA]+$/'
+            'reply' => 'required|regex:/^[\x7f-\xffA-Za-z0-9 ()（）!,:;\n\s]+$/',
+            'title' => 'required|regex:/^[\x7f-\xffA-Za-z0-9 ()（）!,:;\n\s]+$/'
         ]);
 
         $reportId = Report::insertGetId([

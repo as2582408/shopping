@@ -17,7 +17,7 @@ class CreateLevelTable extends Migration
             //
             $table->increments('level_id');
             $table->string('level_name', 20);
-            $table->integer('level_rank');
+            $table->tinyInteger('level_rank');
             $table->integer('level_threshold');
             $table->enum('level_status', ['Y','D']);
 

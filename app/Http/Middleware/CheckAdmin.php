@@ -17,7 +17,7 @@ class CheckAdmin
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::check() && $request->user()->admin !== 'Y') {
+        if(Auth::check() && (Auth::user()->admin !== 'Y' || Auth::user()->status !== 'Y')) {
             Auth::logout();
             return redirect('/');
         } elseif(!(Auth::check())) {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Category;
+use App\Cart;
 use Storage;
 use Auth;
 use File;
@@ -14,7 +15,7 @@ class ProductsController extends Controller
     public function products()
     {
         $categories = Category::all();
-        $products = Product::all();
+        $products = Product::where('product_status', '!=', 'D')->get();
         $category = [];
         $status = [
             'Y' => __('shop.Put'),
@@ -27,7 +28,7 @@ class ProductsController extends Controller
         foreach ($categories as $categorys) {
                 $categoryName[$categorys['id']] = $categorys['category_name'];
         }
-
+        //切割分類字串
         foreach($products as $product) {
             $categoryArr = explode(",", $product->product_category);
             $category += [ $product->product_id => $categoryArr ];
@@ -99,6 +100,8 @@ class ProductsController extends Controller
             'product_status' => 'D', 
             'product_updata_time' => date("Y-m-d H:i:s")
         ]);
+        //清除購物車內同樣商品
+        Cart::where('product_id', '=', $id)->delete();
 
         return redirect()->intended('admin/products')->withSuccessMessage(__('shop.delete Products Success'));
     }

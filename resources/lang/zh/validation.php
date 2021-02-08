@@ -177,7 +177,6 @@ return [
         'file'                  => '圖片',
         'price'                  => '價錢',
         'year'                  => '年',
-        'year'                  => '年',
-        'year'                  => '年',
+        'threshold'             => '門檻金額'
     ],
 ];

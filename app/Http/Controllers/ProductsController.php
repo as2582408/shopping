@@ -191,7 +191,7 @@ class ProductsController extends Controller
             ]);
         }
 
-        return redirect()->intended('admin/products')->withSuccessMessage('修改成功');
+        return redirect()->intended('admin/products')->withSuccessMessage(__('shop.edit Success'));
     }
 
     public function searchProducts(Request $request)

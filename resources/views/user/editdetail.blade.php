@@ -115,10 +115,10 @@
 			<table class="table table-sm">
 				<thead>
 					<tr>
-						<th scope="col">商品名稱</th>
-						<th scope="col">單價</th>
-						<th scope="col">數量</th>
-						<th scope="col">小計</th>
+						<th scope="col">{{ __('shop.Product Name') }}</th>
+						<th scope="col">{{ __('shop.unit') }}</th>
+						<th scope="col">{{ __('shop.quantity') }}</th>
+						<th scope="col">{{ __('shop.subtotal') }}</th>
 					</tr>
 					<tbody>
 						@foreach ($products as $product)

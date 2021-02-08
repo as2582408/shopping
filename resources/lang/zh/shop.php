@@ -241,8 +241,9 @@ return [
     'edit Success' => '修改成功',
     'discount error1' => '優惠比例請輸入大於0的數字',
     'add Products Success' => '新增商品成功',
-    'delete Products Success' => '刪除商品成功'
-    'product Over' => '數量超出庫存'
+    'delete Products Success' => '刪除商品成功',
+    'delete Success' => '刪除成功',
+    'product Over' => '數量超出庫存',
     'discountName' => '使用折扣',
     'discountGift' => '折扣比率',
     'discountPrice' => '折扣後價格',

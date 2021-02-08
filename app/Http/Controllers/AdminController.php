@@ -35,10 +35,7 @@ class AdminController extends Controller
         $user = User::where('email', $request->input('email'))->first();
         if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')]) && $user->admin == 'Y') {
             $user->login_time = date("Y-m-d H:i:s");
-            $user->save();
-
-            session()->put('lang', $request->language);
-            
+            $user->save();            
             return redirect('admin/center');
         } else {
             return view('admin.login', ['error' => __('shop.accountpassworderror')]);
@@ -96,7 +93,7 @@ class AdminController extends Controller
         $user->updated_at = date("Y-m-d H:i:s"); ;
         $user->save();
 
-        return redirect()->intended('admin/account')->withSuccessMessage('刪除成功');
+        return redirect()->intended('admin/account')->withSuccessMessage(__('delete Success'));
     }
 
     //後台修改會員資料

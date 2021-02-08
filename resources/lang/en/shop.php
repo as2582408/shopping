@@ -69,7 +69,7 @@ return [
     'orderMoney' => 'Order using cash',
     'orderPoint' => 'Purchase money for orders',
     'orderGift' => 'Reward for completing the order',
-    'orderIsHas' => '此帳號尚有訂單',
+    'orderIsHas' => 'order Is Has',
     'orderContent' => 'There are still orders for this account',
     'reasonRefund' => 'Reason for refund',
     'reasonRejection' => 'Reason for rejection',
@@ -223,10 +223,11 @@ return [
     'Put' => 'Put',
     'Stop Put' => 'Stop Put',
     'edit Success' => 'edit Success',
-    'discount error1' => '優惠比例請輸入大於0的數字',
+    'discount error1' => 'discount error',
     'add Products Success' => 'add Products Success',
-    'delete Products Success' => 'delete Products Success'
-    'product Over' => 'product Over'
+    'delete Products Success' => 'delete Products Success',
+    'delete Success' => 'delete Success',
+    'product Over' => 'product Over',
     'discountName' => 'discount',
     'discountGift' => 'discount Gift',
     'discountPrice' => 'discount Price',

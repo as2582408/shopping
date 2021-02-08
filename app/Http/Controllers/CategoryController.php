@@ -55,7 +55,7 @@ class CategoryController extends Controller
                 }
             }
             //無分類時設置為未分類
-            if ($new_category == '') {
+            if ($new_category == '' || $new_category == '10,') {
                 $new_category = '10';
             }
             $products[$i]['product_category'] = $new_category;

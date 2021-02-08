@@ -21,7 +21,7 @@ class AdminController extends Controller
     {
         return view('admin.login');
     }
-    //
+    
     public function postSignin(Request $request)
     {
         $this->validate($request, [

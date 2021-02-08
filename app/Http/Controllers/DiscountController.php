@@ -27,9 +27,9 @@ class DiscountController extends Controller
             'name' => 'required|max:255|regex:/^[A-Za-z0-9\x7f-\xffA]+$/',
             'level' => 'required|numeric|min:0|integer',
             'threshold' => 'required|numeric|min:0|digits_between:0,10',
-            'gift' => 'required|numeric|digits_between:0,10'
+            'gift' => 'required|numeric'
         ]);
-        if((float)$request->gift <= 0) {
+        if((float)$request->gift <= 0 || $request->gift > 9999999999) {
             return redirect()->back()->withErrors(__('shop.discount error1'));
         }
         Discount::where('discount_id', '=', $request->input('id'))->update([
@@ -64,9 +64,9 @@ class DiscountController extends Controller
             'name' => 'required|max:255|regex:/^[A-Za-z0-9\x7f-\xffA]+$/',
             'level' => 'required|numeric|min:0|integer',
             'threshold' => 'required|numeric|min:0|digits_between:0,10',
-            'gift' => 'required|numeric|digits_between:0,10'
+            'gift' => 'required|numeric'
         ]);
-        if((float)$request->gift <= 0) {
+        if((float)$request->gift <= 0 || $request->gift > 9999999999) {
             return redirect()->back()->withErrors(__('shop.discount error1'));
         }
         Discount::create([

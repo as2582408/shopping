@@ -61,7 +61,6 @@
           <table class="table table-sm">
 				<thead>
 				  <tr>
-					<th scope="col"></th>
 					<th scope="col">{{__('shop.Category Name')}}</th>
           <th scope="col">{{__('shop.Edit')}}</th>
           <th scope="col"></th>
@@ -72,7 +71,6 @@
           @foreach ($categories as $category)
           @if($category->id != 10)
             <tr>
-              <th scope="row">{{ $category->id }}</th>
               <td>{{ $category->category_name }}</td>
               <td><a href='{{ url("/admin/editCategory/{$category->id}") }}' class="alert-link">{{ __('shop.Edit') }}</a></td>
               <td></td>

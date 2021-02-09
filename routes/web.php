@@ -33,29 +33,29 @@ Route::group(['middleware' => ['lang']], function () {
         Route::group(['middleware' => ['member']], function () {
             Route::prefix('shop')->group(function () {
                 //商品頁面
-                Route::get('/show/{id}', 'shopController@show');
+                Route::get('/show/{id}', 'ShopController@show');
                 //加入購物車
-                Route::post('/addcart', 'shopController@addCart');
+                Route::post('/addcart', 'ShopController@addCart');
                 //快速加入購物車
-                Route::get('/quicklyadd/{id}/{price}', 'shopController@quicklyAddCart');
+                Route::get('/quicklyadd/{id}/{price}', 'ShopController@quicklyAddCart');
                 //搜尋
-                Route::get('/search', 'shopController@search');
+                Route::get('/search', 'ShopController@search');
                 //分類
-                Route::get('/category/{id}', 'shopController@selectCategory');
+                Route::get('/category/{id}', 'ShopController@selectCategory');
                 //排序
-                Route::get('/orderby/{orderby}/{type}', 'shopController@orderBy');
+                Route::get('/orderby/{orderby}/{type}', 'ShopController@orderBy');
                 //分類排序
-                Route::get('/orderByCategory/{orderby}/{type}/{categoryId}', 'shopController@orderByCategory');
+                Route::get('/orderByCategory/{orderby}/{type}/{categoryId}', 'ShopController@orderByCategory');
                 //搜尋排序
-                Route::get('/orderBySearch/{orderby}/{type}/{search}', 'shopController@orderBySearch');
+                Route::get('/orderBySearch/{orderby}/{type}/{search}', 'ShopController@orderBySearch');
                 //購物車頁面
-                Route::get('/cart', 'shopController@cart');
+                Route::get('/cart', 'ShopController@cart');
                 //購物車取消
-                Route::get('/removecart/{id}', 'shopController@removeCart');
+                Route::get('/removecart/{id}', 'ShopController@removeCart');
                 //結帳確認
-                Route::post('/checking', 'shopController@checking');
+                Route::post('/checking', 'ShopController@checking');
                 //結帳
-                Route::post('/checkout', 'shopController@checkout');
+                Route::post('/checkout', 'ShopController@checkout');
             });
             //會員中心
             Route::get('/mycenter', 'UserController@getCenter');

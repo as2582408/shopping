@@ -91,7 +91,7 @@ class ProductsController extends Controller
         ]);
         $products->save();
         
-        return redirect()->intended('admin/products')->withSuccessMessage(__('shop.add Products Succ'));
+        return redirect()->intended('admin/products')->withSuccessMessage(__('shop.add Products Success'));
     }
 
     //刪除商品

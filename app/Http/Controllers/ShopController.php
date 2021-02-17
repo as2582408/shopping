@@ -314,7 +314,7 @@ class ShopController extends Controller
                 'totalPrice' => '$'.$totalPrice,
                 'discountName' => $discount->discount_name, //使用折扣
                 'discountGift' => $discount->discount_gift,//折扣比率
-                'discountPrice' => $discountPrice, //折扣後價格
+                'discountPrice' => '$'.$discountPrice, //折扣後價格
                 'useGift' => $useGift, //使用禮金
                 'useGiftBefore' => $useGiftBefore,//使用後禮金
                 'endPrice' =>   '$'.$endPrice//應付價格
@@ -351,7 +351,7 @@ class ShopController extends Controller
                 'totalPrice' => '$'.$totalPrice,
                 'discountName' => $discount->discount_name, //使用折扣
                 'discountGift' => $discount->discount_gift,//折扣比率
-                'discountPrice' => $discountPrice, //折扣後價格
+                'discountPrice' => '$'.$discountPrice, //折扣後價格
                 'endPrice' =>   '$'.$discountPrice//應付價格
             ];
             $nameArr['discountGift'] = "折價比率";

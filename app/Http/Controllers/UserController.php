@@ -162,6 +162,7 @@ class UserController extends Controller
             '3' => __('shop.order cancel'),
             '4' => __('shop.return order'),
             '5' => __('shop.return gift'),
+            '6' => __('shop.chagePoint')
         ];
         return view('user.point', [
             'pointLog' => $pointLog,

@@ -97,6 +97,9 @@
                 <div class="col-sm-5 col-xs-6 tital ">{{ __('shop.level') }}:</div>
                 <div class="col-sm-4 pull-right"">
                   <select id="level" name="level" class="form-select" aria-label="Default select example">
+                    @if (count($levels) == 0)
+                      <option value="0">0</option>
+                    @endif
                     @foreach ($levels as $level)
                       <option value="{{$level->level_rank}}" @if($users_data->level == $level->level_rank) {{'SELECTED'}} @endif>{{$level->level_rank}}</option>
                     @endforeach

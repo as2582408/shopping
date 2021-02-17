@@ -234,6 +234,8 @@ return [
     'useGift' => 'use Gift',
     'useGiftBefore' => 'use Gift Before',
     'endPrice' =>   'Price',
-    'discountGift' => 'discountGift'
+    'discountGift' => 'discountGift',
+    'chagePoint' => 'chage Point'
+
 
 ];

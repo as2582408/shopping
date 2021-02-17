@@ -20,7 +20,7 @@ class CreatPointLogTable extends Migration
             $table->integer('log_detail');
             $table->integer('log_change_gold');
             $table->integer('log_new_gold');
-            $table->enum('log_type', ['1','2', '3','4','5']);
+            $table->enum('log_type', ['1','2', '3','4','5','6']);
             $table->timestamp('log_time')->nullable();
 
         });

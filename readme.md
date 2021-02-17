@@ -24,6 +24,11 @@ FLUSH PRIVILEGES;<br>
 sudo apt-get install php7.2-fpm -y<br>
 sudo apt-get install php7.2-common php7.2-json php7.2-gd php7.2-cli php7.2-mbstring php7.2-xml php7.2-opcache php7.2-mysql -y<br>
 
+## 安裝git 
+sudo apt-get install git
+## 安裝composer
+sudo apt-get install composer
+
 ## 修改host
 
 sudo nano /etc/hosts<br>
@@ -65,7 +70,7 @@ php artisan serve --host=shop.admin.net --port=8002<br>
 
 http://shop.admin.net:8002 <br>
 為後台<br>
-帳號:admin 密碼:qaz123<br>
+帳號:admin＠gmail.com 密碼:qaz123<br>
 
 http://shop.user.net:8001<br>
 為商店頁面<br>

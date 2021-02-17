@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\User;
 use App\Level;
+use App\Point_log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 
@@ -141,6 +142,19 @@ class AdminController extends Controller
                 return redirect()->intended('admin/account')->withErrors(__('shop.emailunique'));
             }
         }
+        if($user->point != $request->input('point'))
+        {
+            $cheageMoney = $request->input('point') - $user->point;
+
+            Point_log::create([
+                'log_user_id' => $user->id,
+                'log_detail' => '0',
+                'log_change_gold' => $cheageMoney,
+                'log_new_gold' => $request->input('point'),
+                'log_type' => '6',
+                'log_time' => date("Y-m-d H:i:s")
+            ])->save();
+        };
         $user->name = $newName;
         $user->email = $newemail;
         $user->phone = $request->input('phone');

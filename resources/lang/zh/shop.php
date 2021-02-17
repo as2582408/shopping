@@ -250,7 +250,7 @@ return [
     'useGift' => '使用禮金',
     'useGiftBefore' => '使用後禮金',
     'endPrice' =>   '應付價格',
-    'discountGift' => '可獲得禮金'
-    
+    'discountGift' => '可獲得禮金',
+    'chagePoint' => '額度變動'
 
 ];

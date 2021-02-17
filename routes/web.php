@@ -131,7 +131,11 @@ Route::group(['middleware' => ['lang']], function () {
                 Route::get('/accountdel/{id}', 'AdminController@delectAccount'); 
                 //搜尋會員
                 Route::get('/accountSearch', 'AdminController@searchAccount');
-            
+                //修改會員密碼頁面
+                Route::get('/accountSetPassword/{id}', 'AdminController@setPasswordPage');
+                //修改會員密碼頁面
+                Route::post('/accountSetPassword', 'AdminController@setPassword');
+
                 //商品頁面
                 Route::get('/products', 'ProductsController@products');
                 //新增商品頁面
@@ -218,7 +222,7 @@ Route::group(['middleware' => ['lang']], function () {
                 Route::get('/agreereturn/{id}', 'ReturnController@agreeReturn');
                 //退貨拒絕頁面
                 Route::get('/refusereturn/{id}', 'ReturnController@refuseReturnPage');
-                ////客訴拒絕
+                //退貨拒絕
                 Route::post('/refusereturn', 'ReturnController@refuseReturn');
             });
         });

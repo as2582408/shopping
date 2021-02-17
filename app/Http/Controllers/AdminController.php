@@ -184,4 +184,25 @@ class AdminController extends Controller
             'status' => $status
         ]);
     }
+
+    public function setPasswordPage($id)
+    {
+        return view('admin.setpassword', ['userId' => $id]);
+    }
+
+    public function setPassword(Request $request)
+    {
+        $this->validate($request, [
+            'password' => 'required|min:6|regex:/^.*(?=.*[a-z])(?=.*[0-9]).*$/',
+        ], [
+            'password.min' => __('shop.passwordmin'),
+            'password.regex' => __('shop.passwordregex')
+        ]);
+        $user = User::find($request->id);
+        $user->password = bcrypt($request->input('password'));
+        $user->updated_at = date("Y-m-d H:i:s");
+        $user->save();
+
+        return redirect('admin/account');
+    }
 }

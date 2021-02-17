@@ -41,6 +41,13 @@
 <hr>
     <div class="container">
       <div class="row">
+                @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    @foreach ($errors->all() as $errors)
+                        <p>{{ $errors }}</p>    
+                    @endforeach
+                </div>
+                @endif
         <div class="col-md-6 h-100 " style="width:200px;">
           <div class="list-group">
             <a href="{{ url('/admin/account') }}" class="list-group-item list-group-item-action">{{ __('shop.Account Management') }}</a>
@@ -53,62 +60,30 @@
             <a href="{{ url('/admin/level') }}" class="list-group-item list-group-item-action">{{ __('shop.Level Management') }}</a>
           </div>
         </div>
-        <div class= "col-md-8">
-                @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                    @foreach ($errors->all() as $errors)
-                        <p>{{ $errors }}</p>    
-                    @endforeach
-                </div>
-                @endif
-                @if (session()->has('success_message'))
-                <div class="alert alert-success">
-			          {{ session()->get('success_message') }}
-                </div>
-      @endif
+        <div class="col-md-8">
           <div class="row">
-            <div style="margin-top:10px;">
-              <form action="{{ url('/admin/accountSearch') }}" method="GET" class="search-form">
-                  <input type="text" name="query" id="query" value="{{ request()->input('query') }}" class="search-box"
-                      placeholder="{{__('shop.Account Name')}}">
-                  <button type="submit" class="fa fa-search btn btn-info btn-sm"></button>
-              </form>
-          </div>
-            <table class="table table-sm">
-				<thead>
-				  <tr>
-					<th scope="col">{{ __('shop.ID') }}</th>
-					<th scope="col">{{ __('shop.name') }}</th>
-					<th scope="col">{{ __('shop.email') }}</th>
-					<th scope="col">{{ __('shop.ShoppingPoint') }}</th>
-					<th scope="col">{{ __('shop.level') }}</th>
-					<th scope="col">{{ __('shop.status') }}</th>
-          <th scope="col">{{ __('shop.Edit') }}</th>
-          <th scope="col">{{ __('shop.editpassword') }}</th>
-          <th scope="col"></th>
-          <th scope="col">{{ __('shop.Delete') }}</th>
-          
-				  </tr>
-				</thead>
-				<tbody>
-					@foreach ($users_data as $user)
-					<tr>
-						<th scope="row">{{ $user->id }}</th>
-						<td>{{ $user->name }}</td>
-						<td>{{ $user->email }}</td>
-						<td>${{ $user->point }}</td>
-						<td>{{ $user->level }}</td>
-						<td>{{ $status[$user->status] }}</td>
-            <td><a href='{{ url("/admin/accountedit/{$user->id}") }}' class="alert-link">{{ __('shop.Edit') }}</a></td>
-            <td><a href='{{ url("/admin/accountSetPassword/{$user->id}") }}' class="alert-link">{{ __('shop.Edit') }}</a></td>
-            <td></td>
-            @if ($user->status != 'D')
-            <td><a href='{{ url("/admin/accountdel/{$user->id}") }}' class="alert-link">{{ __('shop.Delete') }}</a></td>
-            @endif
-					  </tr>
-					@endforeach
-				</tbody>
-			  </table>
+            <div class="text-center">
+              <form action="{{ url('/admin/accountSetPassword') }}" method="post">
+                {!! csrf_field() !!}
+                <input id="id" name="id" type="hidden"  class="form-control  " value="{{$userId}}" required="">
+                <div class="col-sm-5 col-xs-6 tital ">新密碼:</div>
+                <div class="col-sm-4 col-xs-3  pull-right" >
+                     <input id="password" name="password" type="text"  class="form-control  " value="" required="">
+                </div>
+                <div class="clearfix"></div>
+                <div class="bot-border"></div>
+                <!-- /.box-body -->
+                <hr>
+                <div class="btn-group pull-right">
+                    <button id="submit" name="submit" class="btn btn-sm btn-default">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>{{__('shop.saveedit')}}
+                    </button>
+                  </form>
+                </div>
+                <div>
+                  <button class="btn btn-sm btn-default" onclick="history.back()">{{__('shop.Back')}}</button>
+                </div>
+              </div>
           </div>
         </div>
       </div>

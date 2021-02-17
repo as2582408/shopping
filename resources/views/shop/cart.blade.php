@@ -28,7 +28,7 @@
         @foreach ($products as $product)
         <tr>
 			<td><a href='{{url("/shop/show/{$product->product_id}")}}' target="_blank">{{$product->product_name}}</a></td>
-            <td>{{ $product->product_price }}$</td>
+            <td>${{ $product->product_price }}</td>
             <td>{{ $product->cart_product_amount }}</td>
             <td></td>
 			<td><a href='{{url("/shop/removecart/{$product->product_id}")}}' class="alert-link">{{ __('shop.remove') }}</a></td>
@@ -40,7 +40,7 @@
         <table class="table table-sm">
         <tr>
             <td></td>
-            <td class="text-danger">{{ __('shop.orderTotal') }}：{{$totalPrice}}＄</td>
+            <td class="text-danger">{{ __('shop.orderTotal') }}：${{$totalPrice}}</td>
             <form id="checking" action="{{url("/shop/checking")}}" method="POST" >
             <td>{{ __('shop.usevirtual') }}
                 <select name="point" id="point">

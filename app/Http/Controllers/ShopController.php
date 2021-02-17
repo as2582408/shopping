@@ -253,6 +253,7 @@ class ShopController extends Controller
         $products = Cart::join('products', 'cart.product_id', '=', 'products.product_id')->where('user_id', '=', $userData->id)->get();
         $totalPrice = 0;
         $nameArr = [
+            'totalPrice' => __('shop.total'),
             'discountName' => __('shop.discountName'),
             'discountGift' => __('shop.discountGift'),
             'discountPrice' => __('shop.discountPrice'),
@@ -261,6 +262,7 @@ class ShopController extends Controller
             'endPrice' =>   __('shop.endPrice'),
             'discountGift' => __('shop.discountGift'),
         ];
+        //總價
         foreach($products as $product)
         {
             $totalPrice += ($product->product_price * $product->cart_product_amount);
@@ -269,8 +271,9 @@ class ShopController extends Controller
         if($request->point == 2 && $request->discount == 0)
         {
             $checkout = [
+                'totalPrice' => '$'.$totalPrice,
                 'discountName' => '無', //使用折扣
-                'endPrice' =>  $totalPrice//應付價格
+                'endPrice' =>  '$'.$totalPrice//應付價格
             ];
         }
         
@@ -287,9 +290,10 @@ class ShopController extends Controller
             };
 
             $checkout = [
+                'totalPrice' => '$'.$totalPrice,
                 'useGift' => $useGift, //使用禮金
                 'useGiftBefore' => $useGiftBefore,//使用後禮金
-                'endPrice' =>   $endPrice//應付價格
+                'endPrice' =>   '$'.$endPrice//應付價格
             ];
         }
 
@@ -307,12 +311,13 @@ class ShopController extends Controller
             };
 
             $checkout = [
+                'totalPrice' => '$'.$totalPrice,
                 'discountName' => $discount->discount_name, //使用折扣
                 'discountGift' => $discount->discount_gift,//折扣比率
                 'discountPrice' => $discountPrice, //折扣後價格
                 'useGift' => $useGift, //使用禮金
                 'useGiftBefore' => $useGiftBefore,//使用後禮金
-                'endPrice' =>   $endPrice//應付價格
+                'endPrice' =>   '$'.$endPrice//應付價格
             ];
             $nameArr['discountGift'] = "折價比率";
         }
@@ -330,11 +335,12 @@ class ShopController extends Controller
             };
 
             $checkout = [
+                'totalPrice' => '$'.$totalPrice,
                 'discountName' => $discount->discount_name, //使用折扣
                 'discountGift' => $discount->discount_gift,//可獲得禮金
                 'useGift' => $useGift, //使用禮金
                 'useGiftBefore' => $useGiftBefore,//使用後禮金
-                'endPrice' =>   $endPrice//應付價格
+                'endPrice' =>   '$'.$endPrice//應付價格
             ];
         }
 
@@ -342,10 +348,11 @@ class ShopController extends Controller
             $discountPrice = $totalPrice * $discount->discount_gift;
 
             $checkout = [
+                'totalPrice' => '$'.$totalPrice,
                 'discountName' => $discount->discount_name, //使用折扣
                 'discountGift' => $discount->discount_gift,//折扣比率
                 'discountPrice' => $discountPrice, //折扣後價格
-                'endPrice' =>   $discountPrice//應付價格
+                'endPrice' =>   '$'.$discountPrice//應付價格
             ];
             $nameArr['discountGift'] = "折價比率";
         }
@@ -353,9 +360,10 @@ class ShopController extends Controller
         if(isset($discount) && $request->point == 2 && $discount->discount_gift > 1) {
 
             $checkout = [
+                'totalPrice' => '$'.$totalPrice,
                 'discountName' => $discount->discount_name, //使用折扣
                 'discountGift' => $discount->discount_gift,//可獲得禮金
-                'endPrice' =>   $totalPrice//應付價格
+                'endPrice' =>   '$'.$totalPrice//應付價格
             ];
         }
 

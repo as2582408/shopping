@@ -17,7 +17,6 @@ class CreateCartTable extends Migration
             //
             $table->integer('user_id');
             $table->integer('product_id');
-            $table->integer('cart_product_price');
             $table->integer('cart_product_amount');
             $table->timestamp('cart_input_time')->nullable();
 

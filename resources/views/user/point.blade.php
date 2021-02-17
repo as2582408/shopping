@@ -31,7 +31,12 @@
             	<th scope="row">{{$log->log_detail}}</th>
 				<td>{{$log->log_time}}</td>
             	<td>{{$type[$log->log_type]}}</td>
-            	<td>{{$log->log_change_gold}}</td>
+				<td @if ($log->log_change_gold < 0) 
+						style="color:red;"
+					@else
+						class="text-primary"
+					@endif>
+					{{$log->log_change_gold}}</td>
 				<td>{{$log->log_new_gold}}</td>
         	</tr>
 			@endforeach

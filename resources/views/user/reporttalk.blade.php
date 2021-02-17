@@ -72,7 +72,7 @@
 				<tbody>
 					@foreach ($replys as $reply)
 					<tr>
-            <td>{{$reply->reply}}</td>
+            <td>@php echo $reply->reply @endphp</td>
             <td>{{$reply->reply_time}}</td>
           </tr>
           @endforeach

@@ -34,7 +34,8 @@ class ReportController extends Controller
         $this->validate($request, [
             'reply' => 'required|regex:/^[\x7f-\xffA-Za-z0-9 ()（）!,:;\n\s]+$/',
         ]);
-        $newMessage = 'System:  "'.$request->input('reply').'"';
+        $textToStore = nl2br(htmlentities($request->input('reply'), ENT_COMPAT, 'UTF-8'));
+        $newMessage = 'System:  "'.$textToStore.'"';
 
         Report_reply::create([
             'reply_id' => $request->input('id'),
@@ -76,7 +77,8 @@ class ReportController extends Controller
         $this->validate($request, [
             'reply' => 'required|regex:/^[\x7f-\xffA-Za-z0-9 ()（）!,:;\n\s]+$/',
         ]);
-        $newMessage = 'Member:  "'.$request->input('reply').'"';
+        $textToStore = nl2br(htmlentities($request->input('reply'), ENT_COMPAT, 'UTF-8'));
+        $newMessage = 'Member:  "'.$textToStore.'"';
 
         Report_reply::create([
             'reply_id' => $request->input('id'),

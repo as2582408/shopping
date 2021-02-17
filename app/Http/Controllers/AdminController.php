@@ -129,7 +129,7 @@ class AdminController extends Controller
 
         $newName = $request->input('name');
         $newemail = $request->input('email');
-
+        //修改刪除狀態時，進行名稱的還原或修改，並檢查是否已有重複的帳號
         if($request->input('status') == 'D' && $user->status != 'D') {
             $newName = '(D)'.$request->input('name');
             $newemail = '(D)'.$request->input('email');

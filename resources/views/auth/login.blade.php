@@ -30,6 +30,9 @@
                             <div class="col-sm-12 controls">
                                 <button type="submit" id="btn-login" href="#" class="btn btn-success">{{ __('shop.signin') }}</button> 
 								<a href="{{ url('signup') }}" >&emsp;&emsp;&emsp;{{ __('shop.signup')}}</a>
+								<a class="btn btn-link" href="{{ route('password.request') }}">
+									{{__('shop.forgot')}}
+								</a>
                             </div>
                         </div>
                     </form>

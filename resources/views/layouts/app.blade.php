@@ -26,7 +26,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-
+                    <a class="navbar-brand" href="{{ url('shop') }}">{{ __('shop.shop') }}</a>
                     <!-- Branding Image -->
                 </div>
 
@@ -38,31 +38,20 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li><a href="{{ url('/signin') }}">{{ __('Login') }}</a></li>
-                            <li><a href="{{ url('signup') }}">{{ __('shop.signup') }}</a></li>
+                        @if(App::getLocale() == 'zh')
+                        <li><a href="/lang/en">英文</a></li>
                         @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endguest
+                        <li><a href="/lang/zh">chinese</a></li>
+                        @endif
+                        @if(!Auth::user())
+                        <li><a href="{{ url('signin') }}">{{ __('shop.signin') }}</a></li>
+                        <li><a href="{{ url('signup') }}">{{ __('shop.signup') }}</a></li>
+                        @else
+                        <li><a href="{{ url('mycenter') }}">{{ __('shop.mycenter') }} <span class="fa fa-briefcase"></span></a></li>
+                        <li><a href="{{ url('shop/cart') }}">{{ __('shop.ShoppingCart') }} <span class="fa fa-shopping-cart"></span></a></li>
+                        <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('shop.signout') }}&emsp;{{ __(Auth::user()->name) }}</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form></li>
+                        @endif
                     </ul>
                 </div>
             </div>

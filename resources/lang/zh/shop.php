@@ -31,6 +31,7 @@ return [
     'passwordrule' => '(至少包含1個小寫字母、1個數字)',
     'confirmpassword' => '確認密碼',
     'registered' => '註冊',
+    'forgot' => '忘記密碼',
     'contactnumber' => '聯絡電話',
     'emailaddress' => '電子郵件信箱',
     'message' => '訊息',

@@ -31,6 +31,7 @@ return [
     'passwordrule' => '(Contain at least 1 lowercase letter and 1 number)',
     'confirmpassword' => 'Confirm Password',
     'registered' => 'registered',
+    'forgot' => 'forgot password',
     'contactnumber' => 'Contact number',
     'emailaddress' => 'Email mailbox',
     'message' => 'message',

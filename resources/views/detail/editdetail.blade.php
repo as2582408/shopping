@@ -132,7 +132,12 @@
 				  	</table>
 				<div class="clearfix"></div>
                 <div class="bot-border"></div>
-				      <hr>
+              <hr>
+              <div class="form-group">
+                <label for="exampleFormControlTextarea1">備註</label><br>
+                <th scope="row">@php echo $detail->detail_remarks; @endphp</th>
+              </div>
+              <hr>
                 <div class="btn-group pull-right">
                   @if ($detail->detail_shipment == 1 && $detail->detail_status == 0)
                   <button id="submit" name="submit" class="btn btn-sm btn-default">

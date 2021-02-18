@@ -7,7 +7,7 @@ use App\Product;
 use App\Category;
 use App\Cart;
 use Storage;
-use Auth;
+use Redis;
 use File;
 
 class ProductsController extends Controller

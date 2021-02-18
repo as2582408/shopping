@@ -62,10 +62,11 @@ class ReturnController extends Controller
     public function refuseReturn(Request $request)
     {
         $this->validate($request, [
-            'remarks' => 'required|max:255|regex:/^[A-Za-z0-9\x7f-\xffA]+$/',
+            'remarks' => 'required|max:255|regex:/^[\x7f-\xffA-Za-z0-9 ()（）!,:;\n\s]+$/',
         ]);
+        $textToStore = nl2br(htmlentities($request->input('remarks'), ENT_COMPAT, 'UTF-8'));
         Return_detail::where('return_id', '=', $request->input('id'))->update([
-            'return_reply' => $request->input('remarks'),
+            'return_reply' => $textToStore,
             'return_status' => '2',
             'return_updata_time' => date("Y-m-d H:i:s")
         ]);

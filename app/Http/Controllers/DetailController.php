@@ -67,11 +67,11 @@ class DetailController extends Controller
     public function delDetail(Request $request)
     {
         $this->validate($request, [
-            'remarks' => 'required|max:255|regex:/^[A-Za-z0-9\x7f-\xffA]+$/',
+            'remarks' => 'required|max:255|regex:/^[\x7f-\xffA-Za-z0-9 ()（）!,:;\n\s]+$/',
         ]);
-
+        $textToStore = nl2br(htmlentities($request->input('remarks'), ENT_COMPAT, 'UTF-8'));
         Detail::where('detail_id', '=', $request->input('id'))->update([
-            'detail_remarks' => $request->input('remarks'),
+            'detail_remarks' => $textToStore,
             'detail_status' => '2',
             'detail_updata_time' => date("Y-m-d H:i:s")
 

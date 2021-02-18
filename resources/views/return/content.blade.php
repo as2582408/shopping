@@ -84,7 +84,7 @@
       </thead>
         <tbody>
           <tr>
-            <th scope="row">{{$return->return_reply}}</th>
+            <th scope="row">@php echo $return->return_reply; @endphp</th>
           </tr>
         </tbody>
       </table>

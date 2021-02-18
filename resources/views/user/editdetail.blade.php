@@ -136,9 +136,9 @@
                 <div class="bot-border"></div>
               <hr>
               <div class="form-group">
-                  <label for="exampleFormControlTextarea1">備註</label>
-                  <textarea id="remarks" name="remarks" class="form-control" id="exampleFormControlTextarea1" rows="3" readonly="readonly">{{$detail->detail_remarks}}</textarea>
-                </div>
+                  <label for="exampleFormControlTextarea1">備註</label><br>
+                  <th scope="row">@php echo $detail->detail_remarks; @endphp</th>
+              </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>
                 <hr>

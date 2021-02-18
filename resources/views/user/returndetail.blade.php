@@ -89,7 +89,7 @@
 				  	@else
 				  <input type="checkbox" name="product[]" value="{{$product->item_id}}" disabled="disabled" >
 					  @endif
-                  <a target="_blank" href="{{ url('/shop') }}">{{$product->product_name}}</a>
+                  <a target="_blank" href="{{ url("shop/show/{$product->item_detail_id}") }}">{{$product->product_name}}</a>
                 </td>
                 <td class=" align-middle">${{$product->product_price}}</td>
                 <td class=" align-middle">

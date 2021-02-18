@@ -45,8 +45,6 @@ class AdminController extends Controller
     //後台首頁
     public function adminCenter()
     {
-        $user = Auth::user();
-
         return view('admin.adminCenter');
     }
 

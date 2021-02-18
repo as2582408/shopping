@@ -423,7 +423,12 @@ class ShopController extends Controller
                 'product_amount' => $product->cart_product_amount,
                 'product_retrun_amount' => 0
             ])->save();
-            Product::where('product_id', '=', $product->product_id)->decrement('product_amount', $product->cart_product_amount);
+            
+            $productAmount = Product::where('product_id', '=', $product->product_id)->select('product_amount')->first();
+            if(($productAmount->product_amount - $product->cart_product_amount) <= 0) {
+                Product::where('product_id', '=', $product->product_id)->decrement('product_amount', $product->cart_product_amount);
+                Cart::where('product_id', '=', $id)->delete();
+            }
         }
         //刪除購物車商品
         Cart::where('user_id', '=', $userData->id)->delete();

@@ -72,7 +72,7 @@
           @if($category->id != 10)
             <tr>
               <td>{{ $category->category_name }}</td>
-              <td><a href='{{ url("/admin/editCategory/{$category->id}") }}' class="alert-link">{{ __('shop.Add Category') }}</a></td>
+              <td><a href='{{ url("/admin/editCategory/{$category->id}") }}' class="alert-link">{{ __('shop.Edit') }}</a></td>
               <td></td>
               <td><a href='{{ url("/admin/delCategory/{$category->id}") }}' class="alert-link">{{ __('shop.Delete') }}</a></td>
             </tr>

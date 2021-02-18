@@ -113,7 +113,8 @@ class ReportController extends Controller
             'report_updata_time' => date("Y-m-d H:i:s")
         ]);
         
-        $newMessage = 'Member:  "'.$request->input('reply').'"';
+        $textToStore = nl2br(htmlentities($request->input('reply'), ENT_COMPAT, 'UTF-8'));
+        $newMessage = 'Member:  "'.$textToStore.'"';
 
         Report_reply::create([
             'reply_id' => $reportId,

@@ -3,6 +3,7 @@
 return [
 
     'shop' => 'shop',
+    'home' => 'shop',
     'language' => 'language' ,
     'en' => 'English',
     'zh' => 'Chinese',

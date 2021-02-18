@@ -3,6 +3,7 @@
 return [
 
     'shop' => '商店',
+    'home' => '商店',
     'language' => ' 語 言' ,
     'en' => '英文',
     'zh' => '中文',

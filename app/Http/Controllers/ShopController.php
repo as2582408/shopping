@@ -380,13 +380,13 @@ class ShopController extends Controller
         $discountGift = ($request->input('discountGift') > 1 )  ? $request->input('discountGift') : 0;
         $giftPoint = ($request->input('useGift') > 0) ? $request->input('useGift') : 0;
         $newPoint = ($request->input('useGift') > 0) ? $request->input('useGiftBefore') : $userData->point;
-
+        $endPrice = str_replace('$', '', $request->input('endPrice'));
         User::where('id', '=', Auth::id())->decrement('point', $giftPoint);
 
         $detailId = Detail::insertGetId([
             'user_id' => Auth::id(),
             'detail_discount_id'  => $request->input('discountId'),
-            'detail_totail_price' => $request->input('endPrice'),
+            'detail_totail_price' => $endPrice,
             'detail_status' => '0',
             'detail_shipment' => '1',
             'detail_updata_time' => date("Y-m-d H:i:s"),

@@ -78,7 +78,7 @@
           @foreach ($details as $detail)
           <tr>
             <th scope="row">{{ $detail->detail_id }}</th>
-            <td>{{$detail->detail_totail_price + $detail->detail_shopping_point}}$</td>
+            <td>${{$detail->detail_totail_price + $detail->detail_shopping_point}}</td>
 						<td>{{$status[ $detail->detail_status ]}}</td>
             <td>{{$shipment[ $detail->detail_shipment ]}}</td>
             <td>{{$detail->detail_create_time}}</td>

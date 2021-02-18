@@ -134,7 +134,6 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $this->validate($request, [
-            'name' => 'required|max:255|regex:/^[\x7f-\xffA-Za-z0-9 ()（）\s]+$/',
             'password' => 'required|min:6|confirmed|regex:/^.*(?=.*[a-z])(?=.*[0-9]).*$/',
             'oldpassword' => 'required|min:6|regex:/^.*(?=.*[a-z])(?=.*[0-9]).*$/',
         ], [

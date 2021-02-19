@@ -175,8 +175,17 @@ return [
         'title'                 => '標題',
         'username'              => '使用者名稱',
         'file'                  => '圖片',
-        'price'                  => '價錢',
+        'price'                 => '價錢',
         'year'                  => '年',
-        'threshold'             => '門檻金額'
+        'threshold'             => '門檻金額',
+        'amount'                => '數量',
+        'img'                   => '圖片',
+        'point'                 => '購物金',
+        'level'                 => '會員等級',
+        'remarks'               => '內容',
+        'product'               => '產品',
+        'gift'                  => '優惠比率',
+        'reply'                 => '回覆',
+        'oldpassword'           => '舊密碼'
     ],
 ];

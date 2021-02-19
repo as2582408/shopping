@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class MemberStatus
 {
@@ -17,6 +18,11 @@ class MemberStatus
     {
         if (isset($request->user()->status) && $request->user()->status == 'N') {
             return redirect('report')->withErrors('該帳號已被停權');
+        }
+
+        if(Auth::check() && (Auth::user()->admin == 'Y' || Auth::user()->status == 'D')) {
+            Auth::logout();
+            return redirect('/');
         }
 
         return $next($request);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Point_log;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Auth;
 use App\User;
 
@@ -77,18 +78,23 @@ class UserController extends Controller
             'password.min' => __('shop.passwordmin')
         ]);
 
-        $user = User::where('email',$request->input('email'))->first();
-        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')]) && $user->admin == 'N' && $user->status == 'Y') {
-        //if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')]) && $user->status == 'Y') {
+        $user = User::where([
+            ['email', $request->input('email')],
+            ['admin', 'N']])->first();
+
+        if($user == NULL){
+            return view('welcome', ['error' => __('shop.accountpassworderror')]);
+        }
+
+        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])  && $user->status == 'Y') {
             $user->login_time = date("Y-m-d H:i:s");
             $user->save();
             return redirect()->intended('/');
-        } elseif (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')]) && $user->admin == 'N' && $user->status == 'N') {
+        } elseif (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])  && $user->status == 'N') {
             return redirect('/mycenter')->withErrors(__('shop.suspended'));
-        } else {
-            Auth::logout();
-            return view('welcome', ['error' => __('shop.accountpassworderror')]);
-        }
+        } 
+
+        return view('welcome', ['error' => __('shop.accountpassworderror')]);
     }
 
     public function getCenter()
@@ -161,7 +167,7 @@ class UserController extends Controller
             '3' => __('shop.order cancel'),
             '4' => __('shop.return order'),
             '5' => __('shop.return gift'),
-            '6' => __('shop.chagePoint')
+            '6' => __('shop.ChagePoint')
         ];
         return view('user.point', [
             'pointLog' => $pointLog,
@@ -171,8 +177,7 @@ class UserController extends Controller
 
     public function chageLang($lang)
     {   
-        session()->put('lang', $lang);
-
-        return redirect()->back();
+        $minutes = 43200;
+        return redirect()->back()->withCookie(cookie('lang', $lang, $minutes));
     }
 }

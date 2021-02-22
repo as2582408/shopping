@@ -5,6 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Cookie;
+
 
 class Language
 {
@@ -17,8 +19,8 @@ class Language
      */
     public function handle($request, Closure $next)
     {
-        if (Session::has('lang')) {
-            $lang = Session::get('lang');
+        if (Cookie::has('lang')) {
+            $lang = Cookie::get('lang');
             App::setLocale($lang);
         } else {
             App::setLocale('zh');

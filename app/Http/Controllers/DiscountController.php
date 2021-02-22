@@ -62,7 +62,7 @@ class DiscountController extends Controller
     public function addDiscount(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|max:255|regex:/^[A-Za-z0-9\x7f-\xffA]+$/',
+            'name' => 'required|max:255|regex:/^[A-Za-z0-9\x7f-\xffA]+$/|unique:discount,discount_name',
             'level' => 'required|numeric|min:0|integer',
             'threshold' => 'required|numeric|min:0|digits_between:0,10',
             'gift' => 'required|numeric'

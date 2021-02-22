@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>{{ __('shop.Administrator') }}</title>
+    <title>{{ __('shop.shop') }}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>

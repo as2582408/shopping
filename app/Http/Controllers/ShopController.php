@@ -298,7 +298,7 @@ class ShopController extends Controller
         }
 
         if(isset($discount) && $request->point == 1 && $discount->discount_gift < 1) {
-            $discountPrice = $totalPrice * $discount->discount_gift;
+            $discountPrice = ceil($totalPrice * $discount->discount_gift);
 
             if($discountPrice >= $userData->point){
                 $useGiftBefore = 0;
@@ -345,7 +345,7 @@ class ShopController extends Controller
         }
 
         if(isset($discount) && $request->point == 2 && $discount->discount_gift < 1) {
-            $discountPrice = $totalPrice * $discount->discount_gift;
+            $discountPrice = ceil($totalPrice * $discount->discount_gift);
 
             $checkout = [
                 'totalPrice' => '$'.$totalPrice,
@@ -414,7 +414,7 @@ class ShopController extends Controller
         foreach($products as $product)
         {
             //寫入細單如是折扣優惠 需要打折後再寫入
-            $price = ($request->discountGift < 1 && $request->discountGift != 0) ? $product->product_price * $request->discountGift : $product->product_price;
+            $price = ($request->discountGift < 1 && $request->discountGift != 0) ? ceil($product->product_price * $request->discountGift) : $product->product_price;
             
             Detail_item::create([
                 'item_detail_id' => $detailId,

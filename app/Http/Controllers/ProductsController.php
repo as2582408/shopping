@@ -61,7 +61,9 @@ class ProductsController extends Controller
         ]);
 
         //放置檔案
-        $productsImg = $_FILES['img']['name'];
+        $timestamp = strtotime(date("Y-m-d H:i:s"));
+        $rand = rand(0,10000);
+        $productsImg = $timestamp.$rand.'.jpg';
         $imgPath = '../storage/app/public';
         $request->file('img')->move($imgPath, $productsImg);
         $productCategory = '10';

@@ -8,6 +8,7 @@ use App\Level;
 use App\Point_log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class AdminController extends Controller
 {
@@ -146,7 +147,7 @@ class AdminController extends Controller
 
             Point_log::create([
                 'log_user_id' => $user->id,
-                'log_detail' => '0',
+                'log_detail' => Auth::id(),
                 'log_change_gold' => $cheageMoney,
                 'log_new_gold' => $request->input('point'),
                 'log_type' => '6',

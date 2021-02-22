@@ -13,6 +13,14 @@
                 </div>
                 <div style="padding-top:30px" class="panel-body" >
                     <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+					@if (count($errors) > 0)
+                	<div class="alert alert-danger">
+                	    @foreach ($errors->all() as $errors)
+                	        <p>{{ $errors }}</p>    
+                	    @endforeach
+					
+                	</div>
+                	@endif
                     <form method="POST" action="{{ url('/signin') }}" class="form-horizontal" role="form">
                         {!! csrf_field() !!}
                         <div style="margin-bottom: 25px" class="input-group">

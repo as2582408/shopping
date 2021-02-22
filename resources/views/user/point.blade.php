@@ -28,7 +28,13 @@
 			<tbody>
 			@foreach ($pointLog as $log)
           	<tr>
-            	<th scope="row">{{$log->log_detail}}</th>
+            	<th scope="row">
+					@if ($log->log_type  == 6)
+					
+					@else
+					{{$log->log_detail}}
+					@endif
+				</th>
 				<td>{{$log->log_time}}</td>
             	<td>{{$type[$log->log_type]}}</td>
 				<td @if ($log->log_change_gold < 0) 

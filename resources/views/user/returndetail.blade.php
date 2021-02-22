@@ -111,7 +111,7 @@
             <div class="btn-group pull-right">
 				@if ($check != 0)
 					<button id="submit" name="submit" class="btn btn-sm btn-default">
-						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>{{__('shop.saveedit')}}
+						{{__('shop.submit')}}
 				 	</button>
 				@endif
               </form>

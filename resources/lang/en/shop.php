@@ -212,7 +212,7 @@ return [
     'Successful reply' => 'Successful reply',
     'Content' => 'Content',
     'Added time' => 'Added time',
-    'ChagePoint' => 'Chage Point',
+    'ChagePoint' => 'Admin Chage Point',
     'BeforePoint' => 'Before Point',
     'Up Time' => 'Updata Time',
     'shopping' => 'shopping',
@@ -237,7 +237,6 @@ return [
     'useGiftBefore' => 'use Gift Before',
     'endPrice' =>   'Price',
     'discountGift' => 'discountGift',
-    'chagePoint' => 'chage Point'
 
 
 ];

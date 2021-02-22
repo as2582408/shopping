@@ -228,7 +228,7 @@ return [
     'Successful reply' => '已成功回覆',
     'Content' => '詳細',
     'Added time' => '上架時間',
-    'ChagePoint' => '變動購物金',
+    'ChagePoint' => '管理員異動購物金',
     'BeforePoint' => '變動後額度',
     'Up Time' => '更新時間',
     'shopping' => '消費',
@@ -253,6 +253,4 @@ return [
     'useGiftBefore' => '使用後禮金',
     'endPrice' =>   '應付價格',
     'discountGift' => '可獲得禮金',
-    'chagePoint' => '額度變動'
-
 ];

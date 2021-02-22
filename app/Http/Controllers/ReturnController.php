@@ -205,7 +205,7 @@ class ReturnController extends Controller
             ];
             $i++;
         }
-        return view('user.contentreturn', [
+        return view('user.contentReturn', [
             'itmes' => $itme,
             'return' => $returnDetail
             ]); 

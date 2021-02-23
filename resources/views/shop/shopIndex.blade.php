@@ -56,7 +56,7 @@
 			<td>${{ $product->product_price }}</td>
             <td><a href='{{url("/shop/show/{$product->product_id}")}}' class="alert-link">{{__('shop.Content') }}</a></td>
             <td></td>
-			<td><a class='add' onclick="add({{$product->product_id}},{{$product->product_price}})" class="alert-link">{{__('shop.FastAdd') }}</a></td>
+			<td><a onclick="add({{$product->product_id}},{{$product->product_price}})" class="alert-link">{{__('shop.FastAdd') }}</a></td>
 		</tr>
         @endforeach  
 		</tbody>
@@ -64,6 +64,7 @@
          </div>
         </div>
     </div>
+
 <script type="text/javascript">
     $(document).ready(function() {
         var categoryId = '{{$categoryId}}';

@@ -31,6 +31,7 @@
             @endforeach
         </tbody>
         </table>
+        <hr>
         <div class="col-sm-5 col-xs-6 tital ">{{__('shop.phone')}}:</div>
         <div class="col-sm-4 pull-right">
             <input id="phone" name="phone" type="text"  class="form-control  " value="{{__($user->phone)}}" required="">    

@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use App\Mail\SendMail;
+use Mail;
 use App\User;
 use App\Level;
 use App\Point_log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
+use Illuminate\Support\Facades\Mail as FacadesMail;
 
 class AdminController extends Controller
 {
@@ -201,6 +204,8 @@ class AdminController extends Controller
         $user->password = bcrypt($request->input('password'));
         $user->updated_at = date("Y-m-d H:i:s");
         $user->save();
+
+        Mail::to($user->email)->send(new SendMail($request->input('password')));
 
         return redirect('admin/account');
     }

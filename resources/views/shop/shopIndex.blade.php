@@ -12,6 +12,7 @@
 				{{ session()->get('success_message') }}
                 </div>
             @endif
+            <p id ='p1'><p>
     <div class="container">
         <div class="row">
     <div class="row">
@@ -23,45 +24,17 @@
             </form>
         </div>
 
-        @if ($categoryId == '' && $search == '')
         <div class="col-md-3 pull-right">
             <strong>{{__('shop.price') }}: </strong>
-            <a href="{{url("/shop/orderby/asc/price")}}">{{__('shop.low') }}</a>
-            <a href="{{url("/shop/orderby/desc/price")}}">{{__('shop.high') }}</a>
+            <a id ='orderbyprice' href="{{url("/shop/orderby/asc/price")}}">{{__('shop.low') }}</a>
+            <a id ='orderbyprice2' href="{{url("/shop/orderby/desc/price")}}">{{__('shop.high') }}</a>
         </div>
-        @elseif(!empty($categoryId) && $search == '')
-        <div class="col-md-3 pull-right">
-            <strong>{{__('shop.price') }}: </strong>
-            <a href="{{url("/shop/orderByCategory/asc/price/{$categoryId}")}}">{{__('shop.low') }}</a>
-            <a href="{{url("/shop/orderByCategory/desc/price/{$categoryId}")}}">{{__('shop.high') }}</a>
-        </div>
-        @elseif(!empty($search) && $categoryId == '')
-        <div class="col-md-3 pull-right">
-            <strong>{{__('shop.price') }}: </strong>
-            <a href="{{url("/shop/orderBySearch/asc/price/{$search}")}}">{{__('shop.low') }}</a>
-            <a href="{{url("/shop/orderBySearch/desc/price/{$search}")}}">{{__('shop.high') }}</a>
-        </div>
-        @endif
 
-        @if ($categoryId == '' && $search == '')
         <div class="col-md-3 pull-right">
             <strong>{{__('shop.Added time') }}: </strong>
-            <a href="{{url("/shop/orderby/asc/time")}}">{{__('shop.Time low') }}</a>
-            <a href="{{url("/shop/orderby/desc/time")}}">{{__('shop.Time high') }}</a>
+            <a id ='orderbytime' href="{{url("/shop/orderby/asc/time")}}">{{__('shop.Time low') }}</a>
+            <a id ='orderbytime2' href="{{url("/shop/orderby/desc/time")}}">{{__('shop.Time high') }}</a>
         </div>
-        @elseif(!empty($categoryId) && $search == '')
-        <div class="col-md-3 pull-right">
-            <strong>{{__('shop.Added time') }}: </strong>
-            <a href="{{url("/shop/orderByCategory/asc/time/{$categoryId}")}}">{{__('shop.Time low') }}</a>
-            <a href="{{url("/shop/orderByCategory/desc/time/{$categoryId}")}}">{{__('shop.Time high') }}</a>
-        </div>
-        @elseif(!empty($search) && $categoryId == '')
-        <div class="col-md-3 pull-right">
-            <strong>{{__('shop.Added time') }}: </strong>
-            <a href="{{url("/shop/orderBySearch/asc/time/{$search}")}}">{{__('shop.Time low') }}</a>
-            <a href="{{url("/shop/orderBySearch/desc/time/{$search}")}}">{{__('shop.Time high') }}</a>
-        </div>
-        @endif
     </div>
     <hr>
     <ul class="nav nav-pills">
@@ -83,7 +56,7 @@
 			<td>${{ $product->product_price }}</td>
             <td><a href='{{url("/shop/show/{$product->product_id}")}}' class="alert-link">{{__('shop.Content') }}</a></td>
             <td></td>
-			<td><a href='{{url("/shop/quicklyadd/{$product->product_id}/{$product->product_price}")}}' class="alert-link">{{__('shop.FastAdd') }}</a></td>
+			<td><a class='add' onclick="add({{$product->product_id}},{{$product->product_price}})" class="alert-link">{{__('shop.FastAdd') }}</a></td>
 		</tr>
         @endforeach  
 		</tbody>
@@ -91,5 +64,37 @@
          </div>
         </div>
     </div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var categoryId = '{{$categoryId}}';
+        var search = '{{$search}}';
+        if (categoryId != '') {
+            document.getElementById("orderbyprice").href = "/shop/orderByCategory/asc/price/" + categoryId; 
+            document.getElementById("orderbyprice2").href = "/shop/orderByCategory/asc/price/" + categoryId;
+            document.getElementById("orderbytime").href = "/shop/orderByCategory/asc/time/" + categoryId; 
+            document.getElementById("orderbytime2").href = "/shop/orderByCategory/desc/time/" + categoryId;
+        }
+        if (search != '') {
+            document.getElementById("orderbyprice").href = "/shop/orderBySearch/asc/price/" + search; 
+            document.getElementById("orderbyprice2").href = "/shop/orderBySearch/desc/price/" + search;
+            document.getElementById("orderbytime").href = "/shop/orderBySearch/asc/time/" + search; 
+            document.getElementById("orderbytime2").href = "/shop/orderBySearch/desc/time/" + search;
+        }
+    });
 
+    function add(id,price){
+        $.ajax({
+            url: "/shop/quicklyadd/"+id+"/"+price,
+            type: "GET",
+            dataType: "text",
+            cache: false,
+            success: function(response) {
+                document.getElementById("p1").innerHTML = "<div class='alert alert-success'> Success </div>";
+            },
+            error: function(){
+                console.log('哪裡怪怪的');
+        	    } 
+            });
+    }
+</script>
 @endsection

@@ -237,6 +237,7 @@ return [
     'useGiftBefore' => 'use Gift Before',
     'endPrice' =>   'Price',
     'discountGift' => 'discountGift',
+    'cart clear'  => 'Cart No Products'
 
 
 ];

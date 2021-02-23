@@ -25,11 +25,19 @@
             </tr>
     	</thead>
 		<tbody>
+        <form id="checking" action="{{url("/shop/checking")}}" method="POST" >
         @foreach ($products as $product)
         <tr>
 			<td><a href='{{url("/shop/show/{$product->product_id}")}}' target="_blank">{{$product->product_name}}</a></td>
-            <td>${{ $product->product_price }}</td>
-            <td>{{ $product->cart_product_amount }}</td>
+            <td id="{{'product_'.$product->product_id}}">${{ $product->product_price }}</td>
+            <td>
+                <select name="amount[]" class="amount">
+                    @for ($i = 1; $i <= $product->product_amount; $i++ )
+                        <option id="{{$product->product_id.'_'.$i}}" value="{{$product->product_id.'_'.$i}}" @if ($product->cart_product_amount == $i) selected
+                        @endif>{{$i}}</option>
+                    @endfor
+                </select>
+            </td>
             <td></td>
 			<td><a href='{{url("/shop/removecart/{$product->product_id}")}}' class="alert-link">{{ __('shop.remove') }}</a></td>
 		</tr>
@@ -40,8 +48,7 @@
         <table class="table table-sm">
         <tr>
             <td></td>
-            <td class="text-danger">{{ __('shop.orderTotal') }}：${{$totalPrice}}</td>
-            <form id="checking" action="{{url("/shop/checking")}}" method="POST" >
+            <td class="text-danger" id ='total'>{{ __('shop.orderTotal') }}：${{$totalPrice}}</td>
             <td>{{ __('shop.usevirtual') }}
                 <select name="point" id="point">
                     @if($userPoint > 0)
@@ -68,10 +75,31 @@
         </tr>
          </table>
          @else
-         <td>{{ __('shop.signin') }}購物車尚無商品</td>
+         <td>{{ __('shop.cart clear') }}</td>
          @endif
          
          </div>
     </div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var data = document.getElementsByClassName("amount");
+            var NewMoney = 0
 
+            $('.amount').on('change', function() {
+                for(var i = 0; i < data.length; i++) {
+                    var value = data[i].value;
+                    var Money
+                    //value[0]為商品ID
+                    //value[1]為選擇的數量
+                    value = value.split('_');
+                    Money = document.getElementById("product_"+value[0]).innerHTML
+                    Money = Money.replace('$','')
+
+                    NewMoney =  NewMoney + parseInt(Money * value[1]);
+                }
+                document.getElementById("total").innerHTML = '{{ __('shop.orderTotal')}}'+'：$' + NewMoney;
+                NewMoney = 0;
+            });
+        });
+    </script>
 @endsection

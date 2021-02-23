@@ -253,4 +253,5 @@ return [
     'useGiftBefore' => '使用後禮金',
     'endPrice' =>   '應付價格',
     'discountGift' => '可獲得禮金',
+    'cart clear'  => '購物車尚無商品'
 ];

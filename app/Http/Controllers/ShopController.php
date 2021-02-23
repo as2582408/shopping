@@ -252,6 +252,8 @@ class ShopController extends Controller
         $userData = User::where('id', '=', Auth::id())->first();
         $products = Cart::join('products', 'cart.product_id', '=', 'products.product_id')->where('user_id', '=', $userData->id)->get();
         $totalPrice = 0;
+        $i = 0;
+
         $nameArr = [
             'totalPrice' => __('shop.total'),
             'discountName' => __('shop.discountName'),
@@ -263,13 +265,14 @@ class ShopController extends Controller
             'discountGift' => __('shop.discountGift'),
         ];
         //總價
-        foreach($products as $product)
-        {
-            $totalPrice += ($product->product_price * $product->cart_product_amount);
+        
+        foreach($products as $product) {
+            $newAmount = explode('_', $request->amount[$i]);
+            $totalPrice += ($product->product_price * $newAmount[1]);
+            $i++;
         }
-
-        if($request->point == 2 && $request->discount == 0)
-        {
+        $amountArr = implode(",", $request->amount);
+        if($request->point == 2 && $request->discount == 0) {
             $checkout = [
                 'totalPrice' => '$'.$totalPrice,
                 'discountName' => '無', //使用折扣
@@ -370,7 +373,8 @@ class ShopController extends Controller
         return view('shop.checking', [
             'checkout' => $checkout,
             'discountId' => $request->discount,
-            'name' => $nameArr
+            'name' => $nameArr,
+            'amount' => $amountArr
         ]);
     }
 
@@ -381,6 +385,8 @@ class ShopController extends Controller
         $giftPoint = ($request->input('useGift') > 0) ? $request->input('useGift') : 0;
         $newPoint = ($request->input('useGift') > 0) ? $request->input('useGiftBefore') : $userData->point;
         $endPrice = str_replace('$', '', $request->input('endPrice'));
+        $newAmount = $request->input('amount');
+        $amountArr = explode(',', $newAmount);
         User::where('id', '=', Auth::id())->decrement('point', $giftPoint);
 
         $detailId = Detail::insertGetId([
@@ -399,7 +405,7 @@ class ShopController extends Controller
             'detail_remarks' => ''
         ]);
         //紀錄消費log
-        if($giftPoint > 0) {
+        if ($giftPoint > 0) {
             Point_log::create([
                 'log_user_id' => $userData->id,
                 'log_detail' => $detailId,
@@ -408,6 +414,11 @@ class ShopController extends Controller
                 'log_type' => '1',
                 'log_time' => date("Y-m-d H:i:s")
             ])->save();
+        }
+
+        foreach ($amountArr as  $amount) {
+            $amount = explode('_', $amount);
+            Cart::where([['user_id', '=', $userData->id], ['product_id', '=', $amount[0]]])->update(['cart_product_amount' => $amount[1]]);
         }
         //將購物車商品放置訂單細項 庫存數量扣除
         $products = Cart::join('products', 'cart.product_id', '=', 'products.product_id')->where('user_id', '=', $userData->id)->get();
@@ -427,7 +438,7 @@ class ShopController extends Controller
             $productAmount = Product::where('product_id', '=', $product->product_id)->select('product_amount')->first();
             if(($productAmount->product_amount - $product->cart_product_amount) <= 0) {
                 Product::where('product_id', '=', $product->product_id)->decrement('product_amount', $product->cart_product_amount);
-                Cart::where('product_id', '=', $id)->delete();
+                Cart::where('product_id', '=', $product->product_id)->delete();
             }
         }
         //刪除購物車商品

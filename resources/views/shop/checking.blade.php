@@ -48,6 +48,9 @@
                     <input id="discountId" name="discountId" type="hidden"  class="form-control" value="{{$discountId}}" required="">
                 </td>
                 <td>
+                    <input id="amount" name="amount" type="hidden"  class="form-control" value="{{$amount}}" required="">
+                </td>
+                <td>
                     <button id="submit" name="submit" class="btn btn-sm btn-default">
                         {{ __('shop.confirm') }}
                     </button>

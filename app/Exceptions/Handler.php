@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -48,6 +49,18 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if($exception instanceof \Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException){
+	        $exception = new HttpException(404, $exception->getMessage(), $exception);
+        }
         return parent::render($request, $exception);
+    }
+
+    protected function prepareResponse($request, Exception $e)
+    {
+	    if (!config('app.debug') and !$this->isHttpException($e)) {
+	        $e = new HttpException(404, $e->getMessage(), $e);
+	    }
+
+	    return parent::prepareResponse($request, $e);
     }
 }

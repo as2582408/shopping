@@ -14,6 +14,8 @@
     @endif
     <div class="container">
         <div class="row">
+        <form id="logout-form" action="{{url("/shop/checkout")}}" method="POST" >
+            {{ csrf_field() }}
         <table class="table table-sm">
         <thead>
             <tr>
@@ -29,16 +31,19 @@
             @endforeach
         </tbody>
         </table>
-
+        <div class="col-sm-5 col-xs-6 tital ">{{__('shop.phone')}}:</div>
+        <div class="col-sm-4 pull-right">
+            <input id="phone" name="phone" type="text"  class="form-control  " value="{{__($user->phone)}}" required="">    
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+        <hr>
+        <div class="col-sm-5 col-xs-6 tital ">{{__('shop.address')}}:</div>
+        <div class="col-sm-4 pull-right">
+            <input id="address" name="address" type="text"  class="form-control  " value="{{__($user->address)}}" required=""> 
+        </div>
         <table class="table table-sm">
         <tr>
-            <td>
-                <button class="btn btn-sm btn-default" onclick="history.back()">
-                {{__('shop.Back')}}
-                </button>
-            </td>
-            <form id="logout-form" action="{{url("/shop/checkout")}}" method="POST" >
-                {{ csrf_field() }}
                 @foreach ($checkout as $id => $value)
                 <td>
                     <input id="{{$id}}" name="{{$id}}" type="hidden"  class="form-control" value="{{$value}}" required="">
@@ -49,6 +54,11 @@
                 </td>
                 <td>
                     <input id="amount" name="amount" type="hidden"  class="form-control" value="{{$amount}}" required="">
+                </td>
+                <td>
+                    <button class="btn btn-sm btn-default" onclick="history.back()">
+                    {{__('shop.Back')}}
+                    </button>
                 </td>
                 <td>
                     <button id="submit" name="submit" class="btn btn-sm btn-default">

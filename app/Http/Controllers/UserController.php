@@ -115,7 +115,8 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required|max:255|regex:/^[\x7f-\xffA-Za-z0-9 ()（）\s]+$/',
             'email' => 'email|required|unique:users,email,'.$user->id,
-            'phone' => 'required|numeric|regex:/^09\d{8}$/'
+            'phone' => 'required|numeric|regex:/^09\d{8}$/',
+            'address' => 'required|max:255|regex:/^[\x7f-\xffA-Za-z0-9 ()（）\s]+$/'
         ], [
             'name.regex' => __('shop.nameregex'),
             'email.email' => __('shop.emailvalidation'),

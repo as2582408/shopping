@@ -34,7 +34,13 @@ class ShopController extends Controller
     //商品頁面
     public function show($id)
     {
+        if(!is_numeric($id)) {
+            return redirect('/');
+        }
         $product = Product::where('product_id', '=', $id)->first();
+        if(!$product) {
+            return redirect('/');
+        }
 
         return view('shop.show', ['product' => $product]);
     }
@@ -251,27 +257,26 @@ class ShopController extends Controller
         $discount = Discount::where('discount_id', '=', $request->discount)->first();
         $userData = User::where('id', '=', Auth::id())->first();
         $products = Cart::join('products', 'cart.product_id', '=', 'products.product_id')->where('user_id', '=', $userData->id)->get();
+        $amountArr = implode(",", $request->amount);
         $totalPrice = 0;
         $i = 0;
 
         $nameArr = [
             'totalPrice' => __('shop.total'),
             'discountName' => __('shop.discountName'),
-            'discountGift' => __('shop.discountGift'),
             'discountPrice' => __('shop.discountPrice'),
             'useGift' => __('shop.useGift'),
             'useGiftBefore' => __('shop.useGiftBefore'),
             'endPrice' =>   __('shop.endPrice'),
             'discountGift' => __('shop.discountGift'),
         ];
-        //總價
-        
+        //計算總價
         foreach($products as $product) {
             $newAmount = explode('_', $request->amount[$i]);
             $totalPrice += ($product->product_price * $newAmount[1]);
             $i++;
         }
-        $amountArr = implode(",", $request->amount);
+        //無使用折扣，無購物金
         if($request->point == 2 && $request->discount == 0) {
             $checkout = [
                 'totalPrice' => '$'.$totalPrice,
@@ -279,7 +284,7 @@ class ShopController extends Controller
                 'endPrice' =>  '$'.$totalPrice//應付價格
             ];
         }
-        
+        //無使用折扣，使用購物金
         if($request->point == 1 && $request->discount == 0)
         {
             if($totalPrice >= $userData->point){
@@ -322,7 +327,7 @@ class ShopController extends Controller
                 'useGiftBefore' => $useGiftBefore,//使用後禮金
                 'endPrice' =>   '$'.$endPrice//應付價格
             ];
-            $nameArr['discountGift'] = "折價比率";
+            $nameArr['discountGift'] = __('shop.discountGift2');
         }
 
         if(isset($discount) && $request->point == 1 && $discount->discount_gift > 1) {
@@ -357,7 +362,7 @@ class ShopController extends Controller
                 'discountPrice' => '$'.$discountPrice, //折扣後價格
                 'endPrice' =>   '$'.$discountPrice//應付價格
             ];
-            $nameArr['discountGift'] = "折價比率";
+            $nameArr['discountGift'] = __('shop.discountGift2');
         }
 
         if(isset($discount) && $request->point == 2 && $discount->discount_gift > 1) {
@@ -371,6 +376,7 @@ class ShopController extends Controller
         }
 
         return view('shop.checking', [
+            'user' => $userData,
             'checkout' => $checkout,
             'discountId' => $request->discount,
             'name' => $nameArr,
@@ -380,6 +386,10 @@ class ShopController extends Controller
 
     public function checkout(Request $request) {
 
+        $this->validate($request, [
+            'phone' => 'required|numeric|regex:/^09\d{8}$/',
+            'address' => 'required|max:255|regex:/^[\x7f-\xffA-Za-z0-9 ()（）\s]+$/'
+        ]);
         $userData = User::where('id', '=', Auth::id())->first();
         $discountGift = ($request->input('discountGift') > 1 )  ? $request->input('discountGift') : 0;
         $giftPoint = ($request->input('useGift') > 0) ? $request->input('useGift') : 0;
@@ -397,8 +407,8 @@ class ShopController extends Controller
             'detail_shipment' => '1',
             'detail_updata_time' => date("Y-m-d H:i:s"),
             'detail_create_time' => date("Y-m-d H:i:s"),
-            'user_phone' => $userData->phone,
-            'user_address' => $userData->address,
+            'user_phone' => $request->phone,
+            'user_address' => $request->address,
             'detail_shopping_point' => $giftPoint,
             'detail_gift_money' => $discountGift,
             'detail_description' => '',

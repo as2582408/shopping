@@ -71,7 +71,7 @@
         var search = '{{$search}}';
         if (categoryId != '') {
             document.getElementById("orderbyprice").href = "/shop/orderByCategory/asc/price/" + categoryId; 
-            document.getElementById("orderbyprice2").href = "/shop/orderByCategory/asc/price/" + categoryId;
+            document.getElementById("orderbyprice2").href = "/shop/orderByCategory/desc/price/" + categoryId;
             document.getElementById("orderbytime").href = "/shop/orderByCategory/asc/time/" + categoryId; 
             document.getElementById("orderbytime2").href = "/shop/orderByCategory/desc/time/" + categoryId;
         }

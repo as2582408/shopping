@@ -70,6 +70,9 @@ class AdminController extends Controller
     //編輯會員資料頁面
     public function editAccountPage($id)
     {
+        if(!is_numeric($id)) {
+            return redirect()->intended('admin/account');
+        }
         $user = User::where('id', $id)->first();
         $levels = Level::where('level_status', '=', 'Y')->orderBy('level_rank', 'asc')->get();
 
@@ -81,6 +84,9 @@ class AdminController extends Controller
     //後台刪除會員
     public function delectAccount($id)
     {
+        if(!is_numeric($id)) {
+            return redirect()->intended('admin/account');
+        }
         $checkDetail = User::join('detail', 'users.id', '=', 'detail.user_id')->where([
             ['detail_status', '=', '0'],
             ['id', '=', $id]])->count();
@@ -189,6 +195,9 @@ class AdminController extends Controller
 
     public function setPasswordPage($id)
     {
+        if(!is_numeric($id)) {
+            return redirect()->intended('admin/account');
+        }
         return view('admin.setpassword', ['userId' => $id]);
     }
 

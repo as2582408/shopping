@@ -16,6 +16,9 @@ class CategoryController extends Controller
     
     public function editCategoryPage($id)
     {
+        if(!is_numeric($id)) {
+            return redirect()->intended('admin/category');
+        }
         $category = Category::where('id' , '=', $id)->first();
         return view('category.editcategory', ['categories' => $category]);
     }
@@ -35,6 +38,9 @@ class CategoryController extends Controller
 
     public function delCategory($id)
     {
+        if(!is_numeric($id)) {
+            return redirect()->intended('admin/category');
+        }
         $products = Product::where('product_category', 'LIKE' ,'%'.$id.'%')->get();
         $productsNum = count($products);
 

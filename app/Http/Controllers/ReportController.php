@@ -17,6 +17,9 @@ class ReportController extends Controller
 
     public function talk($id)
     {
+        if(!is_numeric($id)) {
+            return redirect()->redirect('/admin/report');
+        }
         $replys = Report_reply::join('report', 'report.report_id', '=', 'report_reply.reply_id')->where('reply_id', '=', $id)->orderBy('reply_time', 'desc')->get();
         return view('report.reporttalk', [
             'replys' => $replys,
@@ -26,6 +29,9 @@ class ReportController extends Controller
 
     public function reportReplyPage($id)
     {
+        if(!is_numeric($id)) {
+            return redirect()->redirect('/admin/report');
+        }
         return view('report.reportreply', ['reply_id' => $id]);
     }
 
@@ -60,6 +66,9 @@ class ReportController extends Controller
 
     public function userTalk($id)
     {
+        if(!is_numeric($id)) {
+            return redirect()->redirect('/report');
+        }
         $replys = Report_reply::join('report', 'report.report_id', '=', 'report_reply.reply_id')->where('reply_id', '=', $id)->orderBy('reply_time', 'desc')->get();
         return view('user.reporttalk', [
             'replys' => $replys,

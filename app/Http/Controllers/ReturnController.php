@@ -31,6 +31,9 @@ class ReturnController extends Controller
 
     public function contentReturn($id)
     {
+        if(!is_numeric($id)) {
+            return redirect()->intended('/admin/return');
+        }
         $returnDetail = Return_detail::where('return_id', '=', $id)->first();
         $itmeId = explode(",",$returnDetail->return_itme_id);
         $itmeAmount = explode(",",$returnDetail->return_message);
@@ -56,6 +59,9 @@ class ReturnController extends Controller
 
     public function refuseReturnPage($id)
     {
+        if(!is_numeric($id)) {
+            return redirect()->intended('/admin/return');
+        }
         return view('return.refusereturn', ['returnId' => $id]);
     }
 
@@ -86,6 +92,9 @@ class ReturnController extends Controller
 
     public function agreeReturn($id)
     {
+        if(!is_numeric($id)) {
+            return redirect()->intended('/admin/return');
+        }
         Return_detail::where('return_id', '=', $id)->update([
             'return_status' => '1',
             'return_updata_time' => date("Y-m-d H:i:s")
@@ -188,6 +197,9 @@ class ReturnController extends Controller
 
     public function userContentReturn($id)
     {
+        if(!is_numeric($id)) {
+            return redirect()->intended('/return');
+        }
         $returnDetail = Return_detail::where('return_id', '=', $id)->first();
         $itmeId = explode(",",$returnDetail->return_itme_id);
         $itmeAmount = explode(",",$returnDetail->return_message);

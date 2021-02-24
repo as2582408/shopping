@@ -23,8 +23,17 @@ class DetailController extends Controller
         ->join('users', 'users.id', '=', 'detail.user_id')
         ->get();
 
-        $status_arr = [__('shop.Not End'), __('shop.End'), __('shop.cancel')];
-        $shipment_arr = [1 => __('shop.Not Send'),2 => __('shop.Send'),3 =>__('shop.RefundStatus')];
+        //用來轉換狀態選定語系的文字
+        $status_arr = [
+            0 => __('shop.Not End'),
+            1 => __('shop.End'),
+            2 => __('shop.cancel')
+        ];
+        $shipment_arr = [
+            1 => __('shop.Not Send'),
+            2 => __('shop.Send'),
+            3 =>__('shop.RefundStatus')
+        ];
 
         return view('detail.detail', [
             'details' => $details,
@@ -35,6 +44,9 @@ class DetailController extends Controller
 
     public function editDetailPage($id)
     {
+        if(!is_numeric($id)) {
+            return redirect()->intended('/admin/detail');
+        }
         $detail = Detail::where('detail_id', $id)->join('users', 'users.id', '=', 'detail.user_id')->first();
         $products = Detail_item::where('item_detail_id', '=', $id)->get();
 
@@ -61,6 +73,9 @@ class DetailController extends Controller
 
     public function delDetailPage($id)
     {
+        if(!is_numeric($id)) {
+            return redirect()->intended('/admin/detail');
+        }
         return view('detail.delectdetail', ['detailId' => $id]);
     }
 
@@ -103,6 +118,9 @@ class DetailController extends Controller
 
     public function shipmentDetail($id)
     {
+        if(!is_numeric($id)) {
+            return redirect()->intended('/admin/detail');
+        }
         Detail::where('detail_id', '=', $id)->update([
             'detail_shipment' => '2',
             'detail_updata_time' => date("Y-m-d H:i:s")
@@ -113,6 +131,9 @@ class DetailController extends Controller
 
     public function endDetail($id)
     {        
+        if(!is_numeric($id)) {
+            return redirect()->intended('/detail');
+        }
         Detail::where('detail_id', '=', $id)->update([
             'detail_status' => '1',
             'detail_updata_time' => date("Y-m-d H:i:s"),
@@ -169,6 +190,9 @@ class DetailController extends Controller
     //會員編輯訂單頁面
     public function userEditDetailPage($id)
     {
+        if(!is_numeric($id)) {
+            return redirect()->intended('/detail');
+        }
         $detail = Detail::where('detail_id', $id)->join('users', 'users.id', '=', 'detail.user_id')->first();
         $products = Detail_item::where('item_detail_id', '=', $id)->get();
 
@@ -197,6 +221,9 @@ class DetailController extends Controller
     //
     public function userDelDetail($id)
     {
+        if(!is_numeric($id)) {
+            return redirect()->intended('/detail');
+        }
         Detail::where('detail_id', '=', $id)->update([
             'detail_status' => '2',
             'detail_updata_time' => date("Y-m-d H:i:s")
@@ -209,6 +236,9 @@ class DetailController extends Controller
     //會員退貨頁面
     public function userReturnDetailPage($id)
     {
+        if(!is_numeric($id)) {
+            return redirect()->intended('/detail');
+        }
         $check = 0;
         $products = Detail_item::where('item_detail_id', '=', $id)->get();
         foreach($products as $product) {

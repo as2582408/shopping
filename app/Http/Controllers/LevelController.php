@@ -28,6 +28,9 @@ class LevelController extends Controller
 
     public function editLevelPage($id)
     {
+        if(!is_numeric($id)) {
+            return redirect()->intended('/admin/level');
+        }
         $level = Level::where('level_id' , '=', $id)->first();
         $upMoney = Level::where('level_rank', '=', $level->level_rank+1)->select('level_threshold')->first();
         $downMoney = Level::where('level_rank', '=', $level->level_rank-1)->select('level_threshold')->first();
@@ -69,6 +72,9 @@ class LevelController extends Controller
 
     public function delLevel($id)
     {
+        if(!is_numeric($id)) {
+            return redirect()->intended('/admin/level');
+        }
         $oldRank = Level::select('level_rank')->where('level_id', '=', $id)->first();
 
         Level::where('level_id', '=', $id)->update([
@@ -84,6 +90,9 @@ class LevelController extends Controller
 
     public function redelLevel($id)
     {
+        if(!is_numeric($id)) {
+            return redirect()->intended('/admin/level');
+        }
         $reRank = Level::select('level_rank', 'level_threshold')->where('level_id', '=', $id)->first();
 
         Level::where('level_id', '=', $id)->update([

@@ -99,6 +99,9 @@ class ProductsController extends Controller
     //刪除商品
     public function delectProducts($id)
     {
+        if(!is_numeric($id)) {
+            return redirect()->intended('admin/products');
+        }
         $product = Product::where('product_id', $id)->update([
             'product_status' => 'D', 
             'product_updata_time' => date("Y-m-d H:i:s")
@@ -111,6 +114,9 @@ class ProductsController extends Controller
 
     public function editProductsPage($id)
     {
+        if(!is_numeric($id)) {
+            return redirect()->intended('admin/products');
+        }
         $categories = Category::all();
         $product = Product::where('product_id', $id)->first();
 

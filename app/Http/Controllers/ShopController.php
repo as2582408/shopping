@@ -121,6 +121,9 @@ class ShopController extends Controller
     //選擇分類
     public function selectCategory($id)
     {
+        if(!is_numeric($id)) {
+            return redirect('/');
+        }
         $products = Product::where([
             ['product_category', 'LIKE', '%'.$id.'%'],
             ['product_status', '=', 'Y'],
@@ -244,6 +247,9 @@ class ShopController extends Controller
 
     public function removeCart($id)
     {
+        if(!is_numeric($id)) {
+            return redirect()->back();
+        }
         Cart::where([
             ['user_id', '=', Auth::id()],
             ['product_id', '=', $id]

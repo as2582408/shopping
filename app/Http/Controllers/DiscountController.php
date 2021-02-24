@@ -16,6 +16,9 @@ class DiscountController extends Controller
 
     public function editDiscountPage($id)
     {
+        if(!is_numeric($id)) {
+            return redirect()->intended('/admin/discount');
+        }
         $discount = Discount::where('discount_id', '=', $id)->first();
 
         return view('discount.editdiscount',[ 'discount' => $discount ]);
@@ -46,6 +49,9 @@ class DiscountController extends Controller
 
     public function delDiscount($id)
     {
+        if(!is_numeric($id)) {
+            return redirect()->intended('/admin/discount');
+        }
         Discount::where('discount_id', '=', $id)->update([
             'discount_status' => 'D',
             'discount_updata_time' => date("Y-m-d H:i:s")

@@ -34,7 +34,8 @@
         <hr>
         <div class="col-sm-5 col-xs-6 tital ">{{__('shop.phone')}}:</div>
         <div class="col-sm-4 pull-right">
-            <input id="phone" name="phone" type="text"  class="form-control  " value="{{__($user->phone)}}" required="">    
+            <input id="phone" name="phone" type="text"  class="form-control  " value="{{__($user->phone)}}" required="">
+            <span id="uidt1" style="margin-left: 100px"></span>    
         </div>
         <div class="clearfix"></div>
         <div class="bot-border"></div>
@@ -42,6 +43,7 @@
         <div class="col-sm-5 col-xs-6 tital ">{{__('shop.address')}}:</div>
         <div class="col-sm-4 pull-right">
             <input id="address" name="address" type="text"  class="form-control  " value="{{__($user->address)}}" required=""> 
+            <span id="uidt2" style="margin-left: 100px"></span>    
         </div>
         <table class="table table-sm">
         <tr>
@@ -57,19 +59,41 @@
                     <input id="amount" name="amount" type="hidden"  class="form-control" value="{{$amount}}" required="">
                 </td>
                 <td>
-                    <button class="btn btn-sm btn-default" onclick="history.back()">
-                    {{__('shop.Back')}}
-                    </button>
+                    <a class="btn btn-sm btn-default" href="{{ url('shop/cart') }}">{{__('shop.Back')}}</a>
                 </td>
                 <td>
                     <button id="submit" name="submit" class="btn btn-sm btn-default">
                         {{ __('shop.confirm') }}
                     </button>
                 </td>
-            </form> 
         </tr>
         </table>
         </div>
+    </form> 
     </div>
+<script type="text/javascript">
+phone.onblur = function() {
+    if(!(/^09\d{8}$/.test(phone.value))) {
+      this.classList.add("error");
+      document.getElementById('uidt1').innerHTML = '請輸入正確的手機號';
+      phone.focus();
+    } else {
+      this.classList.remove("error");
+      document.getElementById('uidt1').innerHTML = '';
 
+    }
+}
+address.onblur = function() {
+    if(!(/^[a-zA-Z0-9\u4e00-\u9fa5]+$/.test(address.value))) {
+      this.classList.add("error");
+      document.getElementById('uidt2').innerHTML = '請輸入正確地址';
+      address.focus();
+    } else {
+      this.classList.remove("error");
+      document.getElementById('uidt2').innerHTML = '';
+
+    }
+}
+
+</script>
 @endsection

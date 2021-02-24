@@ -392,10 +392,15 @@ class ShopController extends Controller
 
     public function checkout(Request $request) {
 
-        $this->validate($request, [
-            'phone' => 'required|numeric|regex:/^09\d{8}$/',
-            'address' => 'required|max:255|regex:/^[\x7f-\xffA-Za-z0-9 ()（）\s]+$/'
-        ]);
+        $phonePattern = "/^09\d{8}$/";
+        $addressPattern = "/^[\x7f-\xffA-Za-z0-9 ()（）\s]+$/";
+
+        if(!preg_match($phonePattern, $request->phone, $matches)) {
+            return redirect('shop/cart');
+        }
+        if(!preg_match($addressPattern, $request->address, $matches)) {
+            return redirect('shop/cart');
+        }
         $userData = User::where('id', '=', Auth::id())->first();
         $discountGift = ($request->input('discountGift') > 1 )  ? $request->input('discountGift') : 0;
         $giftPoint = ($request->input('useGift') > 0) ? $request->input('useGift') : 0;

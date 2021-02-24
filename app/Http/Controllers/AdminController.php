@@ -38,6 +38,7 @@ class AdminController extends Controller
         ]);
 
         $user = User::where('email', $request->input('email'))->first();
+        //驗證管理員登入，非管理員階層導回登入頁面
         if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')]) && $user->admin == 'Y') {
             $user->login_time = date("Y-m-d H:i:s");
             $user->save();            
@@ -70,7 +71,7 @@ class AdminController extends Controller
     //編輯會員資料頁面
     public function editAccountPage($id)
     {
-        if(!is_numeric($id)) {
+        if (!is_numeric($id)) {
             return redirect()->intended('admin/account');
         }
         $user = User::where('id', $id)->first();
@@ -84,13 +85,15 @@ class AdminController extends Controller
     //後台刪除會員
     public function delectAccount($id)
     {
-        if(!is_numeric($id)) {
+        if (!is_numeric($id)) {
             return redirect()->intended('admin/account');
         }
+
         $checkDetail = User::join('detail', 'users.id', '=', 'detail.user_id')->where([
             ['detail_status', '=', '0'],
             ['id', '=', $id]])->count();
 
+        //如會員還有注單未結束或取消，則無法刪除會員
         if ($checkDetail){
             return redirect()->back()->withErrors(__('shop.orderIsHas')); 
         }
@@ -150,6 +153,7 @@ class AdminController extends Controller
                 return redirect()->intended('admin/account')->withErrors(__('shop.emailunique'));
             }
         }
+        //如有修改額度，則紀錄log
         if($user->point != $request->input('point'))
         {
             $cheageMoney = $request->input('point') - $user->point;
@@ -213,7 +217,7 @@ class AdminController extends Controller
         $user->password = bcrypt($request->input('password'));
         $user->updated_at = date("Y-m-d H:i:s");
         $user->save();
-
+        //有修改密碼，會寄信至會員信箱通知會員
         Mail::to($user->email)->send(new SendMail($request->input('password')));
 
         return redirect('admin/account');

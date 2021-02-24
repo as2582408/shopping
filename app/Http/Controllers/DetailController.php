@@ -84,6 +84,7 @@ class DetailController extends Controller
         $this->validate($request, [
             'remarks' => 'required|max:255|regex:/^[\x7f-\xffA-Za-z0-9 ()（）!,:;\n\s]+$/',
         ]);
+        //刪除注單的理由
         $textToStore = nl2br(htmlentities($request->input('remarks'), ENT_COMPAT, 'UTF-8'));
         Detail::where('detail_id', '=', $request->input('id'))->update([
             'detail_remarks' => $textToStore,
@@ -102,6 +103,7 @@ class DetailController extends Controller
     {
         //結束訂單後才會取得禮金與累積金額，取消訂單不對禮金做動作
         $detailData = Detail::select('user_id', 'detail_shopping_point', 'detail_totail_price')->where('detail_id', '=', $detailId)->first();
+        //如有使用購物金，則歸還購物金並紀錄log
         User::where('id', '=', $detailData->user_id)->increment('point', $detailData->detail_shopping_point);
         if ($detailData->detail_shopping_point > 0) {
             $log = User::select('point')->where('id', '=', $detailData->user_id)->first();
@@ -143,11 +145,11 @@ class DetailController extends Controller
         $userData = Detail::select('user_id', 'detail_totail_price', 'detail_shopping_point', 'detail_gift_money')->where('detail_id', '=', $id)->first();
         $total = ($userData->detail_shopping_point + $userData->detail_totail_price);
 
-        //刷新累計金額與禮金
+        //如有可取得禮金，更新禮金
         if($userData->detail_gift_money > 0) {
             User::where('id', '=', $userData->user_id)->increment('point', $userData->detail_gift_money);
         }
-
+        //更新累計金額
         User::where('id', '=', $userData->user_id)->increment('accumulation_point', $total);
 
         //刷新會員等級
@@ -218,7 +220,7 @@ class DetailController extends Controller
         return redirect()->intended('/detail');
     }
 
-    //
+    //會員刪除訂單
     public function userDelDetail($id)
     {
         if(!is_numeric($id)) {
@@ -241,6 +243,7 @@ class DetailController extends Controller
         }
         $check = 0;
         $products = Detail_item::where('item_detail_id', '=', $id)->get();
+        //該訂單可退貨數量
         foreach($products as $product) {
             $check += ($product->product_amount - $product->product_retrun_amount);
         }

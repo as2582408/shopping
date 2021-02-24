@@ -90,8 +90,8 @@
         </tbody>
       </table>
     @endif
-    <button class="btn btn-sm btn-default" onclick="history.back()">{{__('shop.Back')}}</button>
-      </div>
+    <a class="btn btn-sm btn-default" href="{{ url('return') }}">{{__('shop.Back')}}</a>
+    </div>
     </div>
   </div>
 </div>

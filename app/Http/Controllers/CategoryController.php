@@ -16,7 +16,7 @@ class CategoryController extends Controller
     
     public function editCategoryPage($id)
     {
-        if(!is_numeric($id)) {
+        if (!is_numeric($id)) {
             return redirect()->intended('admin/category');
         }
         $category = Category::where('id' , '=', $id)->first();
@@ -38,12 +38,12 @@ class CategoryController extends Controller
 
     public function delCategory($id)
     {
-        if(!is_numeric($id)) {
+        if (!is_numeric($id)) {
             return redirect()->intended('admin/category');
         }
         $products = Product::where('product_category', 'LIKE' ,'%'.$id.'%')->get();
         $productsNum = count($products);
-
+        //刪除分類時進行商品分類的檢查，如商品底下有該分類，則清除該分類
         for($i = 0; $i < $productsNum; $i++) {
 
             $product_category_arr = explode(',', $products[$i]['product_category']);
@@ -51,9 +51,9 @@ class CategoryController extends Controller
             $categoryNum = count($product_category_arr);
 
             for($j = 0; $j < $categoryNum; $j++){
-                if($product_category_arr[$j] != $id)
+                if ($product_category_arr[$j] != $id)
                 {
-                    if($j == $categoryNum-1) {
+                    if ($j == $categoryNum-1) {
                         $new_category .= $product_category_arr[$j];
                     } else {
                         $new_category .= $product_category_arr[$j].',';
@@ -66,7 +66,7 @@ class CategoryController extends Controller
             }
             $products[$i]['product_category'] = $new_category;
         }
-
+        //將修改後的商品分類更新
         foreach($products as $product) {
             Product::where('product_id', '=', $product->product_id)->update([
                 'product_category' => $product->product_category
@@ -87,6 +87,7 @@ class CategoryController extends Controller
             'name' => 'required|max:255|regex:/^[A-Za-z0-9\x7f-\xffA]+$/',
         ]);
         $check = Category::where('category_name', '=', $request->input('name'))->first();
+        //無重複分類才可以新增
         if(!isset($check)){
             Category::create([
                 'category_name' => $request->input('name')

@@ -90,7 +90,7 @@
 			  </table>
           </div>
           <div>
-            <a type="button" class="btn btn-sm btn-default" href="{{url('report')}}">{{__('shop.Back')}}</a>
+            <a class="btn btn-sm btn-default" href="{{ url('/admin/report') }}">{{__('shop.Back')}}</a>
           </div>
         </div>
       </div>

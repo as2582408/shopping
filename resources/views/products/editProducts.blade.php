@@ -132,7 +132,7 @@
                   </form>
                 </div>
                 <div>
-                  <button class="btn btn-sm btn-default" onclick="history.back()">{{__('shop.Back')}}</button>
+                  <a class="btn btn-sm btn-default" href="{{ url('/admin/products') }}">{{__('shop.Back')}}</a>
                 </div>
               </div>
           </div>

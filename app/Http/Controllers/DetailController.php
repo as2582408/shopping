@@ -265,13 +265,13 @@ class DetailController extends Controller
         $idArr = '';
         $messageStr ='';
         $userId = Auth::id();
-        //檢查退貨數量
+        //檢查退貨數量 不能數量為0
         foreach( $checks as $check) {
             if($request->$check == 0){
                 return  redirect()->back()->withSuccessMessage(__('shop.quantityrequired'));;
             }       
         }
-
+        //將商品id與商品各自退貨數量轉換為字串
         for($i = 0; $i < $prCount; $i++) {
             if($i == $prCount-1) {
                 $idArr .= $checks[$i];

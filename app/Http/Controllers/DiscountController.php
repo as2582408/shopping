@@ -32,8 +32,12 @@ class DiscountController extends Controller
             'threshold' => 'required|numeric|min:0|digits_between:0,10',
             'gift' => 'required|numeric'
         ]);
-        if((float)$request->gift <= 0 || $request->gift > 9999999999) {
+        //檢查折扣數字，不能為負數或超出10位數
+        if((float)$request->gift <= 0) {
             return redirect()->back()->withErrors(__('shop.discount error1'));
+        }
+        if($request->gift > 9999999999) {
+            return redirect()->back()->withErrors(__('shop.discount error2'));
         }
         Discount::where('discount_id', '=', $request->input('id'))->update([
             'discount_name' => $request->input('name'),
@@ -73,8 +77,12 @@ class DiscountController extends Controller
             'threshold' => 'required|numeric|min:0|digits_between:0,10',
             'gift' => 'required|numeric'
         ]);
-        if((float)$request->gift <= 0 || $request->gift > 9999999999) {
+        //檢查折扣數字，不能為負數或超出10位數
+        if((float)$request->gift <= 0) {
             return redirect()->back()->withErrors(__('shop.discount error1'));
+        }
+        if($request->gift > 9999999999) {
+            return redirect()->back()->withErrors(__('shop.discount error2'));
         }
         Discount::create([
             'discount_name' => $request->input('name'),

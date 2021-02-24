@@ -221,6 +221,7 @@ class ProductsController extends Controller
 
         $categories = json_decode($categories, true);
         $categoryName = [];
+        //將分類id轉換為對應的分類名
         foreach ($categories as $categorys) {
                 $categoryName[$categorys['id']] = $categorys['category_name'];
         }

@@ -226,6 +226,7 @@ return [
     'Stop Put' => 'Stop Put',
     'edit Success' => 'edit Success',
     'discount error1' => 'discount error',
+    'discount error2' => 'discount over',
     'add Products Success' => 'add Products Success',
     'delete Products Success' => 'delete Products Success',
     'delete Success' => 'delete Success',

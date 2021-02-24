@@ -30,6 +30,7 @@ class CreateDetailTable extends Migration
             $table->integer('detail_shopping_point');
             $table->integer('detail_gift_money');
             $table->string('detail_remarks');
+            $table->string('anther_name', 20);
         });
     }
 

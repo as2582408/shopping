@@ -401,6 +401,9 @@ class ShopController extends Controller
         if(!preg_match($addressPattern, $request->address, $matches)) {
             return redirect('shop/cart');
         }
+        if(!preg_match($addressPattern, $request->anthername, $matches)) {
+            return redirect('shop/cart');
+        }
         $userData = User::where('id', '=', Auth::id())->first();
         $discountGift = ($request->input('discountGift') > 1 )  ? $request->input('discountGift') : 0;
         $giftPoint = ($request->input('useGift') > 0) ? $request->input('useGift') : 0;
@@ -423,7 +426,8 @@ class ShopController extends Controller
             'detail_shopping_point' => $giftPoint,
             'detail_gift_money' => $discountGift,
             'detail_description' => '',
-            'detail_remarks' => ''
+            'detail_remarks' => '',
+            'anther_name' => $request->anthername
         ]);
         //紀錄消費log
         if ($giftPoint > 0) {

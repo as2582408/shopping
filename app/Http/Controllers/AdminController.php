@@ -105,7 +105,7 @@ class AdminController extends Controller
         $user->updated_at = date("Y-m-d H:i:s"); ;
         $user->save();
 
-        return redirect()->intended('admin/account')->withSuccessMessage(__('delete Success'));
+        return redirect()->intended('admin/account')->withSuccessMessage(__('shop.delete Success'));
     }
 
     //後台修改會員資料

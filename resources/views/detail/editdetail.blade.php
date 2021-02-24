@@ -67,9 +67,9 @@
                 {!! csrf_field() !!}
                 <input id="id" name="id" type="hidden"  class="form-control  " value="{{$detail->detail_id}}" required="">
       
-                <div class="col-sm-5 col-xs-6 tital ">{{ __('shop.User Name') }}:</div>
+                <div class="col-sm-5 col-xs-6 tital ">{{ __('shop.receiver') }}:</div>
                 <div class="col-sm-4 pull-right">
-                    <input id="name" name="name" type="text"  class="form-control  " value="{{$detail->name}}" required="" readonly="readonly"> 
+                    <input id="name" name="name" type="text"  class="form-control  " value="{{$detail->anther_name}}" required="" readonly="readonly"> 
                 </div>
                 <div class="clearfix"></div>
                 <div class="bot-border"></div>

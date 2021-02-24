@@ -32,6 +32,14 @@
         </tbody>
         </table>
         <hr>
+        <div class="col-sm-5 col-xs-6 tital ">{{__('shop.name')}}:</div>
+        <div class="col-sm-4 pull-right">
+            <input id="anthername" name="anthername" type="text"  class="form-control  " value="{{__($user->name)}}" required="">
+            <span id="uidt3" style="margin-left: 100px"></span>    
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+        <hr>
         <div class="col-sm-5 col-xs-6 tital ">{{__('shop.phone')}}:</div>
         <div class="col-sm-4 pull-right">
             <input id="phone" name="phone" type="text"  class="form-control  " value="{{__($user->phone)}}" required="">
@@ -74,23 +82,29 @@
 <script type="text/javascript">
 phone.onblur = function() {
     if(!(/^09\d{8}$/.test(phone.value))) {
-      this.classList.add("error");
       document.getElementById('uidt1').innerHTML = '請輸入正確的手機號';
       phone.focus();
     } else {
-      this.classList.remove("error");
       document.getElementById('uidt1').innerHTML = '';
 
     }
 }
 address.onblur = function() {
     if(!(/^[a-zA-Z0-9\u4e00-\u9fa5]+$/.test(address.value))) {
-      this.classList.add("error");
       document.getElementById('uidt2').innerHTML = '請輸入正確地址';
       address.focus();
     } else {
-      this.classList.remove("error");
       document.getElementById('uidt2').innerHTML = '';
+
+    }
+}
+anthername.onblur = function() {
+    console.log(anthername.value);
+    if(!(/^[a-zA-Z0-9\u4e00-\u9fa5]+$/.test(anthername.value))) {
+      document.getElementById('uidt3').innerHTML = '請輸入正確名稱';
+      anthername.focus();
+    } else {
+     document.getElementById('uidt3').innerHTML = '';
 
     }
 }

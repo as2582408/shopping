@@ -64,19 +64,20 @@ class ReturnController extends Controller
         }
         return view('return.refusereturn', ['returnId' => $id]);
     }
-
+    //拒絕退貨
     public function refuseReturn(Request $request)
     {
         $this->validate($request, [
             'remarks' => 'required|max:255|regex:/^[\x7f-\xffA-Za-z0-9 ()（）!,:;\n\s]+$/',
         ]);
+        //拒絕退貨理由
         $textToStore = nl2br(htmlentities($request->input('remarks'), ENT_COMPAT, 'UTF-8'));
         Return_detail::where('return_id', '=', $request->input('id'))->update([
             'return_reply' => $textToStore,
             'return_status' => '2',
             'return_updata_time' => date("Y-m-d H:i:s")
         ]);
-
+        //計算退貨單的id與數量
         $returnItem = Return_detail::select('return_itme_id','return_message')->where('return_id', '=', $request->input('id'))->first();
         $itmeIdArr = explode(",",$returnItem->return_itme_id);
         $itmeAmountArr = explode(",",$returnItem->return_message);
